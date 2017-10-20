@@ -23,7 +23,7 @@ public class gradoscyf_bucleado
 	{
 		// Inicializamos las variables
 		double grados = 0;
-		String conversion = "";
+		char conversion;
 		double resultado = 0;
 		Scanner teclado = new Scanner (System.in);
 		
@@ -31,10 +31,10 @@ public class gradoscyf_bucleado
 		do
 		{
 			System.out.println("¿A qué deseas convertir?");
-			System.out.println("Si deseas pasar Celsius a Fahrenheit, escribe \"fahrenheit\"");
-			System.out.println("Si deseas pasar Fahrenheit a Celsius, escribe \"celsius\"");
-			conversion = teclado.nextLine();
-		} while (!conversion.equals("fahrenheit") || !conversion.equals("celsius"));
+			System.out.println("Si deseas pasar Celsius a Fahrenheit, escribe \"F\"");
+			System.out.println("Si deseas pasar Fahrenheit a Celsius, escribe \"C\"");
+			conversion = teclado.next().charAt(0);
+		} while (conversion != 'F' || conversion != 'f' || conversion != 'C' || conversion != 'c');
 		
 		// Le preguntamos por los grados que desea pasar
 		System.out.println("\n¿Cuántos grados?");
@@ -42,13 +42,13 @@ public class gradoscyf_bucleado
 		
 		// Las temperaturas tienen un número mínimo, así que
 		
-		if (conversion.equals("celsius") && grados < -459.67)
+		if ((conversion == 'c' || conversion == 'C') && grados < -459.67)
 		{
 			System.out.println("¡Los grados Fahrenheit no puede ser menor a -459.67!");
 		}
 		else
 		{
-			if (conversion.equals("fahrenheit") && grados < -273.15)
+			if ((conversion == 'f' || conversion == 'F') && grados < -273.15)
 			{
 				System.out.println("¡Los grados Celsius no puede ser menor a -273.15!");
 			}
@@ -56,7 +56,7 @@ public class gradoscyf_bucleado
 			{
 				// Ahora podemos realizar las operaciones tras
 				// comprobar todos los inputs del usuario
-				if (conversion.equals("fahrenheit"))
+				if (conversion == 'f' || conversion == 'F')
 				{
 					resultado = grados * 1.8 + 32;
 					System.out.println(grados+"ºC"+" son "+resultado+"ºF");
