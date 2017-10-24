@@ -59,8 +59,7 @@
  * 		Fin (Mientras la opcion elegida sea la segunda)
  * 		Mientras la opción elegida sea la tercera
  * 			Inicializar variables del tercer programa
- * 			Preguntar número al usuario
- * 			Leer número
+ * 			Preguntar número al usuario y leer número
  * 			Mientras que la variable contador no alcance el 100
  * 				Sumar en 1 al número introducido
  * 				Comprobar si es múltiplo de 5
@@ -177,8 +176,6 @@ public class boletin3b_5_seissieteyocho
 			//Mientras la opción elegida sea la segunda
 			while (opcion == '2')
 			{
-				System.out.println("Work in Progress");
-				
 				//Inicializar variables del segundo programa
 				long numero;
 				byte contador = 1;
@@ -226,8 +223,36 @@ public class boletin3b_5_seissieteyocho
 			
 			while (opcion == '3')
 			{
+				//Inicializar variables del tercer programa
 				char ejecutar3;
-				System.out.println("Work in Progress. Come back in a few days");
+				byte numero;
+				byte contador;
+				int suma = 0;
+				byte contadordivisores = 0;
+				
+				//Preguntar número al usuario y leer número
+				System.out.println("¿A partir de qué número?");
+				numero = teclado.nextByte();
+				contador = numero;
+				
+				//Mensaje en pantalla
+				System.out.println("Los números divisores de 5 son:");
+				
+				// Mientras que el contador no llegue a 100
+				while (contador < 100)
+				{
+					contador++;
+					if ((contador  % 5) == 0)
+					{
+						System.out.println(contador);
+						suma = suma + contador;
+						contadordivisores++;
+					}
+				}
+				
+				System.out.println("\n\nA partir del número "+numero+" hay "+contadordivisores+" divisores de 5, y la suma de todos ellos es "+suma);
+				
+				
 				
 				do
 				{
