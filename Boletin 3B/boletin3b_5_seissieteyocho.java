@@ -181,17 +181,22 @@ public class boletin3b_5_seissieteyocho
 				
 				//Inicializar variables del segundo programa
 				long numero;
-				byte contador = 0;
+				byte contador = 1;
+				long guardarnumero;
 				char ejecutar2;
 				
 				//Preguntar por número
 				System.out.println("¿De qué número quieres saber cuántos dígitos tiene?");
 				//Leer número
 				numero = teclado.nextLong();
+				guardarnumero = numero;
 				
-				//Splicar teorema fundamental de la numeración
-				
-				
+				//Aplicar teorema fundamental de la numeración
+				while (numero >= 10)
+				{
+					numero = numero/10;
+					contador++;
+				}
 				
 				/* No sirve
 				do
@@ -202,7 +207,7 @@ public class boletin3b_5_seissieteyocho
 				*/
 				
 				//Mostrar resultado en pantalla
-				System.out.println("El número tiene "+contador+" dígitos");
+				System.out.println("El número "+guardarnumero+" tiene "+contador+" dígitos");
 				
 				//Preguntar si quiere ejecutar de nuevo el programa dos
 				do
