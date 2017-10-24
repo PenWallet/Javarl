@@ -1,4 +1,4 @@
-/* Análisis:
+j/* Análisis:
  * El usuario podrá introducir tantos números como quiera, e iremos
  * almacenando la informacion sobre, de los números que ha introducido,
  * cuál es el menor, cuál el mayor, y cuál es la media de todos ellos.

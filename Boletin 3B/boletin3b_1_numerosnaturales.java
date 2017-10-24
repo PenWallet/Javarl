@@ -61,7 +61,7 @@ public class boletin3b_1_numerosnaturales
 			// Calcular potencia
 			System.out.println("Potencia: "+Math.pow(contador,n));
 			// Calcular producto
-			System.out.println("Producto: "+(contador)*(Math.sqrt(contador))*(Math.pow(contador,n))+"\n");
+			System.out.println("Producto: "+(double)((contador)*(Math.sqrt(contador))*(Math.pow(contador,n)))+"\n");
 			// Se sube en 1 el contador
 			contador++;
 		}

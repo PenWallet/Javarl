@@ -180,25 +180,29 @@ public class boletin3b_5_seissieteyocho
 				System.out.println("Work in Progress");
 				
 				//Inicializar variables del segundo programa
-				char contador2;
 				long numero;
 				byte contador = 0;
 				char ejecutar2;
-				/*
+				
 				//Preguntar por número
 				System.out.println("¿De qué número quieres saber cuántos dígitos tiene?");
 				//Leer número
 				numero = teclado.nextLong();
 				
-				//Mientras que el caracter leído no sea un espacio en blanco
+				//Splicar teorema fundamental de la numeración
+				
+				
+				
+				/* No sirve
 				do
 				{
-					if (numero.charAt(contador2) != '1')
-						contador2++;
-				} while (numero.charAt(contador2) == '1');
+					if (numero.charAt(contador) != '')
+						contador++;
+				} while (numero.charAt(contador) == '');
+				*/
 				
 				//Mostrar resultado en pantalla
-				System.out.println("El número tiene "+contador2+" dígitos"); ***********/
+				System.out.println("El número tiene "+contador+" dígitos");
 				
 				//Preguntar si quiere ejecutar de nuevo el programa dos
 				do
