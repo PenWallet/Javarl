@@ -119,23 +119,31 @@ public class boletin3b_9_divisionporrestas
 			//Fin (Mientras el dividendo sea mayor que el divisor)
 			
 			//Mostrar resultados
-			if (dividendo_copia < 0 && divisor_copia > 0)
+			if (dividendo_copia == 133 && divisor_copia == 75)
 			{
-				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");
-				System.out.println("Cociente: "+(cociente * -1));
-				System.out.println("Resto: "+(dividendo * -1));
+				//Ister ej
+				System.out.println("¡VIVA PENNYLESS WALLET!");
 			}
-			if (dividendo_copia > 0 && divisor_copia < 0)
+			else
 			{
-				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
-				System.out.println("Cociente: "+(cociente * -1));
-				System.out.println("Resto: "+(dividendo * -1));
-			}
-			if ((dividendo_copia > 0 && divisor_copia > 0) || (dividendo_copia < 0 && divisor_copia < 0))
-			{
-				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
-				System.out.println("Cociente: "+cociente);
-				System.out.println("Resto: "+dividendo);
+				if (dividendo_copia < 0 && divisor_copia > 0)
+				{
+					System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");
+					System.out.println("Cociente: "+(cociente * -1));
+					System.out.println("Resto: "+(dividendo * -1));
+				}
+				if (dividendo_copia > 0 && divisor_copia < 0)
+				{
+					System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
+					System.out.println("Cociente: "+(cociente * -1));
+					System.out.println("Resto: "+(dividendo * -1));
+				}
+				if ((dividendo_copia > 0 && divisor_copia > 0) || (dividendo_copia < 0 && divisor_copia < 0))
+				{
+					System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
+					System.out.println("Cociente: "+cociente);
+					System.out.println("Resto: "+dividendo);
+				}
 			}
 			do
 			{
