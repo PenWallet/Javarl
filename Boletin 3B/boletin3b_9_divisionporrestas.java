@@ -6,18 +6,29 @@
  * Una vez el dividendo sea menor que el divisor, lo que quede de
  * dividendo pasará a ser conocido como el resto.
  * 
- * Requisitos
- * - Los números introducidos deben ser números naturales
- * - El divisor no puede ser 0
+ * Entrada:
+ * - Dividendo
+ * 		- Debe ser número entero
+ * - Divisor
+ * 		- Debe ser número entero
+ * 		- No puede ser igual a 0
+ * 
+ * Salida:
+ * - Cociente
+ * - Resto
+ * 
+ * 
+ * 
  * 
 */
 
-/* Pseudocódigo Generalizado:
+
+
+/* Pseudocódigo Detallado:
  * 	Inicio
- * 		Inicializar variable de bucle
- * 		Preguntar si quiere iniciar el programa y leer respuesta
+ * 		// 
+ * 		Preguntar si quiere iniciar el programa y leer respuesta  //Obtener y validar inicio del programa
  * 		Mientras el usuario quiera
- * 			Inicializar variables de programa
  * 			Preguntar por dividendo y leer respuesta
  * 			Preguntar por divisor y leer respuesta
  * 			Si uno o todos los datos introducidos son negativos
@@ -27,11 +38,7 @@
  * 				Restar una vez el divisor a dividendo
  * 				Aumentar en uno el contador (cociente)
  * 			Fin (Mientras el dividendo sea mayor que el divisor)
- * 			
- * 			Si solo uno de los datos introducidos era negativo
- * 				Mostrar resultado en negativo
- * 			Sino
- * 				Mostrar resultado en positivo
+ * 			Mostrar resultado
  * 			Fin_SI
  * 			Preguntar si quiere ejecutar de nuevo el programa y leer respuesta
  * 		Fin (Mientras el usuario quiera)
@@ -55,7 +62,13 @@ public class boletin3b_9_divisionporrestas
 		//Inicializar variable de bucle y teclado
 		char bucleinicio;
 		Scanner teclado = new Scanner (System.in);
-		
+		//Inicializar variables de programa
+		int dividendo;
+		int divisor;
+		int cociente = 0;
+		int dividendo_copia;
+		int divisor_copia;
+			
 		//Preguntar si quiere iniciar el programa y leer respuesta
 		do
 		{
@@ -65,14 +78,10 @@ public class boletin3b_9_divisionporrestas
 				System.out.println("¡Solo Y o N!");
 		} while (bucleinicio != 'N' && bucleinicio != 'n' && bucleinicio != 'Y' && bucleinicio != 'y');
 		
+		//Mientras el usuario quiera
 		while (bucleinicio == 'y' || bucleinicio == 'Y')
 		{
-			//Inicializar variables de programa
-			int dividendo;
-			int divisor;
-			int cociente = 0;
-			int dividendo_copia;
-			int divisor_copia;
+			
 			
 			//Preguntar por dividendo y leer respuesta
 			System.out.println("¿Cuál es el dividendo?");
@@ -100,7 +109,7 @@ public class boletin3b_9_divisionporrestas
 			//Fin_SI
 			
 			//Mientras el dividendo sea mayor que el divisor
-			while (dividendo > divisor)
+			while (dividendo > divisor || dividendo == divisor)
 			{
 				//Restar una vez el divisor a dividendo
 				dividendo = dividendo - divisor;
@@ -109,29 +118,33 @@ public class boletin3b_9_divisionporrestas
 			}
 			//Fin (Mientras el dividendo sea mayor que el divisor)
 			
-			//Si solo uno de los datos introducidos era negativo
-			if (dividendo_copia < 0 || divisor_copia < 0)
+			//Mostrar resultados
+			if (dividendo_copia < 0 && divisor_copia > 0)
 			{
 				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");
 				System.out.println("Cociente: "+(cociente * -1));
 				System.out.println("Resto: "+(dividendo * -1));
 			}
-			if (dividendo_copia < 0 && divisor_copia < 0)
+			if (dividendo_copia > 0 && divisor_copia < 0)
+			{
+				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
+				System.out.println("Cociente: "+(cociente * -1));
+				System.out.println("Resto: "+(dividendo * -1));
+			}
+			if ((dividendo_copia > 0 && divisor_copia > 0) || (dividendo_copia < 0 && divisor_copia < 0))
 			{
 				System.out.println("Dividir "+dividendo_copia+" entre "+divisor_copia+" es igual a:");				
 				System.out.println("Cociente: "+cociente);
 				System.out.println("Resto: "+dividendo);
 			}
+			do
+			{
+				System.out.println("¿Desea ejecutar el programa de nuevo? (Y / N)");
+				bucleinicio = teclado.next().charAt(0);
+				if (bucleinicio != 'N' && bucleinicio != 'n' && bucleinicio != 'Y' && bucleinicio != 'y')
+					System.out.println("¡Solo Y o N!");
+			} while (bucleinicio != 'N' && bucleinicio != 'n' && bucleinicio != 'Y' && bucleinicio != 'y');
 		}
-		
-		do
-		{
-			System.out.println("¿Desea ejecutar el programa de nuevo? (Y / N)");
-			bucleinicio = teclado.next().charAt(0);
-			if (bucleinicio != 'N' && bucleinicio != 'n' && bucleinicio != 'Y' && bucleinicio != 'y')
-				System.out.println("¡Solo Y o N!");
-		} while (bucleinicio != 'N' && bucleinicio != 'n' && bucleinicio != 'Y' && bucleinicio != 'y');
-				
 	}
 }
 
