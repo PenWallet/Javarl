@@ -131,9 +131,91 @@ public class boletin3b_14_cambiomonedas
 					opcion = 'L';
 				else
 					opcion = 'R';
+			}
+			//Fin (Mientras sea Libras)
+			
+			//Mientras sea Dólares
+			while (opcion == 'D')
+			{
+				//Declarar variables de dolares
+				float cantidad_m;
+				char mismamoneda;
+				
+				//Leer y validar cantidad
+				do
+				{
+					System.out.println("¿Qué cantidad deseas cambiar?");
+					cantidad_m = teclado.nextFloat();
+					if (cantidad_m < 0)
+						System.out.println("¡La cantidad no puede ser negativa!");
+				} while (cantidad_m < 0);
+				
+				//Calcular e imprimir cambio de moneda (E -> D)
+				System.out.println(cantidad_m + " euros son "+(cantidad_m * 1.16961)+ " dólares");
+				
+				//Leer y validar si quiere volver a cambiar la misma moneda
+				do
+				{
+					System.out.println("¿Quieres volver a cambiar la misma moneda? (Y / N)");
+					mismamoneda = Character.toUpperCase(teclado.next().charAt(0));
+					if (mismamoneda != 'Y' && mismamoneda != 'N')
+						System.out.println("¡Solo Y o N!");
+				} while (mismamoneda != 'Y' && mismamoneda != 'N');
+				
+				if (mismamoneda == 'Y')
+					opcion = 'D';
+				else
+					opcion = 'R';
 				
 			}
+			//Fin (Mientras sea Dólares)
+			
+			
+			while (opcion == 'C')
+			{
+				//Declarar variables de libras
+				float cantidad_c;
+				char mismamoneda;
+				
+				//Leer y validar cantidad
+				do
+				{
+					System.out.println("¿Qué cantidad deseas cambiar?");
+					cantidad_c = teclado.nextFloat();
+					if (cantidad_c < 0)
+						System.out.println("¡La cantidad no puede ser negativa!");
+				} while (cantidad_c < 0);
+				
+				//Calcular e imprimir cambio de moneda (E -> L)
+				System.out.println(cantidad_c + " euros son "+(cantidad_c * 25.6640969)+ " coronas checas");
+				
+				//Leer y validar si quiere volver a cambiar la misma moneda
+				do
+				{
+					System.out.println("¿Quieres volver a cambiar la misma moneda? (Y / N)");
+					mismamoneda = Character.toUpperCase(teclado.next().charAt(0));
+					if (mismamoneda != 'Y' && mismamoneda != 'N')
+						System.out.println("¡Solo Y o N!");
+				} while (mismamoneda != 'Y' && mismamoneda != 'N');
+				
+				if (mismamoneda == 'Y')
+					opcion = 'C';
+				else
+					opcion = 'R';
+				
+			}
+			//Fin (Mientras sea Coronas Checas)
+			
+			//Leer y validar si quiere volver a ejecutar el programa
+			do
+			{
+				System.out.println("¿Desea volver a ejecutar el programa (Y / N)?");
+				bucleinicio = Character.toUpperCase(teclado.next().charAt(0));
+				if (bucleinicio != 'Y' && bucleinicio != 'N')
+					System.out.println("¡Solo Y o N!");
+			} while (bucleinicio != 'Y' && bucleinicio != 'N');
 		}
+		//Fin (Mientras el usuario quiera)
 	}
 }
 		
