@@ -26,7 +26,6 @@
 
 /* Pseudocódigo Detallado:
  * 	Inicio
- * 		// 
  * 		Preguntar si quiere iniciar el programa y leer respuesta  //Obtener y validar inicio del programa
  * 		Mientras el usuario quiera
  * 			Preguntar por dividendo y leer respuesta
@@ -81,8 +80,6 @@ public class boletin3b_9_divisionporrestas
 		//Mientras el usuario quiera
 		while (bucleinicio == 'y' || bucleinicio == 'Y')
 		{
-			
-			
 			//Preguntar por dividendo y leer respuesta
 			System.out.println("¿Cuál es el dividendo?");
 			dividendo = teclado.nextInt();

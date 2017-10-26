@@ -32,7 +32,6 @@
  * 	Declarar variable de bucle
  * 	Preguntar si desea ejecutar el programa
  * 	Mientras el usuario quiera
- * 		Declarar variable de opción
  * 		Preguntar qué programa quiere ejecutar
  * 		Mientras la opcion elegida sea la primera
  * 			Inicializar variables del primer programa
@@ -92,7 +91,7 @@ public class boletin3b_5_seissieteyocho
 	public static void main (String[] args) 
 	{
 		//Declarar variable de bucle
-		char bucleinicio;
+		char bucleinicio, opcion;
 		Scanner teclado = new Scanner (System.in);
 		
 		//Preguntar si desea ejecutar el programa
@@ -107,9 +106,6 @@ public class boletin3b_5_seissieteyocho
 		//Mientras el usuario quiera
 		while (bucleinicio == 'y' || bucleinicio == 'Y')
 		{
-			//Declarar la variable opcion
-			char opcion;
-			
 			//Preguntar qué programa quiere ejecutar
 			do
 			{
@@ -236,13 +232,13 @@ public class boletin3b_5_seissieteyocho
 				contador = numero;
 				
 				//Mensaje en pantalla
-				System.out.println("Los números divisores de 5 son:");
+				System.out.println("\nLos números divisores de 5 son:");
 				
 				// Mientras que el contador no llegue a 100
 				while (contador < 100)
 				{
 					contador++;
-					if ((contador  % 5) == 0)
+					if ((contador % 5) == 0)
 					{
 						System.out.println(contador);
 						suma = suma + contador;
