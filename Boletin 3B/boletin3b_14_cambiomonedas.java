@@ -217,14 +217,4 @@ public class boletin3b_14_cambiomonedas
 		}
 		//Fin (Mientras el usuario quiera)
 	}
-}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+}	

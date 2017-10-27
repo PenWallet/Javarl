@@ -7,16 +7,14 @@ public class numeronegativo
 	{
 		byte numero;
 		Scanner teclado = new Scanner (System.in);
-		System.out.print("Â¿Cual es el numero?: ");
+		System.out.println("¿Cual es el numero?: ");
 		numero = teclado.nextByte();
 		teclado.close();
+		if (numero == 0)
+			System.out.println("El número 0 es positivo");
 		if (numero > 0)
-		{
 			System.out.print("El numero "+numero+" es positivo");
-		}
-		else
-		{
+		if (numero < 0)
 			System.out.print("El numero "+numero+" es negativo");
-		}
 	}
 }
