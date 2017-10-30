@@ -106,12 +106,10 @@ public class boletin3b_9_divisionporrestas
 			//Fin_SI
 			
 			//Mientras el dividendo sea mayor que el divisor
-			while (dividendo > divisor || dividendo == divisor)
+			for (cociente = 0; dividendo > divisor || dividendo == divisor; cociente++)
 			{
 				//Restar una vez el divisor a dividendo
 				dividendo = dividendo - divisor;
-				//Aumentar en uno el contador (cociente)
-				cociente++;
 			}
 			//Fin (Mientras el dividendo sea mayor que el divisor)
 			
