@@ -8,8 +8,10 @@
  * 
  * Salida:
  * - Mensaje en pantalla ganador o perdedor
- * 
- * Pseudocódigo generalizado:
+*/
+
+
+/* Pseudocódigo generalizado:
  * 	Inicio
  * 		Declarar variables
  * 		Leer y validar si desea jugar
@@ -21,6 +23,17 @@
  * 				Leer y validar si desea jugar de nuevo
  * 			Fin (Mientras el usuario quiera jugar)
  * 	Fin
+*/
+
+
+/* 
+ * Estudio de los bucles:
+ * 
+ * (Mientras el usuario quiera jugar)
+ * Tipo VCB: Centinela
+ * Inicialización VCB: Lectura antes de la primera iteración
+ * Actualización VCB: Lectura al final del bucle
+ * Condición de salida: VCB == 'Y' ó VCB == 'N'
  * 
  * 	
  * 
@@ -105,8 +118,7 @@ public class boletinazar_7_trilero
 			if (jugador == trilero)
 				System.out.println("\n¡Has acertado!");
 			else
-				System.out.println("\nnope.avi");
-			
+				System.out.println("\n¡Has fallado!");
 			System.out.println("\n---------------------------------");
 				
 			//Leer y validar si desea jugar de nuevo
