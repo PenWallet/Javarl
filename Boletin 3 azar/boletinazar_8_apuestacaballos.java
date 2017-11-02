@@ -34,26 +34,20 @@
  * 
  * ----------------------------------
  * 
- * (Mientras el usuario quiera jugar)
- * Tipo VCB: Centinela
- * Inicialización VCB: Lectura antes de la primera iteración
- * Actualización VCB: Lectura al final del bucle
- * Condición de salida: VCB == 'Y' ó VCB == 'N'
- * 
- * ----------------------------------
- * 
- * (Mientras el usuario tenga dinero)
- * Tipo VCB: Centinela
- * Inicialización VCB: Lectura antes de la primera iteración
- * Actualización VCB: Lectura al final del bucle
- * Condición de salida: VCB == 0
+ * (Mientras tenga dinero con el que apostar y quiera apostar)
+ * Tipo VCB: Acumulador y centinela
+ * Inicialización VCB Acumulador Lectura antes del bucle en (Leer y validar cantidad de dinero inicial)
+ * Actualización VCB Acumulador: Lectura al final del bucle en (Calcular caballo ganador)
+ * Inicialización VCB Centinela: Lectura antes del bucle en (Leer y validar si quiere apostar)
+ * Actualización VCB Centinela: Lectura al final del bucle en ("Leer y validar si desea apostar de nuevo)
+ * Condición de salida: (apostarYoN == 'N' && dinero > 0) || (apostarYoN == 'Y' && dinero == 0)
  * 
  * ----------------------------------
  * 
  * (Repetir ... Mientras no haya elegido un caballo)
  * Tipo VCB: Centinela
- * Inicialización VCB: Lectura dentro del bucle, tras (Mostrar menú)
- * Actualización VCB: Lectura al final del bucle
+ * Inicialización VCB: Lectura al principio del bucle en (Leer y validar selección de caballo)
+ * Actualización VCB: Lectura dentro del bucle dentro de cada caso del switch
  * Condición de salida: VCB == '1' ó VCB == '2' ó VCB == '3'
  * 
  * ----------------------------------
@@ -74,13 +68,19 @@
  * 					Caballo 1: Mostrar información y leer y validar si desea elegirlo
  * 					Caballo 2: Mostrar información y leer y validar si desea elegirlo
  * 					Caballo 3: Mostrar información y leer y validar si desea elegirlo
+ * 				Fin (Según caballo)
  * 			Mientras no haya elegido un caballo
  * 			Leer y validar dinero apostado
  * 			Calcular caballo ganador
+ *			Según ganador (Calcular posición de pole)
+ * 				Ganador 1: Calcular segunda y tercera posición e imprimir en pantalla resultados
+ * 				Ganador 2: Calcular segunda y tercera posición e imprimir en pantalla resultados
+ * 				Ganador 3: Calcular segunda y tercera posición e imprimir en pantalla resultados
+ * 			Fin (Según ganador)
  * 			Mostrar mensaje ganador/perdedor
  * 			Leer y validar si desea apostar de nuevo
  * 		Fin (Mientras tenga dinero con el que apostar y quiera apostar)
- * 		Imprimit mensaje final
+ * 		Imprimir mensaje final
  * 	Fin
 */ 
 
@@ -94,15 +94,18 @@ public class boletinazar_8_apuestacaballos
 	public static void main (String[] args) 
 	{
 		//Declarar variables
-		char apostaryon = 'Y';
-		int dinero;
+		char apostarYoN = 'Y';
+		char caballo = '0';
 		char elegir;
-		int apuesta;
+		char ganador;
+		
+		double letranger;
 		double quickfix;
 		double tomislav;
-		double letranger;
-		char ganador;
-		char caballo = '0';
+		
+		int apuesta;
+		int dinero;
+		
 		Scanner teclado = new Scanner (System.in);
 	
 		//Leer y validar cantidad de dinero inicial
@@ -115,17 +118,18 @@ public class boletinazar_8_apuestacaballos
 				System.out.println("\n¡Solo entre 1 y 1000!");
 		} while (dinero <= 0 || dinero > 1000);
 		
+		//Leer y validar si quiere apostar
 		do
 		{
 			System.out.println("¿Deseas apostar? (Y / N)");
-			apostaryon = Character.toUpperCase(teclado.next().charAt(0));
-			if (apostaryon != 'Y' && apostaryon != 'N')
+			apostarYoN = Character.toUpperCase(teclado.next().charAt(0));
+			if (apostarYoN != 'Y' && apostarYoN != 'N')
 				System.out.println("¡Solo Y o N!");
-		} while (apostaryon != 'Y' && apostaryon != 'N');
+		} while (apostarYoN != 'Y' && apostarYoN != 'N');
 			
 		
 		//Mientras tenga dinero con el que apostar y quiera apostar
-		while (dinero > 0 && apostaryon == 'Y')
+		while (dinero > 0 && apostarYoN == 'Y')
 		{
 			//Repetir
 			do
@@ -136,14 +140,14 @@ public class boletinazar_8_apuestacaballos
 				System.out.println("2. Tomislav");
 				System.out.println("3. L'étranger");
 				System.out.println("\nElige uno para ver su descripción");
-				caballo = teclado.next().charAt(0);
 				
 				//Leer y validar selección de caballo
-				while (caballo != '1' && caballo != '2' && caballo != '3')
+				do
 				{
-					System.out.println("¡Solo 1, 2 o 3!");
 					caballo = teclado.next().charAt(0);
-				}
+					if (caballo != '1' && caballo != '2' && caballo != '3')
+						System.out.println("¡Solo 1, 2 o 3!");
+				}while (caballo != '1' && caballo != '2' && caballo != '3');
 				
 				//Según caballo
 				switch (caballo)
@@ -151,10 +155,10 @@ public class boletinazar_8_apuestacaballos
 					//Caballo 1: Mostrar información y leer y validar si desea elegirlo
 					case '1':
 						System.out.println("\nDescripción de Quick-Fix:");
-						System.out.println("\nImparable, rápido, atropella a quien sea, donde sea y porque sea.");
-						System.out.println("Lo que le falta en herraduras e higiene, lo compensa en velocidad.");
-						System.out.println("Criado en Stuttgart, Alemania, durante una época en la que los caballos");
+						System.out.println("\nCriado en Stuttgart, Alemania, durante una época en la que los caballos");
 						System.out.println("tenían más derechos que las personas.");
+						System.out.println("Es imparable, rápido, atropella a quien sea, donde sea y porque sea.");
+						System.out.println("Lo que le falta en herraduras e higiene, lo compensa en velocidad.");
 						
 						System.out.println("\n¿Quieres elegir este caballo? (Y / N)");
 						do
@@ -172,10 +176,10 @@ public class boletinazar_8_apuestacaballos
 					//Caballo 2: Mostrar información y leer y validar si desea elegirlo
 					case '2':
 						System.out.println("\nDescripción de Tomislav:");
-						System.out.println("\nNacido en la antigua USSR, criado con cariño de látigo.");
+						System.out.println("\nNacido en la antigua URSS, criado con cariño de látigo.");
 						System.out.println("El más feroz de todos los caballos que vas a ver por aquí.");
 						System.out.println("Parece que es capaz de entender que está en una carrera, y si hace falta");
-						System.out.println("tirar a alguien, se hace. Sin preguntas.");
+						System.out.println("empujar y tirar a alguien, se hace. Sin preguntas.");
 						
 						System.out.println("\n¿Quieres elegir este caballo? (Y / N)");
 						do
@@ -239,17 +243,68 @@ public class boletinazar_8_apuestacaballos
 				else
 					ganador = '3';
 					
+			//Según ganador (Calcular posición de pole)
+			switch (ganador)
+			{
+				//Ganador 1: Calcular segunda y tercera posición e imprimir en pantalla resultados
+				case '1':
+					System.out.println("\nEn primer puesto: Quick-Fix");
+					if (tomislav > letranger)
+					{
+						System.out.println("En segundo puesto: Tomislav");
+						System.out.println("En tercer puesto: L'étranger");
+					}
+					else
+					{
+						System.out.println("En segundo puesto: L'étranger");
+						System.out.println("En tercer puesto: Tomislav");
+					}
+				break;
+				
+				//Ganador 2: Calcular segunda y tercera posición e imprimir en pantalla resultados
+				case '2':
+					System.out.println("\nEn primer puesto: Tomislav");
+					if (quickfix > letranger)
+					{
+						System.out.println("En segundo puesto: Quick-Fix");
+						System.out.println("En tercer puesto: L'étranger");
+					}
+					else
+					{
+						System.out.println("En segundo puesto: L'étranger");
+						System.out.println("En tercer puesto: Quick-Fix");
+					}
+				break;
+				
+				//Ganador 3: Calcular segunda y tercera posición e imprimir en pantalla resultados
+				case '3':
+					System.out.println("\nEn primer puesto: L'etranger");
+					if (quickfix > tomislav)
+					{
+						System.out.println("En segundo puesto: Quick-Fix");
+						System.out.println("En tercer puesto: Tomislav");
+					}
+					else
+					{
+						System.out.println("En segundo puesto: Tomislav");
+						System.out.println("En tercer puesto: Quick-Fix");
+					}
+				break;
+			}
+			//Fin (Según ganador)
+						
+					
 			
 			//Calcular si ha ganado o no
 			if (caballo == ganador) //Si gana (el caballo elegido es el que ha ganado)
 			{
 				dinero = dinero + apuesta;
-				System.out.println("¡Has ganado! Ahora cuentas con: "+dinero+" leuros");
+				System.out.println("\n¡Has ganado! Ahora cuentas con: "+dinero+" leuros");
 			}
 			else // Si no (el caballo elegido no es el ganador)
 			{
 				dinero = dinero - apuesta;
-				System.out.println("¡Has perdido! Te has quedado con: "+dinero+" leuros");
+				System.out.println("\n¡Has perdido! Te quedan: "+dinero+" leuros");
 			}
 			
 			if (dinero > 0) //Si el dinero es 0, no hace falta preguntar, ya ha perdido
@@ -257,10 +312,10 @@ public class boletinazar_8_apuestacaballos
 				do
 				{
 					System.out.println("¿Deseas apostar de nuevo? (Y / N)");
-					apostaryon = Character.toUpperCase(teclado.next().charAt(0));
-					if (apostaryon != 'Y' && apostaryon != 'N')
+					apostarYoN = Character.toUpperCase(teclado.next().charAt(0));
+					if (apostarYoN != 'Y' && apostarYoN != 'N')
 						System.out.println("¡Solo Y o N!");
-				} while (apostaryon != 'Y' && apostaryon != 'N');
+				} while (apostarYoN != 'Y' && apostarYoN != 'N');
 			}		
 		}
 		//Fin (Mientras tenga dinero con el que apostar y quiera apostar de nuevo)
@@ -269,8 +324,6 @@ public class boletinazar_8_apuestacaballos
 		if (dinero == 0)
 			System.out.println("\n¡A la calle, pobretón!");
 		else
-			System.out.println("\nVuelve cuando quieras y déjate todo el dinero pls");
-		
-		
+			System.out.println("\nVuelve cuando quieras y déjate todo el dinero pls :D");
 	}
 }
