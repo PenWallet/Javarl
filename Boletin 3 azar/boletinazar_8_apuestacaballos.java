@@ -40,7 +40,7 @@
  * Actualización VCB Acumulador: Lectura al final del bucle en (Calcular caballo ganador)
  * Inicialización VCB Centinela: Lectura antes del bucle en (Leer y validar si quiere apostar)
  * Actualización VCB Centinela: Lectura al final del bucle en ("Leer y validar si desea apostar de nuevo)
- * Condición de salida: (apostarYoN == 'N' && dinero > 0) || (apostarYoN == 'Y' && dinero == 0)
+ * Condición de salida: apostarYoN == 'N' || dinero == 0
  * 
  * ----------------------------------
  * 
