@@ -68,7 +68,8 @@
  * 		
  * 		//Fin Bloque Deducciones
  *
- *		//Mostrar nómina
+ *		
+ * Mostrar nómina
  * 		
  * 		
  * 		
