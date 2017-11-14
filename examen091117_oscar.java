@@ -1,3 +1,4 @@
+
 /* Nombre del programa: examen091117_oscar.java
  * 
  * Análisis:
@@ -188,6 +189,9 @@ public class examen091117_oscar {
 				
 				
 				case '3':
+					contadorGanadorN = 0;
+					contadorGanadorR = 0;
+					
 					System.out.println("\n¡Bienvenido a la Moneda Mágica!");
 					System.out.println("¿Cuántas veces deseas jugar?");
 					
@@ -323,7 +327,6 @@ public class examen091117_oscar {
 						System.out.println("\n¡Ha ganado Nzhdeh!");
 				
 			}
-			
 			//Leer y validar si desea volver a jugar
 			do
 			{
