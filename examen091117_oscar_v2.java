@@ -10,10 +10,10 @@
  * El primer jugador del tercer programa siempre será Raquel
  * 
  * Entradas:
- * - Número de selección de opción en menú. Solo 1, 2 ó 3.
+ * - Número de selección de opción en menú. Solo 1, 2 o 3. 9 servirá para salir.
  * - Dentro de "PintarEsfera", número impar de filas entre 5 y 13, incluídos.
  * - Dentro de "PintarEsfera", carácter de relleno. Solo letra mayúscula.
- * - Dentro de "PintarEsfera", dos caracteres de suavizado. Solo d, b, n, P ó V
+ * - Dentro de "PintarEsfera", dos caracteres de suavizado. Solo d, b, n, V ó P
  * - Dentro de "MonedaMágica", número de veces mayor que 0 que se jugará
  * 
  * Salidas:
@@ -25,17 +25,16 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
- * 		Leer y Validar si desea ejecutar
- * 		Mientras quiera jugar
+ * 		Repetir
  * 			Mostrar menú
  * 			Leer y Validar opción de menú
  * 			Según (opción)
  * 				caso 1: PintarEsfera //en construcción
  * 				caso 2: NúmeroOdioso //en construcción
  * 				caso 3: MonedaMágica
+ * 				caso 9: Salir
  * 			Fin //Según opción
- *	 		Leer y validar si desea volver a ejecutar
- * 		Fin //Mientras quiera jugar
+ * 		Mientras 
  * 	Fin
 */
 
@@ -49,6 +48,7 @@
  * 		Leer y validar carácter de relleno
  * 		Leer y validar caracteres de suavizado
  * 		Mostrar mensaje en construcción
+ * 		Leer y validar si desea ver el menú de nuevo
  * 	Fin
  * 
  * //MonedaMagica
@@ -60,6 +60,7 @@
  * 			Aumentar en 1 el contador de jugadas
  * 		Fin_Para
  * 		Imprimir ganador final
+ * 		Leer y validar si desea ver el menú de nuevo
  * 	Fin 
  */
 
@@ -68,14 +69,14 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.Random;
 
-public class examen091117_oscar {
+public class examen091117_oscar_v2 {
 	
 	public static void main (String[] args) {
 		
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);
 		Random tirarmoneda = new Random();
-		char bucleinicio;
+		char volverMenu = 'Y';
 		char opcion;
 		
 		byte diametroEsfera;
@@ -94,44 +95,35 @@ public class examen091117_oscar {
 		short contadorGanadorR = 0;
 		short contadorGanadorN = 0;
 		char ganador = 'R'; //R de Raquel, que juega la primera
-		
-		//Leer y validar si desea jugar
-		do
-		{
-			System.out.println("¿Deseas ejecutar? (Y / N)");
-			bucleinicio = Character.toUpperCase(teclado.next().charAt(0));
-			if (bucleinicio != 'Y' && bucleinicio != 'N')
-				System.out.println("¡Solo Y o N!");
-		}while (bucleinicio != 'Y' && bucleinicio != 'N');
 
 		// ************************************************************************
 		
-		/* Nombre del bucle: BucleInicial
+		/* Nombre del bucle: BucleInicio
 		*  Tipo de VCB: Centinela
 		*  Descripción: Se repite todo el programa mientras el usuario quiera
-		*  Inicialización VCB: Justo antes del bucle, dentro de Leer y Validar si desea ejecutar
-		*  Actualización VCB: Inmediatamente antes del fin del bucle, dentro de Leer y Validar si desea volver a ejecutar
-		*  Condición de entrada: bucleinicio == 'Y'
-		*  Condición de salida: bucleinicio != 'Y'
+		*  Inicialización y Actualización VCB: Tras cada opción de menú
+		*  Condición de entrada: volverMenu == 'Y'
+		*  Condición de salida: volverMenu != 'Y'
 		*/
 		
 		// ************************************************************************
 		
-		while(bucleinicio == 'Y') //Mientras quiera jugar
+		do
 		{
 			//Mostrar menú
-			System.out.println("\nBienvenido, elige una de estas opciones:");
+			System.out.println("Bienvenido, elige una de estas opciones:");
 			System.out.println("1. Pintar una esfera de símbolos");
 			System.out.println("2. Jugar a Número Odioso");
 			System.out.println("3. Jugar a la Moneda Mágica");
+			System.out.println("9. Salir");
 			
 			//Leer y validar opción de menú
 			do
 			{
 				opcion = teclado.next().charAt(0);
-				if (opcion < '1' || opcion > '3')
+				if (opcion < '1' || opcion > '3' && opcion != '9')
 					System.out.println("¡Solo 1, 2 o 3!");
-			}while (opcion < '1' || opcion > '3');
+			}while (opcion < '1' || opcion > '3' && opcion != '9');
 			
 			
 			switch (opcion) //Según (opción)
@@ -180,11 +172,30 @@ public class examen091117_oscar {
 					//Mostrar mensaje en construcción
 					System.out.println("\n***Lo sentimos. El resto se encuentra en construcción***");
 					
+					//Leer y validar si desea ver el menú de nuevo
+					do
+					{
+						System.out.println("\n\n¿Deseas volver al menú? (Y / N)");
+						volverMenu = Character.toUpperCase(teclado.next().charAt(0));
+						if (volverMenu != 'Y' && volverMenu != 'N')
+							System.out.println("¡Solo Y o N!");
+					}while(volverMenu != 'Y' && volverMenu != 'N');
+					
 					break;
 				
 				
 				case '2':
 					System.out.println("\n***Lo sentimos. Todo este módulo se encuentra bajo construcción***");
+					
+					//Leer y validar si desea ver el menú de nuevo
+					do
+					{
+						System.out.println("\n\n¿Deseas volver al menú? (Y / N)");
+						volverMenu = Character.toUpperCase(teclado.next().charAt(0));
+						if (volverMenu != 'Y' && volverMenu != 'N')
+							System.out.println("¡Solo Y o N!");
+					}while(volverMenu != 'Y' && volverMenu != 'N');
+					
 					break;
 				
 				
@@ -325,16 +336,22 @@ public class examen091117_oscar {
 						System.out.println("\n¡Ha ganado Raquel!");
 					else
 						System.out.println("\n¡Ha ganado Nzhdeh!");
+						
+					//Leer y validar si desea ver el menú de nuevo
+					do
+					{
+						System.out.println("\n\n¿Deseas volver al menú? (Y / N)");
+						volverMenu = Character.toUpperCase(teclado.next().charAt(0));
+						if (volverMenu != 'Y' && volverMenu != 'N')
+							System.out.println("¡Solo Y o N!");
+					}while(volverMenu != 'Y' && volverMenu != 'N');
+					
+					break;
+				
+				case '9':
+					volverMenu = 'N';
 				
 			}
-			//Leer y validar si desea volver a jugar
-			do
-			{
-			System.out.println("\n\n¿Deseas volver a ejecutar? (Y / N)");
-			bucleinicio = Character.toUpperCase(teclado.next().charAt(0));
-			if (bucleinicio != 'Y' && bucleinicio != 'N')
-				System.out.println("¡Solo Y o N!");
-			}while (bucleinicio != 'Y' && bucleinicio != 'N');
-		}
+		}while (volverMenu == 'Y');
 	}
 }
