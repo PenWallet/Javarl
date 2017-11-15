@@ -115,7 +115,7 @@ public class examen091117_oscar_v2 {
 			System.out.println("1. Pintar una esfera de símbolos");
 			System.out.println("2. Jugar a Número Odioso");
 			System.out.println("3. Jugar a la Moneda Mágica");
-			System.out.println("9. Salir");
+			System.out.println("\n9. Salir");
 			
 			//Leer y validar opción de menú
 			do
@@ -332,10 +332,15 @@ public class examen091117_oscar_v2 {
 					//Imprimir ganador final
 					System.out.println("\nRaquel ha ganado "+contadorGanadorR+" veces");
 					System.out.println("Nzhdeh ha ganado "+contadorGanadorN+" veces");
+					
 					if (contadorGanadorR > contadorGanadorN)
 						System.out.println("\n¡Ha ganado Raquel!");
 					else
-						System.out.println("\n¡Ha ganado Nzhdeh!");
+						if (contadorGanadorN > contadorGanadorR)
+							System.out.println("\n¡Ha ganado Nzhdeh!");
+						else
+							System.out.println("\n¡Habéis empatado!");
+						
 						
 					//Leer y validar si desea ver el menú de nuevo
 					do
