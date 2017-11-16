@@ -38,7 +38,7 @@
  * 	Fin
 */
 
-// El estudio de los bucles se encuentra detrás de cada uno de ellos dentro del código
+// El estudio de los bucles se encuentra delante de cada uno de ellos dentro del código
 
 /* Pseudocódigos Generalizados específicos:
  * 
@@ -57,7 +57,6 @@
  * 		Para (contador de tiradas igual a 0, mientras sea menor que el numero de tiradas, se suma en 1 el contador)
  * 			Se tiran las tres monedas
  * 			Evaluar ganador
- * 			Aumentar en 1 el contador de jugadas
  * 		Fin_Para
  * 		Imprimir ganador final
  * 		Leer y validar si desea ver el menú de nuevo
@@ -117,12 +116,25 @@ public class examen091117_oscar_v2 {
 			System.out.println("3. Jugar a la Moneda Mágica");
 			System.out.println("\n9. Salir");
 			
+			// ************************************************************************
+		
+			/* Nombre del bucle: BucleOpcionMenu
+			*  Tipo de VCB: Centinela
+			*  Descripción: Se repite hasta que se introduzca una opción correcta
+			*  Inicialización y Actualización VCB: Dentro del mismo
+			*  Condición de entrada: (opcion < '1' || opcion > '3') && opcion != '9'
+			*  Condición de salida: (opcion >= '1' || opcion >= '3') || opcion == '9'
+			*/
+			
+			// ************************************************************************
+			
+			
 			//Leer y validar opción de menú
 			do
 			{
 				opcion = teclado.next().charAt(0);
 				if (opcion < '1' || opcion > '3' && opcion != '9')
-					System.out.println("¡Solo 1, 2 o 3!");
+					System.out.println("¡Solo 1, 2, 3 ó 9 para salir!");
 			}while (opcion < '1' || opcion > '3' && opcion != '9');
 			
 			
@@ -130,6 +142,18 @@ public class examen091117_oscar_v2 {
 			{
 				case '1':
 					System.out.println("Bienvenido a Pintar Esfera");
+					
+					// ************************************************************************
+		
+					/* Nombre del bucle: BucleValidarDiametro
+					*  Tipo de VCB: Centinela
+					*  Descripción: Se repite hasta que se introduzca un número correcto
+					*  Inicialización y Actualización VCB: Dentro del mismo
+					*  Condición de entrada: (diametroEsfera < 5 || diametroEsfera > 13) || ((diametroEsfera >= 5 && diametroEsfera <= 13) && diametroEsfera % 2 == 0)
+					*  Condición de salida: (diametroEsfera >= 5 || diametroEsfera <= 13) && diametroEsfera % 2 != 0)
+					*/
+					
+					// ************************************************************************
 					
 					//Leer y validar diámetro
 					do
@@ -141,6 +165,18 @@ public class examen091117_oscar_v2 {
 							System.out.println("ERROR");
 					}while ((diametroEsfera < 5 || diametroEsfera > 13) || ((diametroEsfera >= 5 && diametroEsfera <= 13) && diametroEsfera % 2 == 0));
 					
+					// ************************************************************************
+		
+					/* Nombre del bucle: BucleValidarCaracterRelleno
+					*  Tipo de VCB: Centinela
+					*  Descripción: Se repite hasta que se introduzca un carácter correcto
+					*  Inicialización y Actualización VCB: Dentro del mismo bucle
+					*  Condición de entrada: (caracterRelleno < 'A' || caracterRelleno > 'Z')
+					*  Condición de salida: (caracterRelleno >= 'A' && caracterRelleno <= 'Z')
+					*/
+					
+					// ************************************************************************
+					
 					//Leer y validar carácter de relleno
 					do
 					{
@@ -150,6 +186,18 @@ public class examen091117_oscar_v2 {
 						if (caracterRelleno < 'A' || caracterRelleno > 'Z')
 							System.out.println("¡Solo una letra!");
 					}while (caracterRelleno < 'A' || caracterRelleno > 'Z');
+					
+					// ************************************************************************
+		
+					/* Nombre del bucle: BucleValidarCaracterSuavizado
+					*  Tipo de VCB: Centinela
+					*  Descripción: Se repite hasta que se introduzca un carácter correcto
+					*  Inicialización y Actualización VCB: Dentro del mismo bucle
+					*  Condición de entrada: (caracterSuavizado1 != 'd' && caracterSuavizado1 != 'b' && caracterSuavizado1 != 'n' && caracterSuavizado1 != 'V' && caracterSuavizado1 != 'P')
+					*  Condición de salida: (caracterSuavizado1 == 'd' || caracterSuavizado1 == 'b' || caracterSuavizado1 == 'n' || caracterSuavizado1 == 'V' || caracterSuavizado1 == 'P')
+					*/
+					
+					// ************************************************************************
 					
 					//Leer y validar caracteres de suavizado
 					System.out.println("\nIntroduce dos caracteres de suavizado (d, b, n, V o P):"); //Se puede elegir dos veces el mismo carácter
@@ -172,6 +220,18 @@ public class examen091117_oscar_v2 {
 					//Mostrar mensaje en construcción
 					System.out.println("\n***Lo sentimos. El resto se encuentra en construcción***");
 					
+					// ************************************************************************
+		
+					/* Nombre del bucle: BucleVolverMenu
+					*  Tipo de VCB: Centinela
+					*  Descripción: Se repite hasta que se introduzca Y o N
+					*  Inicialización y Actualización VCB: Dentro del mismo bucle
+					*  Condición de entrada: (volverMenu != 'Y' && volverMenu != 'N')
+					*  Condición de salida: (volverMenu == 'Y' || volverMenu == 'N')
+					*/
+					
+					// ************************************************************************
+					
 					//Leer y validar si desea ver el menú de nuevo
 					do
 					{
@@ -186,6 +246,12 @@ public class examen091117_oscar_v2 {
 				
 				case '2':
 					System.out.println("\n***Lo sentimos. Todo este módulo se encuentra bajo construcción***");
+					
+					// ************************************************************************
+		
+					// Nombre del bucle: BucleVolverMenu
+					
+					// ************************************************************************
 					
 					//Leer y validar si desea ver el menú de nuevo
 					do
@@ -205,6 +271,18 @@ public class examen091117_oscar_v2 {
 					
 					System.out.println("\n¡Bienvenido a la Moneda Mágica!");
 					System.out.println("¿Cuántas veces deseas jugar?");
+					
+					// ************************************************************************
+		
+					/* Nombre del bucle: BucleVecesTiradas
+					*  Tipo de VCB: Centinela
+					*  Descripción: Se repite hasta que se introduzca un número contador
+					*  Inicialización y Actualización VCB: Dentro del mismo bucle
+					*  Condición de entrada: (numeroTiradas <= 0)
+					*  Condición de salida: (numeroTiradas > 0)
+					*/
+					
+					// ************************************************************************
 					
 					//Leer y validar número de veces que desea jugar
 					do
@@ -341,7 +419,12 @@ public class examen091117_oscar_v2 {
 						else
 							System.out.println("\n¡Habéis empatado!");
 						
-						
+					// ************************************************************************
+		
+					// Nombre del bucle: BucleVolverMenu
+					
+					// ************************************************************************
+					
 					//Leer y validar si desea ver el menú de nuevo
 					do
 					{

@@ -39,7 +39,7 @@
  * 	Fin
 */
 
-// El estudio de los bucles se encuentra detrás de cada uno de ellos dentro del código
+// El estudio de los bucles se encuentra delante de cada uno de ellos dentro del código
 
 /* Pseudocódigos Generalizados específicos:
  * 
