@@ -375,7 +375,11 @@ public class examen091117_oscar_v2 {
 						
 						//Evaluar ganador
 						//El primer jugador siempre será Raquel
-						if (ganador == 'R')
+						
+						/* No sirve (en verdad sí pero es largo)
+						 * 
+						 * 
+						 * if (ganador == 'R')
 						{
 							if (contadorCaras == 3 || contadorCruces == 3)
 							{
@@ -404,6 +408,20 @@ public class examen091117_oscar_v2 {
 								System.out.println("¡Ha ganado Nzhdeh!");
 								contadorGanadorN++;
 							}
+						}
+						* */
+						
+						if ((ganador == 'R' && (contadorCaras == 3 || contadorCruces == 3)) || (ganador == 'N' && (contadorCaras != 3 && contadorCruces != 3)))
+						{
+							ganador = 'N';
+							System.out.println("¡Ha ganado Nzhdeh!");
+							contadorGanadorN++;
+						}
+						else
+						{
+							ganador = 'R';
+							System.out.println("¡Ha ganado Raquel!");
+							contadorGanadorR++;
 						}
 					}
 					
