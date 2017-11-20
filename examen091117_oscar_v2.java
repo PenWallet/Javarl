@@ -25,16 +25,15 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
- * 		Repetir
- * 			Mostrar menú
- * 			Leer y Validar opción de menú
+ * 		Mostrar menú
+ * 		Leer y Validar opción de menú
+ * 		Mientras (opcion != 9)
  * 			Según (opción)
  * 				caso 1: PintarEsfera //en construcción
  * 				caso 2: NúmeroOdioso //en construcción
  * 				caso 3: MonedaMágica
- * 				caso 9: Salir
- * 			Fin //Según opción
- * 		Mientras 
+ * 			Fin //Según opción 
+ * 		Fin Mientras
  * 	Fin
 */
 
@@ -107,37 +106,38 @@ public class examen091117_oscar_v2 {
 		
 		// ************************************************************************
 		
+		
+		//Mostrar menú
+		System.out.println("Bienvenido, elige una de estas opciones:");
+		System.out.println("1. Pintar una esfera de símbolos");
+		System.out.println("2. Jugar a Número Odioso");
+		System.out.println("3. Jugar a la Moneda Mágica");
+		System.out.println("\n9. Salir");
+		
+		// ************************************************************************
+	
+		/* Nombre del bucle: BucleOpcionMenu
+		*  Tipo de VCB: Centinela
+		*  Descripción: Se repite hasta que se introduzca una opción correcta
+		*  Inicialización y Actualización VCB: Dentro del mismo
+		*  Condición de entrada: (opcion < '1' || opcion > '3') && opcion != '9'
+		*  Condición de salida: (opcion >= '1' || opcion >= '3') || opcion == '9'
+		*/
+		
+		// ************************************************************************
+		
+		
+		//Leer y validar opción de menú
 		do
 		{
-			//Mostrar menú
-			System.out.println("Bienvenido, elige una de estas opciones:");
-			System.out.println("1. Pintar una esfera de símbolos");
-			System.out.println("2. Jugar a Número Odioso");
-			System.out.println("3. Jugar a la Moneda Mágica");
-			System.out.println("\n9. Salir");
-			
-			// ************************************************************************
+			opcion = teclado.next().charAt(0);
+			if (opcion < '1' || opcion > '3' && opcion != '9')
+				System.out.println("¡Solo 1, 2, 3 ó 9 para salir!");
+		}while (opcion < '1' || opcion > '3' && opcion != '9');
 		
-			/* Nombre del bucle: BucleOpcionMenu
-			*  Tipo de VCB: Centinela
-			*  Descripción: Se repite hasta que se introduzca una opción correcta
-			*  Inicialización y Actualización VCB: Dentro del mismo
-			*  Condición de entrada: (opcion < '1' || opcion > '3') && opcion != '9'
-			*  Condición de salida: (opcion >= '1' || opcion >= '3') || opcion == '9'
-			*/
-			
-			// ************************************************************************
-			
-			
-			//Leer y validar opción de menú
-			do
-			{
-				opcion = teclado.next().charAt(0);
-				if (opcion < '1' || opcion > '3' && opcion != '9')
-					System.out.println("¡Solo 1, 2, 3 ó 9 para salir!");
-			}while (opcion < '1' || opcion > '3' && opcion != '9');
-			
-			
+		
+		while(opcion != '9') //Mientras (opcion != '9')
+		{
 			switch (opcion) //Según (opción)
 			{
 				case '1':
@@ -409,7 +409,7 @@ public class examen091117_oscar_v2 {
 								contadorGanadorN++;
 							}
 						}
-						* */
+						*/
 						
 						if ((ganador == 'R' && (contadorCaras == 3 || contadorCruces == 3)) || (ganador == 'N' && (contadorCaras != 3 && contadorCruces != 3)))
 						{
@@ -458,6 +458,6 @@ public class examen091117_oscar_v2 {
 					volverMenu = 'N';
 				
 			}
-		}while (volverMenu == 'Y');
+		} //Fin Mientras
 	}
 }
