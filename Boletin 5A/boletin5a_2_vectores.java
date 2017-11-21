@@ -73,9 +73,10 @@
  * 
  * Nombre subprograma: ModuloVectores
  * Proceso que realiza: Calcula el módulo de dos vectores
- * Entradas: Dos vectores
  * Precondiciones: Las coordenadas deben ser número enteros
+ * Entradas: Dos vectores
  * Salidas: Módulo de vectores
+ * Entradas/Salidas: Ninguna
  * Postcondiciones: Ninguna
  */
  
@@ -85,9 +86,10 @@
  * 
  * Nombre subprograma: VectorSuma
  * Proceso que realiza: Suma los dos vectores
- * Entradas: Dos vectores
  * Precondiciones: Las coordenadas deben ser número enteros
+ * Entradas: Dos vectores
  * Salidas: Suma de vectores
+ * Entradas/Salidas: Ninguna
  * Postcondiciones: Ninguna
  */
  
@@ -97,9 +99,10 @@
  * 
  * Nombre subprograma: ProductoEscalar
  * Proceso que realiza: Realiza el producto escalar 
- * Entradas: Dos vectores y un ángulo
  * Precondiciones: Las coordenadas deben ser número enteros
+ * Entradas: Dos vectores y un ángulo
  * Salidas: Producto escalar
+ * Entradas/Salidas: Ninguna
  * Postcondiciones: Ninguna
  */
  
