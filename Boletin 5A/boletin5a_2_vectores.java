@@ -250,7 +250,7 @@ public class boletin5a_2_vectores
 				break;
 				
 				case '4':
-				//EC
+				//En Resguardo
 			}
 		}
 	}
