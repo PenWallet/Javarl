@@ -152,7 +152,7 @@ public class boletin5a_4_gradoscfk
 	public static double ConversionKaC (double gradosK)
 	{
 		double gradosC;
-		gradosC = gradosK + 273.15;
+		gradosC = gradosK - 273.15;
 		return(gradosC);
 	}
 	
@@ -191,7 +191,7 @@ public class boletin5a_4_gradoscfk
 			}while ((opcion < '1' || opcion > '6') && opcion != '9');
 		
 		
-			switch (opcion)
+			switch (opcion) //Según (opcion)
 			{
 				case '1':
 				//Leer y validar grados
