@@ -3,7 +3,13 @@
  * a Fahrenheit o Kelvin, o cualquier cambio posible entre ellos, según elija el usuario.
  * 
  * Análisis:
- * Nada difícil ni que considere que haya que mencionar
+ * - De Celsius a Fahrenheit: F = C * 9/5 + 32
+ * - De Celsius a Kelvin: K = C + 273.15
+ * - De Fahrenheit a Celsius: C = (F - 32) / (9/5)
+ * - De Fahrenheit a Kelvin: K = (F + 459.67) / (9/5)
+ * - De Kelvin a Celsius: C = K - 273.15
+ * - De Kelvin a Fahrenheit: F = K * 9/5 - 459.67
+ * 
  * 
  * Entradas:
  * - Grados
@@ -29,6 +35,14 @@
  * 	Fin
 */
 
+import java.util.Scanner;
+import java.io.*;
+
+public class boletin5a_4_gradoscfk
+{
+
+// *********************************************************************
+
 /* Estudio interfaz:
  * 
  * Nombre subprograma: ConversionCaF
@@ -43,6 +57,15 @@
  * double ConversionCaF (double grados)
 */
 
+	public static double ConversionCaF (double gradosC)
+	{
+		double gradosF;
+		gradosF = (gradosC * 9/5.0) + 32;
+		return(gradosF);
+	}
+
+// *********************************************************************
+
 /* Estudio interfaz:
  * 
  * Nombre subprograma: ConversionCaK
@@ -56,6 +79,15 @@
  * Cabecera:
  * double ConversionCaK (double grados)
 */
+	
+	public static double ConversionCaK (double gradosC)
+	{
+		double gradosK;
+		gradosK = gradosC + 273.15;
+		return(gradosK);
+	}
+
+// *********************************************************************
 
 /* Estudio interfaz:
  * 
@@ -71,6 +103,15 @@
  * double ConversionFaC (double grados)
 */
 
+	public static double ConversionFaC (double gradosF)
+	{
+		double gradosC;
+		gradosC = (gradosF - 32) * (5/9.0);
+		return(gradosC);
+	}
+
+// *********************************************************************
+
 /* Estudio interfaz:
  * 
  * Nombre subprograma: ConversionFaK
@@ -84,6 +125,15 @@
  * Cabecera:
  * double ConversionFaK (double grados)
 */
+
+	public static double ConversionFaK (double gradosF)
+	{
+		double gradosK;
+		gradosK = (gradosF + 459.67) * (5/9.0);
+		return(gradosK);
+	}
+
+// *********************************************************************
 
 /* Estudio interfaz:
  * 
@@ -99,6 +149,15 @@
  * double ConversionKaC (double grados)
 */
 
+	public static double ConversionKaC (double gradosK)
+	{
+		double gradosC;
+		gradosC = gradosK - 273.15;
+		return(gradosC);
+	}
+
+// *********************************************************************
+
 /* Estudio interfaz:
  * 
  * Nombre subprograma: ConversionKaF
@@ -113,55 +172,14 @@
  * double ConversionKaF (double grados)
 */
 
-
-
-
-import java.util.Scanner;
-import java.io.*;
-
-public class boletin5a_4_gradoscfk
-{
-	public static double ConversionCaF (double gradosC)
-	{
-		double gradosF;
-		gradosF = (gradosC * 9/5.0) + 32;
-		return(gradosF);
-	}
-	
-	public static double ConversionCaK (double gradosC)
-	{
-		double gradosK;
-		gradosK = gradosC + 273.15;
-		return(gradosK);
-	}
-	
-	public static double ConversionFaC (double gradosF)
-	{
-		double gradosC;
-		gradosC = (gradosF - 32) * (5/9.0);
-		return(gradosC);
-	}
-	
-	public static double ConversionFaK (double gradosF)
-	{
-		double gradosK;
-		gradosK = (gradosF + 459.67) * (5/9.0);
-		return(gradosK);
-	}
-	
-	public static double ConversionKaC (double gradosK)
-	{
-		double gradosC;
-		gradosC = gradosK - 273.15;
-		return(gradosC);
-	}
-	
 	public static double ConversionKaF (double gradosK)
 	{
 		double gradosF;
 		gradosF = (gradosK / (5/9.0)) - 459.67;
 		return(gradosF);
 	}
+
+// *********************************************************************
 	
 	public static void main (String[] args) 
 	{
