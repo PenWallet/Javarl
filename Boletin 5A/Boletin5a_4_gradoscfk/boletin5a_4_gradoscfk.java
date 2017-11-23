@@ -21,16 +21,17 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
- * 		Mostrar menú y leer y validar opción
+ * 		Mostrar menú y leer y validar opcion //Conversion.Menu
  * 		Mientras (opcion != 9)
  * 			Según (opcion)
- * 				caso 1: Leer y validar grados y llamar a Conversion.CaF  //quitar lo de "y llamar"
- * 				caso 2: Leer y validar grados y llamar a Conversion.CaK
- * 				caso 3: Leer y validar grados y llamar a Conversion.FaC
- * 				caso 4: Leer y validar grados y llamar a Conversion.FaK
- * 				caso 5: Leer y validar grados y llamar a Conversion.KaC
- * 				caso 6: Leer y validar grados y llamar a Conversion.KaF
+ * 				caso 1: Leer y validar grados y Conversion.CaF
+ * 				caso 2: Leer y validar grados y Conversion.CaK
+ * 				caso 3: Leer y validar grados y Conversion.FaC
+ * 				caso 4: Leer y validar grados y Conversion.FaK
+ * 				caso 5: Leer y validar grados y Conversion.KaC
+ * 				caso 6: Leer y validar grados y Conversion.KaF
  * 			Fin Según
+ * 			Mostrar menú y leer y validar opcion //Conversion.Menu
  * 		Fin Mientras
  * 	Fin
 */
@@ -44,34 +45,39 @@ public class boletin5a_4_gradoscfk
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);
-		char opcion = '0';
+		char opcion;
 		double grados;
 		double gradosConvertidos;
 		
+		//Mostrar menú y leer y validar opcion
+		do
+		{
+			Conversion.Menu();
+			opcion = teclado.next().charAt(0);
+			if ((opcion < '1' || opcion > '6') && opcion != '9')
+				System.out.println("¡Solo del 1 al 6 o el 9 para salir!");
+		}while ((opcion < '1' || opcion > '6') && opcion != '9');
+	
+	
+/* Estudio del bucle:
+ * 
+ * ----------------------------------
+ * 
+ * (Mientras opcion != '9')
+ * Tipo VCB: Centinela
+ * Inicialización VCB: Lectura antes del bucle en (Leer y validar opcion)
+ * Actualización VCB: Antes del final del bucle 
+ * Condición de entrada: opcion != '9'
+ * Condición de salida: opcion == '9'
+ * 
+ * ----------------------------------
+ */
 		while (opcion != '9')
 		{
-			//Mostrar menú y leer y validar opcion
-			System.out.println("\nElija una de las opciones:");
-			System.out.println("1. Convertir de Celsius a Fahrenheit");
-			System.out.println("2. Convertir de Celsius a Kelvin");
-			System.out.println("3. Convertir de Fahrenheit a Celsius");
-			System.out.println("4. Convertir de Fahrenheit a Kelvin");
-			System.out.println("5. Convertir de Kelvin a Celsius");
-			System.out.println("6. Convertir de Kelvin a Fahrenheit");
-			System.out.println("9. Salir");
-			
-			do
-			{
-				opcion = teclado.next().charAt(0);
-				if ((opcion < '1' || opcion > '6') && opcion != '9')
-					System.out.println("¡Solo del 1 al 6 o el 9 para salir!");
-			}while ((opcion < '1' || opcion > '6') && opcion != '9');
-		
-		
 			switch (opcion) //Según (opcion)
 			{
 				case '1':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.CaF
 				System.out.println("\n¿Cuántos grados Celsius deseas convertir a Fahrenheit?");
 				do
 				{
@@ -80,14 +86,13 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Celsius no pueden ser menores a -273.15!");
 				}while (grados < -273.15);
 				
-				//Llamar a ConversionCaF
 				gradosConvertidos = Conversion.CaF(grados);
 				System.out.println(grados+"ºC son "+gradosConvertidos+"ºF");
 				
 				break;
 				
 				case '2':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.CaK
 				System.out.println("\n¿Cuántos grados Celsius deseas convertir a Kelvin?");
 				do
 				{
@@ -96,14 +101,13 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Celsius no pueden ser menores a -273.15!");
 				}while (grados < -273.15);
 				
-				//Llamar a ConversionCaF
 				gradosConvertidos = Conversion.CaK(grados);
 				System.out.println(grados+"ºC son "+gradosConvertidos+"K");
 				
 				break;
 				
 				case '3':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.FaC
 				System.out.println("\n¿Cuántos grados Fahrenheit deseas convertir a Celsius?");
 				do
 				{
@@ -112,14 +116,13 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Fahrenheit no pueden ser menores a -459.67!");
 				}while (grados < -459.67);
 				
-				//Llamar a ConversionFaC
 				gradosConvertidos = Conversion.FaC(grados);
 				System.out.println(grados+"ºF son "+gradosConvertidos+"ºC");
 				
 				break;
 				
 				case '4':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.FaK
 				System.out.println("\n¿Cuántos grados Fahrenheit deseas convertir a Kelvin?");
 				do
 				{
@@ -128,14 +131,13 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Fahrenheit no pueden ser menores a -459.67!");
 				}while (grados < -459.67);
 				
-				//Llamar a ConversionFaK
 				gradosConvertidos = Conversion.FaK(grados);
 				System.out.println(grados+"ºF son "+gradosConvertidos+"K");
 				
 				break;
 				
 				case '5':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.KaC
 				System.out.println("\n¿Cuántos grados Kelvin deseas convertir a Celsius?");
 				do
 				{
@@ -144,14 +146,13 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Kelvin no pueden ser menores a 0!");
 				}while (grados < 0);
 				
-				//Llamar a ConversionKaC
 				gradosConvertidos = Conversion.KaC(grados);
 				System.out.println(grados+"K son "+gradosConvertidos+"ºC");
 				
 				break;
 				
 				case '6':
-				//Leer y validar grados
+				//Leer y validar grados y Conversion.KaF
 				System.out.println("\n¿Cuántos grados Kelvin deseas convertir a Fahrenheit?");
 				do
 				{
@@ -160,12 +161,21 @@ public class boletin5a_4_gradoscfk
 						System.out.println("¡Los grados Kelvin no pueden ser menores a 0!");
 				}while (grados < 0);
 				
-				//Llamar a ConversionKaF
 				gradosConvertidos = Conversion.KaF(grados);
 				System.out.println(grados+"K son "+gradosConvertidos+"ºF");
 				
 				break;
 			}
+			
+			//Mostrar menú y leer y validar opcion
+			do
+			{
+				Conversion.Menu();
+				opcion = teclado.next().charAt(0);
+				if ((opcion < '1' || opcion > '6') && opcion != '9')
+					System.out.println("¡Solo del 1 al 6 o el 9 para salir!");
+			}while ((opcion < '1' || opcion > '6') && opcion != '9');
+			
 		}
 	}
 }

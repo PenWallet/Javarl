@@ -3,6 +3,17 @@ import java.io.*;
 
 public class Conversion
 {
+	public static void Menu()
+	{
+		System.out.println("\nElija una de las opciones:");
+		System.out.println("1. Convertir de Celsius a Fahrenheit");
+		System.out.println("2. Convertir de Celsius a Kelvin");
+		System.out.println("3. Convertir de Fahrenheit a Celsius");
+		System.out.println("4. Convertir de Fahrenheit a Kelvin");
+		System.out.println("5. Convertir de Kelvin a Celsius");
+		System.out.println("6. Convertir de Kelvin a Fahrenheit");
+		System.out.println("9. Salir");
+	}
 	
 // *********************************************************************
 
