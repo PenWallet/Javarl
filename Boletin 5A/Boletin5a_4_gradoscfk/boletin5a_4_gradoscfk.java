@@ -21,15 +21,15 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
+ * 		Mostrar menú y leer y validar opción
  * 		Mientras (opcion != 9)
- * 			Mostrar menú y leer y validar opción
  * 			Según (opcion)
- * 				caso 1: Leer y validar grados y llamar a ConversionCaF
- * 				caso 2: Leer y validar grados y llamar a ConversionCaK
- * 				caso 3: Leer y validar grados y llamar a ConversionFaC
- * 				caso 4: Leer y validar grados y llamar a ConversionFaK
- * 				caso 5: Leer y validar grados y llamar a ConversionKaC
- * 				caso 6: Leer y validar grados y llamar a ConversionKaF
+ * 				caso 1: Leer y validar grados y llamar a Conversion.CaF  //quitar lo de "y llamar"
+ * 				caso 2: Leer y validar grados y llamar a Conversion.CaK
+ * 				caso 3: Leer y validar grados y llamar a Conversion.FaC
+ * 				caso 4: Leer y validar grados y llamar a Conversion.FaK
+ * 				caso 5: Leer y validar grados y llamar a Conversion.KaC
+ * 				caso 6: Leer y validar grados y llamar a Conversion.KaF
  * 			Fin Según
  * 		Fin Mientras
  * 	Fin
@@ -40,147 +40,6 @@ import java.io.*;
 
 public class boletin5a_4_gradoscfk
 {
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionCaF
- * Proceso que realiza: Convierte grados C a F 
- * Precondiciones: El número debe ser mayor o igual a -273.15
- * Entradas: Número
- * Salidas: Número
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a -459.67
- * 
- * Cabecera:
- * double ConversionCaF (double grados)
-*/
-
-	public static double ConversionCaF (double gradosC)
-	{
-		double gradosF;
-		gradosF = (gradosC * 9/5.0) + 32;
-		return(gradosF);
-	}
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionCaK
- * Proceso que realiza: Convierte grados C a K
- * Precondiciones: El número debe ser mayor o igual a -273.15
- * Entradas: Número
- * Salidas: Número 
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a 0
- * 
- * Cabecera:
- * double ConversionCaK (double grados)
-*/
-	
-	public static double ConversionCaK (double gradosC)
-	{
-		double gradosK;
-		gradosK = gradosC + 273.15;
-		return(gradosK);
-	}
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionFaC
- * Proceso que realiza: Convierte grados F a C
- * Precondiciones: El número debe ser mayor o igual a -459.67
- * Entradas: Número
- * Salidas: Número
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a -273.15
- * 
- * Cabecera:
- * double ConversionFaC (double grados)
-*/
-
-	public static double ConversionFaC (double gradosF)
-	{
-		double gradosC;
-		gradosC = (gradosF - 32) * (5/9.0);
-		return(gradosC);
-	}
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionFaK
- * Proceso que realiza: Convierte grados F a K
- * Precondiciones: El número debe ser mayor o igual a -459.67
- * Entradas: Número
- * Salidas: Número
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a 0
- * 
- * Cabecera:
- * double ConversionFaK (double grados)
-*/
-
-	public static double ConversionFaK (double gradosF)
-	{
-		double gradosK;
-		gradosK = (gradosF + 459.67) * (5/9.0);
-		return(gradosK);
-	}
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionKaC
- * Proceso que realiza: Convierte grados K a C
- * Precondiciones: El número debe ser mayor o igual a 0
- * Entradas: Número
- * Salidas: Número
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a -273.15
- * 
- * Cabecera:
- * double ConversionKaC (double grados)
-*/
-
-	public static double ConversionKaC (double gradosK)
-	{
-		double gradosC;
-		gradosC = gradosK - 273.15;
-		return(gradosC);
-	}
-
-// *********************************************************************
-
-/* Estudio interfaz:
- * 
- * Nombre subprograma: ConversionKaF
- * Proceso que realiza: Convierte grados K a F
- * Precondiciones: El número debe ser mayor o igual a 0
- * Entradas: Número
- * Salidas: Número
- * Entradas/Salidas: No
- * Postcondiciones: El número debe ser mayor o igual a -459.67
- * 
- * Cabecera:
- * double ConversionKaF (double grados)
-*/
-
-	public static double ConversionKaF (double gradosK)
-	{
-		double gradosF;
-		gradosF = (gradosK / (5/9.0)) - 459.67;
-		return(gradosF);
-	}
-
-// *********************************************************************
-	
 	public static void main (String[] args) 
 	{
 		//Declarar variables
@@ -222,7 +81,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < -273.15);
 				
 				//Llamar a ConversionCaF
-				gradosConvertidos = ConversionCaF(grados);
+				gradosConvertidos = Conversion.CaF(grados);
 				System.out.println(grados+"ºC son "+gradosConvertidos+"ºF");
 				
 				break;
@@ -238,7 +97,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < -273.15);
 				
 				//Llamar a ConversionCaF
-				gradosConvertidos = ConversionCaK(grados);
+				gradosConvertidos = Conversion.CaK(grados);
 				System.out.println(grados+"ºC son "+gradosConvertidos+"K");
 				
 				break;
@@ -254,7 +113,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < -459.67);
 				
 				//Llamar a ConversionFaC
-				gradosConvertidos = ConversionFaC(grados);
+				gradosConvertidos = Conversion.FaC(grados);
 				System.out.println(grados+"ºF son "+gradosConvertidos+"ºC");
 				
 				break;
@@ -270,7 +129,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < -459.67);
 				
 				//Llamar a ConversionFaK
-				gradosConvertidos = ConversionFaK(grados);
+				gradosConvertidos = Conversion.FaK(grados);
 				System.out.println(grados+"ºF son "+gradosConvertidos+"K");
 				
 				break;
@@ -286,7 +145,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < 0);
 				
 				//Llamar a ConversionKaC
-				gradosConvertidos = ConversionKaC(grados);
+				gradosConvertidos = Conversion.KaC(grados);
 				System.out.println(grados+"K son "+gradosConvertidos+"ºC");
 				
 				break;
@@ -302,7 +161,7 @@ public class boletin5a_4_gradoscfk
 				}while (grados < 0);
 				
 				//Llamar a ConversionKaF
-				gradosConvertidos = ConversionKaF(grados);
+				gradosConvertidos = Conversion.KaF(grados);
 				System.out.println(grados+"K son "+gradosConvertidos+"ºF");
 				
 				break;
