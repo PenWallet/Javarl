@@ -20,26 +20,18 @@ public class anobisiesto
 		
 		// Siguiente, las operaciones
 		if ((year % 400) == 0)
-		{
 			System.out.println("El año ES bisiesto");
-		}
 		else
 		{
 			if ((year % 4) == 0)
 			{
 				if ((year % 100) == 0)
-				{
 					System.out.println("El año NO es bisiesto");
-				}
 				else
-				{
 					System.out.println("El año ES bisiesto");
-				}
 			}
 			else
-			{
 				System.out.println("El año NO es bisiesto");
-			}
 		}
 	}
 }

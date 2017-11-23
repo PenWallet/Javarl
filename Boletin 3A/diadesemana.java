@@ -10,8 +10,7 @@ public class diadesemana
 {
 	public static void main (String[] Args)
 	{
-		// Primero necesitamos la variable que guardará la respuesta
-		// del usuario
+		// Primero necesitamos la variable que guardará la respuesta del usuario
 		int dia;
 		Scanner teclado = new Scanner (System.in);
 		

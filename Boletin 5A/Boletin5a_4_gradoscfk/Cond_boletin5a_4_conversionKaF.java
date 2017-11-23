@@ -29,9 +29,27 @@ public class Cond_boletin5a_4_conversionKaF
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);	
-		final double grados = 0;
+		double grados = 0;
 		double resultado;
 		
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = -200;
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = -100;
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = -50;
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = 50;
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = 100;
+		resultado = ConversionKaF(grados);
+		System.out.println(resultado);
+		grados = 200;
 		resultado = ConversionKaF(grados);
 		System.out.println(resultado);
 	}

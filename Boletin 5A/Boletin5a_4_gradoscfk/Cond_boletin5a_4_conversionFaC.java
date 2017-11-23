@@ -29,9 +29,27 @@ public class Cond_boletin5a_4_conversionFaC
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);	
-		final double grados = 0;
+		double grados = 0;
 		double resultado;
 		
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = -200;
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = -100;
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = -50;
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = 50;
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = 100;
+		resultado = ConversionFaC(grados);
+		System.out.println(resultado);
+		grados = 200;
 		resultado = ConversionFaC(grados);
 		System.out.println(resultado);
 	}
