@@ -1,0 +1,19 @@
+/* Estudio de la Interfaz:
+ * 
+ * Necesidades: 
+ * Devoluciones: 
+ * Nec/Dev: 
+ * Restricciones: 
+*/ 
+
+/* Interfaz:
+ * 
+ * Comentario: 
+ * Cabecera: 
+ * Precondiciones: 
+ * Entradas: 
+ * Salidas: 
+ * Entradas/Salidas: 
+ * Postcondiciones: 
+ * 
+*/
