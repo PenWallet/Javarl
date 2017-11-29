@@ -17,3 +17,16 @@
  * Postcondiciones: 
  * 
 */
+
+// ************************************************************************
+		
+/* Nombre del bucle: 
+*  Tipo de VCB: 
+*  Descripción: 
+*  Inicialización VCB: 
+*  Actualización VCB: 
+*  Condición de entrada: 
+*  Condición de salida: 
+*/
+
+// ************************************************************************
