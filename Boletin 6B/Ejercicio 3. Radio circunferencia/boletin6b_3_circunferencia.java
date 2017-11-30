@@ -18,7 +18,6 @@
  * 
  * Requisitos:
  * - El radio será un número entero, mayor estricto de 0 y menor o igual a 133
- * 
 */
 
 /* Pseudocódigo Generalizado:
@@ -135,7 +134,9 @@ public class boletin6b_3_circunferencia
 				
 				//Imprimir resultado de Área
 				System.out.println("\nEl volumen de la esfera de radio "+radio+" es "+volumen);
-			}
+				
+			} //Fin Según
+			
 			//MostrarMenú * y leer y validar opción
 			do
 			{
@@ -144,8 +145,11 @@ public class boletin6b_3_circunferencia
 				if (opcion < '0' || opcion > '3')
 					System.out.println("¡Solo 1, 2, 3! O pulse 0 para salir");
 			}while (opcion < '0' || opcion > '3');
-		}
+			
+		} //Fin mientras
+		
 	}
+	
 }
 		
 		
