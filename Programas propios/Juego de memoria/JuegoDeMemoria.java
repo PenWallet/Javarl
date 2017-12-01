@@ -10,6 +10,8 @@
  * 
  * - El jugador podrá elegir 2 por cada turno. Si falla 3 veces seguidas, pierde la partida.
  * 
+ * - Los símbolos serán: A, B, C, D, E, F
+ * 
  * Entradas:
  * - Número 1 al 12
  * - Carácter Y o N
@@ -26,7 +28,7 @@
 /* Pseudocódigo Generalizado:
  * 	Inicio
  * 		Repetir
- * 			CartasRandom
+ * 			Cartas random
  * 			CartasPantalla *
  * 			Repetir
  * 				Leer y validar selección de primera carta
@@ -87,6 +89,10 @@ public class JuegoDeMemoria
 		boolean cartaDescubierta10 = false;
 		boolean cartaDescubierta11 = false;
 		boolean cartaDescubierta12 = false;
+		
+		//Cartas random
+		
+		
 		
 		Resguardos.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1);
 	}

@@ -32,6 +32,7 @@
  * 					Imprimir resultado de Area
  * 			caso 3: CalcularVolumen *
  * 					Imprimir resultado de Volumen
+ * 			caso 4: Leer y validar medida del radio
  * 		Fin Según
  * 		MostrarMenú * y leer y validar opción
  * 	Fin Mientras
@@ -78,7 +79,7 @@ public class boletin6b_3_circunferencia
 			{
 				System.out.println("El radio no puede ser menor que 0");
 				contadorError++;
-				if (contadorError >= 3 && contadorErrorVoF == false)
+				if (contadorError >= 3 && !contadorErrorVoF)
 				{
 					System.out.println("QUE FUNCIONA BIEEEEEEEEEEEN");
 					contadorErrorVoF = true;
@@ -105,9 +106,22 @@ public class boletin6b_3_circunferencia
 		{
 			FuncionesCircunferencia.mostrarMenu();
 			opcion = teclado.next().charAt(0);
-			if (opcion < '0' || opcion > '3')
-				System.out.println("¡Solo 1, 2, 3! O pulse 0 para salir");
-		}while (opcion < '0' || opcion > '3');
+			if (opcion < '0' || opcion > '4')
+				System.out.println("¡Solo 1, 2, 3 o 4! O pulse 0 para salir");
+		}while (opcion < '0' || opcion > '4');
+		
+		// ************************************************************************
+		
+		/* Nombre del bucle: Bucle Programa
+		*  Tipo de VCB: Centinela
+		*  Descripción: Se repite mientras el usuario quiera
+		*  Inicialización VCB: Lectura anticipada
+		*  Actualización VCB: Lectura al final del bucle
+		*  Condición de entrada: opcion < 0 || opcion > 3
+		*  Condición de salida: opcion >= 0 && opcion <= 3
+		*/ 
+
+		// ************************************************************************
 		
 		while(opcion != '0') //Mientras (opcion != '0')
 		{
@@ -135,6 +149,19 @@ public class boletin6b_3_circunferencia
 				//Imprimir resultado de Área
 				System.out.println("\nEl volumen de la esfera de radio "+radio+" es "+volumen);
 				
+				break;
+				
+				case '4':
+				do
+				{
+					System.out.println("¿Cuál es el radio de tu circunferencia? (Número entero mayor que 0)");
+					radio = teclado.nextInt();
+					if (radio <= 0 || radio > 133)
+						System.out.println("El radio no puede ser menor que 0");
+				}while (radio <= 0 || radio > 133);
+				
+				break;
+				
 			} //Fin Según
 			
 			//MostrarMenú * y leer y validar opción
@@ -142,9 +169,9 @@ public class boletin6b_3_circunferencia
 			{
 				FuncionesCircunferencia.mostrarMenu();
 				opcion = teclado.next().charAt(0);
-				if (opcion < '0' || opcion > '3')
-					System.out.println("¡Solo 1, 2, 3! O pulse 0 para salir");
-			}while (opcion < '0' || opcion > '3');
+				if (opcion < '0' || opcion > '4')
+					System.out.println("¡Solo 1, 2, 3 o 4! O pulse 0 para salir");
+			}while (opcion < '0' || opcion > '4');
 			
 		} //Fin mientras
 		

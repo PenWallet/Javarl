@@ -29,6 +29,7 @@ public class FuncionesCircunferencia
 		System.out.println("1. Calcular la longitud de la circunferencia");
 		System.out.println("2. Calcular el área del círculo que encierra");
 		System.out.println("3. Calcular el volumen de la esfera que forma");
+		System.out.println("4. Cambiar radio");
 		System.out.println("0. Salir");
 	}
 	
