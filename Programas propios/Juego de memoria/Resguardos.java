@@ -6,20 +6,22 @@ public class Resguardos
 /* Estudio de la Interfaz:
  * 
  * Necesidades: 12 caracteres y 12 booleans
- * Devoluciones: 
- * Nec/Dev: 
- * Restricciones: 
+ * Devoluciones: Ninguna
+ * Nec/Dev: Ninnguna
+ * Restricciones: Los caracteres solo pueden ser A, B, C, D, E o F
 */ 
 
 /* Interfaz:
  * 
- * Comentario: 
- * Cabecera: 
- * Precondiciones: 
- * Entradas: 
- * Salidas: 
- * Entradas/Salidas: 
- * Postcondiciones: 
+ * Comentario: Mostrará en pantalla el estado de las cartas según la partida se vaya desarrollando
+ * Cabecera: CartasPantalla(unmontondevariables) 
+ * // Debido a la falta de herramientas y conocimientos,
+ * esta es la única forma disponible de hacerlo. Es rústica de cojones
+ * Precondiciones: Ninguna
+ * Entradas: 12 caracteres y 12 booleans
+ * Salidas: Ninguna
+ * Entradas/Salidas: Ninguna
+ * Postcondiciones: Ninguna, solo se pintará en pantalla
  * 
 */
 	public static void CartasPantalla

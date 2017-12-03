@@ -12,6 +12,8 @@
  * 
  * - Los símbolos serán: A, B, C, D, E, F
  * 
+ * - A cada carta se le asignará un símbolo al azar
+ * 
  * Entradas:
  * - Número 1 al 12
  * - Carácter Y o N
@@ -47,8 +49,32 @@
  * 			Leer y validar si desea volver a jugar
  * 		Mientras desee jugar
  * 	Fin
- * 				
- * 		
+ * 
+ * //Pseudocódigo específico de //Cartas random
+ * Inicio
+ * 	Generar número al azar del 1 al 6
+ * 	Si es 1
+ * 		Asignar la letra A a la primera carta
+ * 		Sumar en 1 el contador simboloAContador
+ * 	Sino
+ * 		Si es 2
+ * 			Asignar la letra B a la primera carta
+ * 			Sumar en 1 el contador simboloBContador
+ * 		Sino
+ * 			Si es 3
+ * 				Asignar la letra C a la primera carta
+ * 				Sumar en 1 el contador simboloCContador
+ * 			Sino
+ * 				Si es 4
+ * 					Asignar la letra D a la primera carta
+ * 					Sumar en 1 el contador simboloDContador
+ * 				Sino
+ * 					Si es 5
+ * 						Asignar la letra E a la primera carta
+ * 						Sumar en 1 el contador simboloEContador
+ * 					Sino
+ * 						Asignar la letra F a la primera carta
+ * 						Sumar en 1 el contador simboloFContador
  * 
  * 
  * 
@@ -64,18 +90,25 @@ public class JuegoDeMemoria
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);	
-		char cartaSimbolo1 = '1';
-		char cartaSimbolo2 = '1';
-		char cartaSimbolo3 = '1';
-		char cartaSimbolo4 = '1';
-		char cartaSimbolo5 = '1';
-		char cartaSimbolo6 = '1';
-		char cartaSimbolo7 = '1';
-		char cartaSimbolo8 = '1';
-		char cartaSimbolo9 = '1';
-		char cartaSimbolo10 = '1';
-		char cartaSimbolo11 = '1';
-		char cartaSimbolo12 = '1';
+		char cartaSimbolo1;
+		char cartaSimbolo2;
+		char cartaSimbolo3;
+		char cartaSimbolo4;
+		char cartaSimbolo5;
+		char cartaSimbolo6;
+		char cartaSimbolo7;
+		char cartaSimbolo8;
+		char cartaSimbolo9;
+		char cartaSimbolo10;
+		char cartaSimbolo11;
+		char cartaSimbolo12;
+		
+		byte simboloAContador = 0;
+		byte simboloBContador = 0;
+		byte simboloCContador = 0;
+		byte simboloDContador = 0;
+		byte simboloEContador = 0;
+		byte simboloFContador = 0;
 		
 		boolean cartaDescubierta1 = false;
 		boolean cartaDescubierta2 = false;
@@ -94,7 +127,20 @@ public class JuegoDeMemoria
 		
 		
 		
-		Resguardos.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1, cartaSimbolo1, cartaDescubierta1);
+		Funciones.CartasPantalla
+		(
+		cartaSimbolo1, cartaDescubierta1,
+		cartaSimbolo2, cartaDescubierta2,
+		cartaSimbolo3, cartaDescubierta3,
+		cartaSimbolo4, cartaDescubierta4,
+		cartaSimbolo5, cartaDescubierta5,
+		cartaSimbolo6, cartaDescubierta6,
+		cartaSimbolo7, cartaDescubierta7,
+		cartaSimbolo8, cartaDescubierta8,
+		cartaSimbolo9, cartaDescubierta9,
+		cartaSimbolo10, cartaDescubierta10,
+		cartaSimbolo11, cartaDescubierta11,
+		cartaSimbolo12, cartaDescubierta12);
 	}
 }
 		
