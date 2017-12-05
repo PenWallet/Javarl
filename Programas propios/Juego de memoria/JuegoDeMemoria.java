@@ -52,29 +52,8 @@
  * 
  * //Pseudocódigo específico de //Cartas random
  * Inicio
- * 	Generar número al azar del 1 al 6
- * 	Si es 1
- * 		Asignar la letra A a la primera carta
- * 		Sumar en 1 el contador simboloAContador
- * 	Sino
- * 		Si es 2
- * 			Asignar la letra B a la primera carta
- * 			Sumar en 1 el contador simboloBContador
- * 		Sino
- * 			Si es 3
- * 				Asignar la letra C a la primera carta
- * 				Sumar en 1 el contador simboloCContador
- * 			Sino
- * 				Si es 4
- * 					Asignar la letra D a la primera carta
- * 					Sumar en 1 el contador simboloDContador
- * 				Sino
- * 					Si es 5
- * 						Asignar la letra E a la primera carta
- * 						Sumar en 1 el contador simboloEContador
- * 					Sino
- * 						Asignar la letra F a la primera carta
- * 						Sumar en 1 el contador simboloFContador
+ * 	Generar número al azar del 1 al 12
+ * 	
  * 
  * 
  * 
@@ -103,12 +82,18 @@ public class JuegoDeMemoria
 		char cartaSimbolo11;
 		char cartaSimbolo12;
 		
-		byte simboloAContador = 0;
-		byte simboloBContador = 0;
-		byte simboloCContador = 0;
-		byte simboloDContador = 0;
-		byte simboloEContador = 0;
-		byte simboloFContador = 0;
+		boolean cartaSimbolo1Asignado = false;
+		boolean cartaSimbolo2Asignado = false;
+		boolean cartaSimbolo3Asignado = false;
+		boolean cartaSimbolo4Asignado = false;
+		boolean cartaSimbolo5Asignado = false;
+		boolean cartaSimbolo6Asignado = false;
+		boolean cartaSimbolo7Asignado = false;
+		boolean cartaSimbolo8Asignado = false;
+		boolean cartaSimbolo9Asignado = false;
+		boolean cartaSimbolo10Asignado = false;
+		boolean cartaSimbolo11Asignado = false;
+		boolean cartaSimbolo12Asignado = false;
 		
 		boolean cartaDescubierta1 = false;
 		boolean cartaDescubierta2 = false;
