@@ -25,11 +25,11 @@ public class Funciones
  * 
  * Comentario: Pintará en pantalla el estado de la partida
  * Cabecera: CartasPantalla(y todas las variables char y boolean aquí)
- * Precondiciones: 
- * Entradas: 
- * Salidas: 
- * Entradas/Salidas: 
- * Postcondiciones: 
+ * Precondiciones: Los caracteres solo son A, B, C, D, E o F
+ * Entradas: 12 caracteres y 12 booleans
+ * Salidas: Ninguna
+ * Entradas/Salidas: Ninguna
+ * Postcondiciones: Ninguna, solo pinta en pantalla
  * 
 */
 	public static void CartasPantalla

@@ -53,6 +53,8 @@
  * //Pseudocódigo específico de //Cartas random
  * Inicio
  * 	Generar número al azar del 1 al 12
+ * 	Repetir
+ * 		
  * 	
  * 
  * 
@@ -82,18 +84,12 @@ public class JuegoDeMemoria
 		char cartaSimbolo11;
 		char cartaSimbolo12;
 		
-		boolean cartaSimbolo1Asignado = false;
-		boolean cartaSimbolo2Asignado = false;
-		boolean cartaSimbolo3Asignado = false;
-		boolean cartaSimbolo4Asignado = false;
-		boolean cartaSimbolo5Asignado = false;
-		boolean cartaSimbolo6Asignado = false;
-		boolean cartaSimbolo7Asignado = false;
-		boolean cartaSimbolo8Asignado = false;
-		boolean cartaSimbolo9Asignado = false;
-		boolean cartaSimbolo10Asignado = false;
-		boolean cartaSimbolo11Asignado = false;
-		boolean cartaSimbolo12Asignado = false;
+		byte cartaSimboloAAsignado = 0;
+		byte cartaSimboloBAsignado = 0;
+		byte cartaSimboloCAsignado = 0;
+		byte cartaSimboloDAsignado = 0;
+		byte cartaSimboloEAsignado = 0;
+		byte cartaSimboloFAsignado = 0;
 		
 		boolean cartaDescubierta1 = false;
 		boolean cartaDescubierta2 = false;

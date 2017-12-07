@@ -42,6 +42,32 @@ public class Resguardos
 	{
 		System.out.println("En Resguardo");
 	}
+
+/* Estudio de la Interfaz:
+ * 
+ * Necesidades: Ninguna
+ * Devoluciones: Carácter
+ * Nec/Dev: Ninguna
+ * Restricciones: Ninguna
+*/ 
+
+/* Interfaz:
+ * 
+ * Comentario: Calcula un número random y lo asigna a una letra
+ * Cabecera: Carácter CartasRandom()
+ * Precondiciones: Ninguna
+ * Entradas: Ninguna
+ * Salidas: Carácter
+ * Entradas/Salidas: Ninguna
+ * Postcondiciones: El carácter de salida será A, B, C, D, E o F
+ * 
+*/
+	
+	public static char CartasRandom ()
+	{
+		char letra = 'A';
+		return(letra);
+	}
 }
 	
 	
