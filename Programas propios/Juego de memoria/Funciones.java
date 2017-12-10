@@ -1,9 +1,18 @@
-import java.util.Scanner;
+import java.util.Random;
 import java.io.*;
 
 public class Funciones
 {
-	public static void time()
+	public static void Menu()
+	{
+		System.out.println("|------------------|");
+		System.out.println("|       Menú       |");
+		System.out.println("|------------------|");
+		System.out.println("|  1. 1 jugador    |");
+		System.out.println("|  2. 2 jugadores  |");
+		System.out.println("|------------------|");
+	
+	public static void Time()
 	{
 		try
 		{
@@ -13,25 +22,6 @@ public class Funciones
 	}
 	
 	
-/* Estudio de la Interfaz:
- * 
- * Necesidades: 12 caracteres y 12 booleans
- * Devoluciones: Ninguna
- * Nec/Dev: Ninguna
- * Restricciones: El carácter solo podrá ser A, B, C, D, E o F
-*/ 
-
-/* Interfaz:
- * 
- * Comentario: Pintará en pantalla el estado de la partida
- * Cabecera: CartasPantalla(y todas las variables char y boolean aquí)
- * Precondiciones: Los caracteres solo son A, B, C, D, E o F
- * Entradas: 12 caracteres y 12 booleans
- * Salidas: Ninguna
- * Entradas/Salidas: Ninguna
- * Postcondiciones: Ninguna, solo pinta en pantalla
- * 
-*/
 	public static void CartasPantalla
 	(
 	char cartaSimbolo1, boolean cartaDescubierta1,
@@ -57,27 +47,27 @@ public class Funciones
 			switch (cartaSimbolo1)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -89,27 +79,27 @@ public class Funciones
 			switch (cartaSimbolo2)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -121,27 +111,27 @@ public class Funciones
 			switch (cartaSimbolo3)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -153,27 +143,27 @@ public class Funciones
 			switch (cartaSimbolo4)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -191,27 +181,27 @@ public class Funciones
 			switch (cartaSimbolo5)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -222,27 +212,27 @@ public class Funciones
 			switch (cartaSimbolo6)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -254,27 +244,27 @@ public class Funciones
 			switch (cartaSimbolo7)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -286,27 +276,27 @@ public class Funciones
 			switch (cartaSimbolo8)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -324,27 +314,27 @@ public class Funciones
 			switch (cartaSimbolo9)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -355,27 +345,27 @@ public class Funciones
 			switch (cartaSimbolo10)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -387,27 +377,27 @@ public class Funciones
 			switch (cartaSimbolo11)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
@@ -419,32 +409,119 @@ public class Funciones
 			switch (cartaSimbolo12)
 			{
 				case 'A':
-				System.out.println("| A |   ");
+				System.out.print("| A |   ");
 				break;
 				
 				case 'B':
-				System.out.println("| B |   ");
+				System.out.print("| B |   ");
 				break;
 				
 				case 'C':
-				System.out.println("| C |   ");
+				System.out.print("| C |   ");
 				break;
 				
 				case 'D':
-				System.out.println("| D |   ");
+				System.out.print("| D |   ");
 				break;
 				
 				case 'E':
-				System.out.println("| E |   ");
+				System.out.print("| E |   ");
 				break;
 				
 				case 'F':
-				System.out.println("| F |");
+				System.out.print("| F |   ");
 				break;
 			}
 		}
 		System.out.println("\n|   |   |   |   |   |   |   |");
 		System.out.println("-----   -----   -----   -----");
+	}
+	
+	public static char CartasRandom (int contA, int contB, int contC, int contD, int contE, int contF)
+	{
+		
+		char letra = 'A';
+		boolean simboloNoRepetido = true;
+		int numeroRandom;
+		
+		Random random = new Random();
+		
+		do
+		{
+			numeroRandom = random.nextInt(6)+1;
+			
+			switch (numeroRandom)
+			{
+				case 1:
+					if (contA < 2)
+					{
+						letra = 'A';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+					
+					break;
+					
+				case 2:
+					if (contB < 2)
+					{
+						letra = 'B';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+					
+					break;
+					
+				case 3:
+					if (contC < 2)
+					{
+						letra = 'C';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+						
+					break;
+					
+				case 4:
+					if (contD < 2)
+					{
+						letra = 'D';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+						
+					break;
+					
+				case 5:
+					if (contE < 2)
+					{
+						letra = 'E';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+						
+					break;
+					
+				case 6:
+					if (contF < 2)
+					{
+						letra = 'F';
+						simboloNoRepetido = true;
+					}
+					else
+						simboloNoRepetido = false;
+						
+					break;
+			}
+			
+		}while (!simboloNoRepetido);
+		
+		return(letra);
 	}
 }
 		

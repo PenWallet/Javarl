@@ -45,28 +45,54 @@ public class Resguardos
 
 /* Estudio de la Interfaz:
  * 
- * Necesidades: Ninguna
+ * Necesidades: 6 contadores, cada uno de cada símbolo
  * Devoluciones: Carácter
  * Nec/Dev: Ninguna
- * Restricciones: Ninguna
+ * Restricciones: Cada contador será mayor de 0 y menor o igual a 2
 */ 
 
 /* Interfaz:
  * 
- * Comentario: Calcula un número random y lo asigna a una letra
- * Cabecera: Carácter CartasRandom()
- * Precondiciones: Ninguna
- * Entradas: Ninguna
+ * Comentario: Calcula un número random, se asegura de que no haya salido más de 2 veces y lo asigna a una letra
+ * Cabecera: Carácter CartasRandom(int ContA, int ContB, int ContC, int ContD, int ContE, int ContF)
+ * Precondiciones: Cada contador será mayor de 0 y menor o igual a 2
+ * Entradas: 6 contadores
  * Salidas: Carácter
  * Entradas/Salidas: Ninguna
  * Postcondiciones: El carácter de salida será A, B, C, D, E o F
  * 
 */
 	
-	public static char CartasRandom ()
+	public static char CartasRandom (int ContA, int ContB, int ContC, int ContD, int ContE, int ContF)
 	{
 		char letra = 'A';
 		return(letra);
+	}
+	
+	
+/* Estudio de la Interfaz:
+ * 
+ * Necesidades: Ninguna
+ * Devoluciones: Ninguna
+ * Nec/Dev: Ninguna
+ * Restricciones: Ninguna
+*/ 
+
+/* Interfaz:
+ * 
+ * Comentario: Presenta menú
+ * Cabecera: Menu ()
+ * Precondiciones: Ninguna
+ * Entradas: Ninguna
+ * Salidas: Ninguna
+ * Entradas/Salidas: Ninguna
+ * Postcondiciones: Ninguna, solo pinta en pantalla
+ * 
+*/
+	
+	public static char CartasRandom (int ContA, int ContB, int ContC, int ContD, int ContE, int ContF)
+	{
+		System.out.println("Hola");
 	}
 }
 	
