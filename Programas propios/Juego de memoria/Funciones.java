@@ -11,6 +11,7 @@ public class Funciones
 		System.out.println("|  1. 1 jugador    |");
 		System.out.println("|  2. 2 jugadores  |");
 		System.out.println("|------------------|");
+	}
 	
 	public static void Time()
 	{

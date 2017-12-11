@@ -29,34 +29,33 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
- * 		Menú *
- * 		Leer y validar opción de menú
- * 		Repetir
- * 			//En construcción
- * 			Menú *
- * 			Leer y validar opción de menú
- * 		Mientras (1 jugador)
+ * 		Menú * y leer y validar opción
+ * 		Según (opcion)
+ * 			caso '1':
+ * 				//En construcción
+ * 				Menú *
+ * 				Leer y validar opción de menú
  * 		
- * 		Repetir
- * 			Leer nombre primer jugador
- * 			Leer nombre segundo jugador
- * 			Cartas random
- * 			Repetir
- * 				CartasPantalla *
- * 				Leer y validar selección de primera carta
- * 				CartasPantalla *
- * 				Leer y validar selección de segunda carta
- * 				CartasPantalla *
- * 				Si ambas son iguales
- * 					Resetear contador de errores
- * 					Fijar valores de cartas descubiertas
- * 					Sumar punto
- * 				Si no
- *					Agregar en 1 el contador de errores
- * 					Resetear 
- * 				Fin SI
- * 			Leer y validar si desea volver a jugar
- * 		Mientras (2 jugadores)
+ * 			caso '2':
+ * 				Leer nombre primer jugador
+ * 				Leer nombre segundo jugador
+ * 				Cartas random
+ * 				Repetir
+ * 					Mensaje jugador
+ * 					CartasPantalla *
+ * 					Leer y validar selección de primera carta
+ * 					CartasPantalla *
+ * 					Leer y validar selección de segunda carta
+ * 					CartasPantalla *
+ * 					Si ambas son iguales
+ * 						Resetear contador de errores
+ * 						Fijar valores de cartas descubiertas
+ * 						Sumar punto
+ * 					Si no
+ *						Agregar en 1 el contador de errores
+ * 						Resetear 
+ * 					Fin SI
+ * 				Leer y validar si desea volver a jugar
  * 	Fin
  * 
  * //Pseudocódigos específicos
@@ -162,6 +161,11 @@ public class JuegoDeMemoria
 		char cartaSimbolo10;
 		char cartaSimbolo11;
 		char cartaSimbolo12;
+		char opcion;
+		char eleccion1;
+		char eleccion2;
+		
+		byte seleccion;
 		
 		int contA = 0;
 		int contB = 0;
@@ -170,161 +174,214 @@ public class JuegoDeMemoria
 		int contE = 0;
 		int contF = 0;
 		
-		boolean cartaDescubierta1 = false;
-		boolean cartaDescubierta2 = false;
-		boolean cartaDescubierta3 = false;
-		boolean cartaDescubierta4 = false;
-		boolean cartaDescubierta5 = false;
-		boolean cartaDescubierta6 = false;
-		boolean cartaDescubierta7 = false;
-		boolean cartaDescubierta8 = false;
-		boolean cartaDescubierta9 = false;
-		boolean cartaDescubierta10 = false;
-		boolean cartaDescubierta11 = false;
-		boolean cartaDescubierta12 = false;
+		boolean cartaDescubierta1 = true;
+		boolean cartaDescubierta2 = true;
+		boolean cartaDescubierta3 = true;
+		boolean cartaDescubierta4 = true;
+		boolean cartaDescubierta5 = true;
+		boolean cartaDescubierta6 = true;
+		boolean cartaDescubierta7 = true;
+		boolean cartaDescubierta8 = true;
+		boolean cartaDescubierta9 = true;
+		boolean cartaDescubierta10 = true;
+		boolean cartaDescubierta11 = true;
+		boolean cartaDescubierta12 = true;
+		boolean cartaYaDescubierta = false;
+		boolean turnoPrimerJugador = true;
 		
-		//Cartas random
-		//Primera carta
-		cartaSimbolo1 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo1)
+		String nombre1 = new String;
+		String nombre2 = new String;
+		
+		//Presentar menú, leer y validar opción
+		do
 		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
+			Funciones.Menu();
+			opcion = teclado.next().charAt(0);
+			if (opcion != '1' && opcion != '2')
+				System.out.println("¡Solo 1 o 2!");
+		}while (opcion != '1' && opcion != '2');
 		
-		//Segunda carta
-		cartaSimbolo2 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo2)
+		switch(opcion)
 		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
+			case '1':
+				System.out.println("En construcción, sorry");
+			
+			case '2':
+				//Leer nombre del primer jugador
+				System.out.println("Introduce el nombre del primer jugador");
+				nombre1 = teclado.nextLine();
+				
+				System.out.println("Introduce el nombre del primer jugador");
+				nombre2 = teclado.nextLine();
+				
+				
+				//Cartas random
+				//Primera carta
+				cartaSimbolo1 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo1)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Segunda carta
+				cartaSimbolo2 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo2)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Tercera carta
+				cartaSimbolo3 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo3)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Cuarta carta
+				cartaSimbolo4 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo4)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Quinta carta
+				cartaSimbolo5 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo5)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Sexta carta
+				cartaSimbolo6 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo6)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Séptima carta
+				cartaSimbolo7 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo7)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Octava carta
+				cartaSimbolo8 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo8)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Novena carta
+				cartaSimbolo9 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo9)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Décima carta
+				cartaSimbolo10 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo10)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Undécima carta
+				cartaSimbolo11 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				switch(cartaSimbolo11)
+				{
+					case 'A': contA++; break;
+					case 'B': contB++; break;
+					case 'C': contC++; break;
+					case 'D': contD++; break;
+					case 'E': contE++; break;
+					case 'F': contF++; break;
+				}
+				
+				//Duodécima carta
+				cartaSimbolo12 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+				
+				do
+				{
+					//Mensaje jugador
+					if (turnoPrimerJugador)
+						System.out.println("Es el turno de "+nombre1);
+					else
+						System.out.println("Es el turno de "+nombre2);
+					
+					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
+					
+					//Leer y validar primera carta
+					System.out.println("Elige la primera carta (1-12)");
+					seleccion = teclado.next().charAt(0)
+					switch (seleccion)
+					{
+						case 1:
+							eleccion1 = cartaSimbolo1;
+							if (cartaDescubierta1)
+							{
+								System.out.println("¡Esa carta ya está dada la vuelta!");
+								
+						
+					
+					
+					
+					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
+					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
+					
+				}while(
+					
 		}
-		
-		//Tercera carta
-		cartaSimbolo3 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo3)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Cuarta carta
-		cartaSimbolo4 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo4)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Quinta carta
-		cartaSimbolo5 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo5)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Sexta carta
-		cartaSimbolo6 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo6)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Séptima carta
-		cartaSimbolo7 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo7)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Octava carta
-		cartaSimbolo8 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo8)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Novena carta
-		cartaSimbolo9 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo9)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Décima carta
-		cartaSimbolo10 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo10)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Undécima carta
-		cartaSimbolo11 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		switch(cartaSimbolo11)
-		{
-			case 'A': contA++; break;
-			case 'B': contB++; break;
-			case 'C': contC++; break;
-			case 'D': contD++; break;
-			case 'E': contE++; break;
-			case 'F': contF++; break;
-		}
-		
-		//Duodécima carta
-		cartaSimbolo12 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
-		
-		
-		
-		
-		
-		Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
-		
 	}
 }
 		
