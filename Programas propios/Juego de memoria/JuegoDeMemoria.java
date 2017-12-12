@@ -43,18 +43,18 @@
  * 				Repetir
  * 					Mensaje jugador
  * 					CartasPantalla *
- * 					Leer y validar selección de primera carta
+ * 					Leer y validar selección //Primera carta
  * 					CartasPantalla *
- * 					Leer y validar selección de segunda carta
+ * 					Leer y validar selección //Segunda carta
  * 					CartasPantalla *
  * 					Si ambas son iguales
  * 						Resetear contador de errores
  * 						Fijar valores de cartas descubiertas
- * 						Sumar punto
+ * 						Sumar punto al jugador correcto
  * 					Si no
- *						Agregar en 1 el contador de errores
- * 						Resetear 
+ * 						Resetear cartas elegidas
  * 					Fin SI
+ * 				Mientras (
  * 				Leer y validar si desea volver a jugar
  * 	Fin
  * 
@@ -131,7 +131,106 @@
  * 		caso 'E': Aumentar en 1 el contador E
  * 		caso 'F': Aumentar en 1 el contador F
  * 	Fin Según
- * 		
+ * 
+ * 
+ * //Leer y validar selección de carta
+ * 	Inicio
+ * 		Según
+ * 			caso 1:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 2:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 3:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 4:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 5:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 6:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 7:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 8:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 9:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 10:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 11:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
+ * 
+ * 			caso 12:
+ * 				Si la primera carta ya ha sido descubierta
+ * 					Mensaje error
+ * 					Cambiar variable de error a true
+ * 				Sino
+ * 					Darle la vuelta a la carta temporalmente
+ * 				Fin_Si
  * 		
  * 	
  * 
@@ -162,7 +261,7 @@ public class JuegoDeMemoria
 		char cartaSimbolo11;
 		char cartaSimbolo12;
 		char opcion;
-		char eleccion1;
+		char eleccion1 = 0;
 		char eleccion2;
 		
 		byte seleccion;
@@ -174,23 +273,23 @@ public class JuegoDeMemoria
 		int contE = 0;
 		int contF = 0;
 		
-		boolean cartaDescubierta1 = true;
-		boolean cartaDescubierta2 = true;
-		boolean cartaDescubierta3 = true;
-		boolean cartaDescubierta4 = true;
-		boolean cartaDescubierta5 = true;
-		boolean cartaDescubierta6 = true;
-		boolean cartaDescubierta7 = true;
-		boolean cartaDescubierta8 = true;
-		boolean cartaDescubierta9 = true;
-		boolean cartaDescubierta10 = true;
-		boolean cartaDescubierta11 = true;
-		boolean cartaDescubierta12 = true;
+		boolean cartaDescubierta1 = false;
+		boolean cartaDescubierta2 = false;
+		boolean cartaDescubierta3 = false;
+		boolean cartaDescubierta4 = false;
+		boolean cartaDescubierta5 = false;
+		boolean cartaDescubierta6 = false;
+		boolean cartaDescubierta7 = false;
+		boolean cartaDescubierta8 = false;
+		boolean cartaDescubierta9 = false;
+		boolean cartaDescubierta10 = false;
+		boolean cartaDescubierta11 = false;
+		boolean cartaDescubierta12 = false;
 		boolean cartaYaDescubierta = false;
 		boolean turnoPrimerJugador = true;
 		
-		String nombre1 = new String;
-		String nombre2 = new String;
+		String nombre1;
+		String nombre2;
 		
 		//Presentar menú, leer y validar opción
 		do
@@ -211,7 +310,7 @@ public class JuegoDeMemoria
 				System.out.println("Introduce el nombre del primer jugador");
 				nombre1 = teclado.nextLine();
 				
-				System.out.println("Introduce el nombre del primer jugador");
+				System.out.println("Introduce el nombre del segundo jugador");
 				nombre2 = teclado.nextLine();
 				
 				
@@ -362,15 +461,160 @@ public class JuegoDeMemoria
 					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
 					
 					//Leer y validar primera carta
-					System.out.println("Elige la primera carta (1-12)");
-					seleccion = teclado.next().charAt(0)
-					switch (seleccion)
+					do
 					{
-						case 1:
-							eleccion1 = cartaSimbolo1;
-							if (cartaDescubierta1)
-							{
-								System.out.println("¡Esa carta ya está dada la vuelta!");
+						cartaYaDescubierta = false;
+						System.out.println("\nElige la primera carta (1-12)");
+						seleccion = teclado.nextByte();
+						switch (seleccion)
+						{
+							case 1:
+								eleccion1 = cartaSimbolo1;
+								if (cartaDescubierta1)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta1 = true;
+								
+								break;
+								
+							case 2:
+								eleccion1 = cartaSimbolo2;
+								if (cartaDescubierta2)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta2 = true;
+								
+								break;							
+								
+							case 3:
+								eleccion1 = cartaSimbolo3;
+								if (cartaDescubierta3)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta3 = true;
+								
+								break;
+								
+							case 4:
+								eleccion1 = cartaSimbolo4;
+								if (cartaDescubierta4)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta4 = true;
+								
+								break;
+								
+							case 5:
+								eleccion1 = cartaSimbolo5;
+								if (cartaDescubierta5)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta5 = true;
+								
+								break;
+								
+							case 6:
+								eleccion1 = cartaSimbolo6;
+								if (cartaDescubierta6)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta6 = true;
+								
+								break;
+								
+							case 7:
+								eleccion1 = cartaSimbolo7;
+								if (cartaDescubierta7)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta7 = true;
+								
+								break;
+								
+							case 8:
+								eleccion1 = cartaSimbolo8;
+								if (cartaDescubierta8)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta8 = true;
+								
+								break;
+								
+							case 9:
+								eleccion1 = cartaSimbolo9;
+								if (cartaDescubierta9)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta9 = true;
+								
+								break;
+								
+							case 10:
+								eleccion1 = cartaSimbolo10;
+								if (cartaDescubierta10)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta10 = true;
+								
+								break;
+								
+							case 11:
+								eleccion1 = cartaSimbolo11;
+								if (cartaDescubierta11)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta11 = true;
+								
+								break;
+								
+							case 12:
+								eleccion1 = cartaSimbolo12;
+								if (cartaDescubierta12)
+								{
+									System.out.println("¡Esa carta ya está dada la vuelta!");
+									cartaYaDescubierta = true;
+								}
+								else
+									cartaDescubierta12 = true;
+								
+								break;
+						
+						}
+					}while (cartaYaDescubierta && (eleccion1 < 1 || eleccion1 > 12));
+								
 								
 						
 					
@@ -379,7 +623,7 @@ public class JuegoDeMemoria
 					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
 					Funciones.CartasPantalla(cartaSimbolo1, cartaDescubierta1, cartaSimbolo2, cartaDescubierta2, cartaSimbolo3, cartaDescubierta3, cartaSimbolo4, cartaDescubierta4, cartaSimbolo5, cartaDescubierta5, cartaSimbolo6, cartaDescubierta6, cartaSimbolo7, cartaDescubierta7, cartaSimbolo8, cartaDescubierta8, cartaSimbolo9, cartaDescubierta9, cartaSimbolo10, cartaDescubierta10, cartaSimbolo11, cartaDescubierta11, cartaSimbolo12, cartaDescubierta12);
 					
-				}while(
+				}while(opcion == 2);
 					
 		}
 	}

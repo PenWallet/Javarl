@@ -6,11 +6,12 @@ public class Funciones
 	public static void Menu()
 	{
 		System.out.println("|------------------|");
-		System.out.println("|       MenÃº       |");
+		System.out.println("|       Menú       |");
 		System.out.println("|------------------|");
 		System.out.println("|  1. 1 jugador    |");
 		System.out.println("|  2. 2 jugadores  |");
 		System.out.println("|------------------|");
+		System.out.println("\nElija una opción:");
 	}
 	
 	public static void Time()
