@@ -303,8 +303,8 @@ public class JuegoDeMemoria
 		boolean cartaYaDescubierta = false;
 		boolean turnoPrimerJugador = true;
 		
-		String nombre1;
-		String nombre2;
+		String nombre1 = "";
+		String nombre2 = "";
 		
 		//Presentar menú, leer y validar opción
 		do
@@ -321,7 +321,7 @@ public class JuegoDeMemoria
 			switch(opcion)
 			{
 				case '1':
-					System.out.println("En construcción, sorry\n");
+					System.out.println("\nEn construcción, sorry\n");
 					
 					break;
 				
