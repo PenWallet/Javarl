@@ -10,6 +10,7 @@ public class Funciones
 		System.out.println("|------------------|");
 		System.out.println("|  1. 1 jugador    |");
 		System.out.println("|  2. 2 jugadores  |");
+		System.out.println("|  0. Salir        |");
 		System.out.println("|------------------|");
 		System.out.println("\nElija una opción:");
 	}
