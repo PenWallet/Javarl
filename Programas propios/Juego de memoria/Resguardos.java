@@ -23,7 +23,7 @@ public class Resguardos
  * Entradas/Salidas: Ninguna
  * Postcondiciones: Ninguna, solo se pintará en pantalla
  * 
-*/
+
 	public static void CartasPantalla
 	(
 	char cartaSimbolo1, boolean cartaDescubierta1,
@@ -42,7 +42,7 @@ public class Resguardos
 	{
 		System.out.println("En Resguardo");
 	}
-
+*/
 /* Estudio de la Interfaz:
  * 
  * Necesidades: 6 contadores, cada uno de cada símbolo
@@ -61,41 +61,14 @@ public class Resguardos
  * Entradas/Salidas: Ninguna
  * Postcondiciones: El carácter de salida será A, B, C, D, E o F
  * 
-*/
+
 	
 	public static char CartasRandom (int ContA, int ContB, int ContC, int ContD, int ContE, int ContF)
 	{
 		char letra = 'A';
 		return(letra);
 	}
-	
-	
-/* Estudio de la Interfaz:
- * 
- * Necesidades: Ninguna
- * Devoluciones: Ninguna
- * Nec/Dev: Ninguna
- * Restricciones: Ninguna
-*/ 
-
-/* Interfaz:
- * 
- * Comentario: Presenta menú
- * Cabecera: Menu ()
- * Precondiciones: Ninguna
- * Entradas: Ninguna
- * Salidas: Ninguna
- * Entradas/Salidas: Ninguna
- * Postcondiciones: Ninguna, solo pinta en pantalla
- * 
 */
-	
-	public static char CartasRandom (int ContA, int ContB, int ContC, int ContD, int ContE, int ContF)
-	{
-		System.out.println("Hola");
-	}
-}
-	
 	
 		
 		
