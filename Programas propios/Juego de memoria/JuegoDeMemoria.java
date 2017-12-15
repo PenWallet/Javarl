@@ -43,6 +43,7 @@
  * 					Leer nombre del primer jugador
  * 					Leer nombre del segundo jugador
  * 					Cartas random
+ * 					Tirar moneda
  * 					Para (parejasEncontradas = 0; parejasEncontradas < 6)
  * 						Mensaje jugador
  * 						CartasPantalla *
@@ -274,6 +275,8 @@ public class JuegoDeMemoria
 		char opcion;
 		char eleccion1 = 0;
 		char eleccion2 = 0;
+		char monedaPrimerJugador;
+		char 
 		
 		byte seleccion1;
 		byte seleccion2;
@@ -470,6 +473,13 @@ public class JuegoDeMemoria
 					
 					//Duodécima carta
 					cartaSimbolo12 = Funciones.CartasRandom(contA, contB, contC, contD, contE, contF);
+					
+					//Tirar moneda
+					do
+					{
+						System.out.println("¿Quién quiere cruz? (Elige 1 o 2 para el jugador)");
+						teclado.next().charAt(0);
+					
 					
 					for (parejasEncontradas = 0; parejasEncontradas < 6;)
 					{
