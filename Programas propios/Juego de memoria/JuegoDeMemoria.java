@@ -248,7 +248,7 @@
  * 
 */
 
-import java.util.Scanner;
+import java.util.*;
 import java.io.*;
 
 public class JuegoDeMemoria
@@ -275,8 +275,7 @@ public class JuegoDeMemoria
 		char opcion;
 		char eleccion1 = 0;
 		char eleccion2 = 0;
-		char monedaPrimerJugador;
-		char 
+		char quienCruz;
 		
 		byte seleccion1;
 		byte seleccion2;
@@ -290,6 +289,7 @@ public class JuegoDeMemoria
 		int contD = 0;
 		int contE = 0;
 		int contF = 0;
+		int jugadorRandom;
 		
 		boolean cartaDescubierta1 = false;
 		boolean cartaDescubierta2 = false;
@@ -478,10 +478,28 @@ public class JuegoDeMemoria
 					do
 					{
 						System.out.println("¿Quién quiere cruz? (Elige 1 o 2 para el jugador)");
-						teclado.next().charAt(0);
+						quienCruz = teclado.next().charAt(0);
+						if (quienCruz != '1' && quienCruz != '2')
+							System.out.println("¡Solo 1 o 2!");
+					}while(quienCruz != '1' && quienCruz != '2');
 					
+					Random random = new Random();
 					
-					for (parejasEncontradas = 0; parejasEncontradas < 6;)
+					//Cruz 1, Cara 2
+					jugadorRandom = random.nextInt(2)+1;
+					
+					if((quienCruz == '1' && jugadorRandom == 1) || (quienCruz == '2' && jugadorRandom == 2))
+					{
+						turnoPrimerJugador = true;
+						System.out.println("¡Es el turno de "+nombre1+"!");
+					}
+					else
+					{
+						turnoPrimerJugador = false;
+						System.out.println("¡Es el turno de "+nombre2+"!");
+					}
+					
+					for (parejasEncontradas = 0; parejasEncontradas < 6;) //Para (parejasEncontradas = 0; parejasEncontradas < 6)
 					{
 						//Mensaje jugador
 						if (turnoPrimerJugador)
