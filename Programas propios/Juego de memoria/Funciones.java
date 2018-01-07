@@ -24,6 +24,66 @@ public class Funciones
 		}
 		catch(Exception e){};
 	}
+	
+/* Estudio de la Interfaz:
+ * 
+ * Necesidades: Ninguna
+ * Devoluciones: Número que representa cara o cruz
+ * Nec/Dev: Ninnguna
+ * Restricciones: Ninguna
+*/ 
+
+/* Interfaz:
+ * 
+ * Comentario: Se tira una moneda y sale un resultado
+ * Cabecera: real TirarMoneda ()
+ * Precondiciones: Ninguna
+ * Entradas: Ninguna
+ * Salidas: Número real
+ * Entradas/Salidas: Ninguna
+ * Postcondiciones: Número real devuelto asociado al nombre
+*/
+	public static double TirarMoneda (char primerJugador)
+	{
+		double resultado;
+		
+		//Calcular aleatorio
+		resultado = Math.random();
+		
+		//Mostrar resultado (cara o cruz)
+		if (resultado < 0.5)
+		{
+			System.out.println("  -------");
+			System.out.println(" /       \\");
+			System.out.println("|  CARA   |");
+			System.out.println(" \\       /");
+			System.out.println("  -------");
+			
+		}
+		
+		if (resultado > 0.5)
+		{
+			System.out.println("  -------");
+			System.out.println(" /       \\");
+			System.out.println("|  CRUZ   |");
+			System.out.println(" \\       /");
+			System.out.println("  -------");
+		}
+		
+		if (resultado == 0.5)
+		{
+			System.out.println("  -------");
+			System.out.println(" /       \\");
+			System.out.println("|DE CANTO |");
+			System.out.println("\\        /");
+			System.out.println("  -------");
+		}
+		
+		return(resultado);
+	}
+
+
+
 
 /* Estudio de la Interfaz:
  * 
