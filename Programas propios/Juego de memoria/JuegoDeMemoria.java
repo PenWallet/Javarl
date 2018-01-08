@@ -275,8 +275,6 @@ public class JuegoDeMemoria
 		char opcion;
 		char eleccion1 = 0;
 		char eleccion2 = 0;
-		char moneda;
-		char monedaCruz;
 		char quienCruz;
 		
 		byte seleccion1;
@@ -480,41 +478,6 @@ public class JuegoDeMemoria
 					do
 					{
 						System.out.println("¿Quién quiere cruz? (Elige 1 o 2 para el jugador)");
-						monedaCruz = teclado.next().charAt(0);
-						if (monedaCruz != '1' && monedaCruz != '2')
-							System.out.println("¡Solo 1 o 2!");
-					}while (monedaCruz != '1' && monedaCruz != '2');
-					
-					moneda = Funciones.TirarMoneda(monedaCruz);
-					
-					if(moneda <= 0.5)
-					{
-						switch(monedaCruz)
-						{
-							case '1':
-								System.out.println("¡"+nombre1+" pierde! ¡Gana "+nombre2+"!");
-								turnoPrimerJugador = false;
-							
-							case '2':
-								System.out.println("¡"+nombre1+" pierde! ¡Gana "+nombre2+"!");
-								turnoPrimerJugador = true;
-						}
-					}
-					if(moneda > 0.5)
-					{
-						switch(monedaCruz)
-						{
-							case '1':
-								System.out.println("¡"+nombre2+" pierde! ¡Gana "+nombre2+"!");
-								turnoPrimerJugador = true;
-							
-							case '2':
-								System.out.println("¡"+nombre1+" pierde! ¡Gana "+nombre2+"!");
-								turnoPrimerJugador = true;
-						}
-					}
-							
-			
 						quienCruz = teclado.next().charAt(0);
 						if (quienCruz != '1' && quienCruz != '2')
 							System.out.println("¡Solo 1 o 2!");
