@@ -76,6 +76,7 @@ public class boletinnav_14_chicago
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);
+		Scanner tecladoN = new Scanner (System.in);
 		
 		char opcion;
 		char ganador; //J para el jugador, M para la máquina
@@ -87,16 +88,16 @@ public class boletinnav_14_chicago
 		
 		int dinero;
 		int apuesta;
+		int dadoJ1; //dados del jugador
+		int dadoJ2;
+		int dadoM1; //dados de la máquina
+		int dadoM2;
+		int dado1; //dados que se tiran jugando
+		int dado2;
 		
-		byte ronda;
-		byte dadoJ1; //dados del jugador
-		byte dadoJ2;
-		byte dadoM1; //dados de la máquina
-		byte dadoM2;
-		byte dado1; //dados que se tiran jugando
-		byte dado2;
 		byte puntuacionJ = 0;
 		byte puntuacionM = 0;
+		byte ronda;
 		
 		String nombre = "";
 		
@@ -115,14 +116,14 @@ public class boletinnav_14_chicago
 			{
 				case '1':
 					//Leer nombre del jugador
-					System.out.println("/n¿Cuál es tu nombre?");
-					nombre = teclado.nextLine();
+					System.out.println("\n¿Cuál es tu nombre?");
+					nombre = tecladoN.nextLine();
 					System.out.println("¡Bonito nombre, "+nombre+"!");
 					
 					//Leer y validar dinero con el que entras
 					do
 					{
-						System.out.println("/n¿Con cuánto dinero vienes? (1-1000)");
+						System.out.println("\n¿Con cuánto dinero vienes? (1-1000)");
 						dinero = teclado.nextInt();
 						if (dinero < 1 || dinero > 1000)
 							System.out.println("¡Solo entre 1 y 1000!");
@@ -175,6 +176,7 @@ public class boletinnav_14_chicago
 										System.out.println("¡Habéis empatado! Se vuelven a tirar los dados!");
 										Funciones.Time();
 									}
+									
 								}while((dadoJ1+dadoJ2) == (dadoM1+dadoM2));
 								
 								if((dadoJ1+dadoJ2) > (dadoM1+dadoM2))
@@ -238,53 +240,50 @@ public class boletinnav_14_chicago
 								turnoJugador = !turnoJugador;
 								
 								//Jugador 2
-								while(!gameOver)
+								System.out.println("Tirando los dados...");
+								Funciones.TimeDados();
+								dado1 = Funciones.Dados();
+								dado2 = Funciones.Dados();
+								
+								if(dado1 == (ronda+1) || dado2 == (ronda+1) || (dado1+dado2) == (ronda+1)) //Si es correcto
 								{
-									System.out.println("Tirando los dados...");
-									Funciones.TimeDados();
-									dado1 = Funciones.Dados();
-									dado2 = Funciones.Dados();
-									
-									if(dado1 == (ronda+1) || dado2 == (ronda+1) || (dado1+dado2) == (ronda+1)) //Si es correcto
+									if(esPrimeraPartida)
 									{
-										if(esPrimeraPartida)
+										if(turnoJugador)
 										{
-											if(turnoJugador)
-											{
-												puntuacionJ += (ronda+1);
-												System.out.println("¡Acertaste! Ahora tienes "+puntuacionJ+" puntos");
-											}
-											else
-											{
-												puntuacionM += (ronda+1);
-												System.out.println("¡La máquina ha acertado! Ahora tiene "+puntuacionM+" puntos");
-											}
+											puntuacionJ += (ronda+1);
+											System.out.println("¡Acertaste! Ahora tienes "+puntuacionJ+" puntos");
 										}
 										else
 										{
-											if(turnoJugador)
-											{
-												System.out.println("¡Has ganado la partida, "+nombre+"!");
-												ganador = 'J';
-												ronda = 12;
-												gameOver = true;
-											}
-											else
-											{
-												System.out.println("¡Has perdido, "+nombre+"! Gana la máquina");
-												ganador = 'M';
-												ronda = 12;
-												gameOver = true;
-											}
+											puntuacionM += (ronda+1);
+											System.out.println("¡La máquina ha acertado! Ahora tiene "+puntuacionM+" puntos");
 										}
 									}
 									else
 									{
 										if(turnoJugador)
-											System.out.println("¡Fallaste!");
+										{
+											System.out.println("¡Has ganado la partida, "+nombre+"!");
+											ganador = 'J';
+											ronda = 12;
+											gameOver = true;
+										}
 										else
-											System.out.println("¡La máquina ha fallado!");
+										{
+											System.out.println("¡Has perdido, "+nombre+"! Gana la máquina");
+											ganador = 'M';
+											ronda = 12;
+											gameOver = true;
+										}
 									}
+								}
+								else
+								{
+									if(turnoJugador)
+										System.out.println("¡Fallaste!");
+									else
+										System.out.println("¡La máquina ha fallado!");
 								}
 							}
 							
