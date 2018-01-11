@@ -1,29 +1,20 @@
-/* Nombre del programa:
- * 
- * Análisis:
- * 
- * 
- * 
- * 
-*/
-
-/* Pseudocódigo Generalizado:
- * 
- * 
- * 
- * 
-*/
-
-import java.util.Scanner;
 import java.io.*;
 
-public class boletin6b_x_nombre
+public class Conductor
 {
 	
 	public static void main (String[] args) 
 	{
-		//Declarar variables
-		Scanner teclado = new Scanner (System.in);	
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+		System.out.println(Funciones.Dados());
+	}
+}
 		
 		
 		

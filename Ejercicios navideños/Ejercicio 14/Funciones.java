@@ -61,7 +61,7 @@ public class Funciones
 	{
 		try
 		{
-			Thread.sleep(500);
+			Thread.sleep(100);
 		}
 		catch(Exception e){};
 	}
@@ -90,7 +90,7 @@ public class Funciones
 	{
 		try
 		{
-			Thread.sleep(1000);
+			Thread.sleep(200);
 		}
 		catch(Exception e){};
 	}

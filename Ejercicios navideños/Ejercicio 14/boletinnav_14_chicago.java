@@ -8,9 +8,16 @@
  * 
  * Entradas:
  * - Número para opción
+ * - Cantidad de dinero inicial
  * - Cantidad de dinero de apuesta
- * - 
  * 
+ * Salidas:
+ * - Mensajes en pantalla
+ * 
+ * Requisitos:
+ * - El número para la opción solo puede ser 1, 2, 3, o 0
+ * - La cantidad de dinero inicial solo puede ser entre 1 y 1000
+ * - La cantidad de la apusta solo puede ser entre 1 y la cantidad de dinero que se disponga
  * 
 */
 
@@ -291,8 +298,10 @@ public class boletinnav_14_chicago
 							{
 								if(puntuacionJ > puntuacionM)
 								{
-									System.out.println("¡El ganador de esta partida ha sido "+nombre+"!");
 									dinero += apuesta;
+									System.out.println("¡El ganador de esta partida ha sido "+nombre+"!");
+									System.out.println("Ahora dispones de "+dinero+" simoleones");
+									
 								}
 								else
 								{
