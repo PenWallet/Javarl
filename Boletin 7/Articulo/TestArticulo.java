@@ -17,7 +17,10 @@ public class TestArticulo
 		System.out.println("\n\n");
 		
 		//Sobrecargado
-		Articulo n2 = new Articulo("Lacasitos", 1.23, "Alimentacion", 10, 0.75);
+		try
+		{
+			Articulo n2 = new Articulo("Lacasitos", -1, "Alimentacion", 10, 0.75);
+		
 		System.out.println(n2.getNombre());
 		System.out.println(n2.getPrecioSinIva());
 		System.out.println(n2.getTipo());
@@ -35,7 +38,7 @@ public class TestArticulo
 		System.out.println(n2.getIva());
 		System.out.println(n2.getPrecioCosto());
 		System.out.println(n2.getPrecio());
-		
+		} catch (PrecioException error){}
 		System.out.println("\n\n");
 		
 		n1.setNombre("Prueba");

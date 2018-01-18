@@ -58,10 +58,13 @@ public class Articulo
 		precioCosto = 0;
 	}
 	
-	public Articulo(String n, double pSinIva, String t, int i, double pCosto)
+	public Articulo(String n, double pSinIva, String t, int i, double pCosto) throws PrecioException
 	{
 		nombre = n;
-		precioSinIva = pSinIva;
+		if(precioSinIva < 0)
+			throw new PrecioException("¡El precio no puede ser menor que 0! El objeto no ha sido creado");
+		else
+			precioSinIva = pSinIva;
 		tipo = t;
 		iva = i;
 		precioCosto = pCosto;
