@@ -195,6 +195,12 @@ public class Persona
 		return(esMdE);
 	}
 	
+	@Override
+	public String toString()
+	{
+		String s = ("Nombre: "+nombre+", DNI: "+dni+", Sexo: "+sexo+", Peso: "+peso+", Altura: "+altura);
+		return(s);
+	}
 }
 		
 		
