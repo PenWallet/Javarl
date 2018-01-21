@@ -53,7 +53,7 @@ public class TestPersona
 		
 		try
 		{
-			Persona n3 = new Persona("Juan Pepe", 18, "97826345F", 'M', 29, 89.1);
+			Persona n3 = new Persona("Juan Pepe", 18, "97826345F", 'H', 29, 89.1);
 			System.out.println(n3.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -78,6 +78,12 @@ public class TestPersona
 			n5.setAltura(179.6);
 			System.out.println(n5.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
+		
+		Persona n6 = new Persona();
+		
+		
+		//System.out.println(n5.equals(n4));
+		
 		
 	}
 }

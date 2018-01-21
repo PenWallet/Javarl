@@ -201,6 +201,33 @@ public class Persona
 		String s = ("Nombre: "+nombre+", DNI: "+dni+", Sexo: "+sexo+", Peso: "+peso+", Altura: "+altura);
 		return(s);
 	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		boolean ret = false;
+		
+		if (this == obj)
+			ret = true;
+		else if (obj != null && obj instanceof Persona)
+		{
+			Persona other = (Persona)obj;
+			
+			if (this.nombre == other.nombre &&
+				this.edad == other.edad &&
+				this.dni == other.dni &&
+				this.sexo == other.sexo &&
+				this.peso == other.peso &&
+				this.altura == other.altura)
+			{
+				ret = true;
+			}
+		}
+		
+		return (ret);
+	}
+			
+	
 }
 		
 		
