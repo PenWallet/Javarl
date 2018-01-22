@@ -19,10 +19,12 @@ public class anobisiesto
 		year = teclado.nextShort();
 		
 		// Siguiente, las operaciones
-		if ((year % 400) == 0)
+		if (((year % 400) == 0) || (((year % 400) != 0) && ((year % 4) == 0) && ((year % 100) != 0)))
 			System.out.println("El año ES bisiesto");
 		else
-		{
+			System.out.println("El año NO ES bisiesto");
+		
+		/*{
 			if ((year % 4) == 0)
 			{
 				if ((year % 100) == 0)
@@ -32,6 +34,6 @@ public class anobisiesto
 			}
 			else
 				System.out.println("El año NO es bisiesto");
-		}
+		}*/
 	}
 }
