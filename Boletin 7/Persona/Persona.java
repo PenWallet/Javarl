@@ -33,7 +33,7 @@
  * 		boolean esMayorDeEdad()
 */
 
-public class Persona
+public class Persona implements Cloneable
 {
 	//Atributos
 	private String nombre;
@@ -198,7 +198,7 @@ public class Persona
 	@Override
 	public String toString()
 	{
-		String s = ("Nombre: "+nombre+", DNI: "+dni+", Sexo: "+sexo+", Peso: "+peso+", Altura: "+altura);
+		String s = ("Nombre: "+nombre+", Edad: "+edad+", DNI: "+dni+", Sexo: "+sexo+", Peso: "+peso+", Altura: "+altura);
 		return(s);
 	}
 	
@@ -226,7 +226,19 @@ public class Persona
 		
 		return (ret);
 	}
-			
+	
+	@Override
+	public Persona clone()
+	{
+		Persona copia = null;
+		
+		try
+		{
+			copia = (Persona)super.clone();
+		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		
+		return (copia);
+	}
 	
 }
 		

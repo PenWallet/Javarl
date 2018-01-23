@@ -5,7 +5,6 @@ public class TestPersona
 	
 	public static void main (String[] args) 
 	{
-		//Por defecto
 		Persona n1 = new Persona();
 		System.out.println(n1.toString());
 		
@@ -59,9 +58,11 @@ public class TestPersona
 		
 		System.out.println("\n\n");
 		
+		
+		Persona n4 = null;
 		try
 		{
-			Persona n4 = new Persona("Hana Song", 19, "61946548D", 'M', 67.5, 167.3);
+			n4 = new Persona("Hana Song", 19, "61946548D", 'M', 67.5, 167.3);
 			System.out.println(n4.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -79,8 +80,18 @@ public class TestPersona
 			System.out.println(n5.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
+		System.out.println("\n\n");
+		
 		Persona n6 = new Persona();
 		
+		n6 = n5.clone();
+		
+		System.out.println(n6.toString());
+		
+		
+		n6 = n4.clone();
+		
+		System.out.println(n6.toString());
 		
 		//System.out.println(n5.equals(n4));
 		
