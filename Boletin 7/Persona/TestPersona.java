@@ -10,9 +10,10 @@ public class TestPersona
 		
 		System.out.println("\n\n");
 		
+		Persona n2 = null;
 		try
 		{
-			Persona n2 = new Persona("Juan Pepe", -13, "97826345F", 'M', 17, 89.1);
+			n2 = new Persona("Juan Pepe", -13, "97826345F", 'M', 17, 89.1);
 			System.out.println(n2.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -20,7 +21,7 @@ public class TestPersona
 		
 		try
 		{
-			Persona n2 = new Persona("Juan Pepe", 13, "97826345F", 'J', 17, 89.1);
+			n2 = new Persona("Juan Pepe", 13, "97826345F", 'J', 17, 89.1);
 			System.out.println(n2.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -28,7 +29,7 @@ public class TestPersona
 		
 		try
 		{
-			Persona n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', -5, 89.1);
+			n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', -5, 89.1);
 			System.out.println(n2.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -36,7 +37,7 @@ public class TestPersona
 		
 		try
 		{
-			Persona n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', 17, -89.1);
+			n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', 17, -89.1);
 			System.out.println(n2.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -44,15 +45,16 @@ public class TestPersona
 		
 		try
 		{
-			Persona n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', 17, 89.1);
+			n2 = new Persona("Juan Pepe", 13, "97826345F", 'M', 17, 89.1);
 			System.out.println(n2.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
 		System.out.println("\n\n");
 		
+		Persona n3 = null;
 		try
 		{
-			Persona n3 = new Persona("Juan Pepe", 18, "97826345F", 'H', 29, 89.1);
+			n3 = new Persona("Juan Pepe", 18, "97826345F", 'H', 29, 89.1);
 			System.out.println(n3.toString());
 		}catch(PersonaException error){System.out.println("¡No se pudo crear el objeto!");}
 		
@@ -88,14 +90,14 @@ public class TestPersona
 		
 		System.out.println(n6.toString());
 		
+		System.out.println("\n\n");
 		
-		n6 = n4.clone();
-		
-		System.out.println(n6.toString());
-		
-		//System.out.println(n5.equals(n4));
-		
-		
+		System.out.println(n1.hashCode());
+		System.out.println(n2.hashCode());
+		System.out.println(n3.hashCode());
+		System.out.println(n4.hashCode());
+		System.out.println(n5.hashCode());
+		System.out.println(n6.hashCode());
 	}
 }
 		

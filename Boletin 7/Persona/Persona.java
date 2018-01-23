@@ -240,6 +240,14 @@ public class Persona implements Cloneable
 		return (copia);
 	}
 	
+	@Override
+	public int hashCode()
+	{
+		int hash = 1;
+		hash = edad * 17 + nombre.length() * 3 - (int)peso * 5;
+		return(hash);
+	}
+	
 }
 		
 		
