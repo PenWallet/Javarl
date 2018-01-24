@@ -58,7 +58,7 @@ public class Persona implements Cloneable
 	//Sobrecargado
 	public Persona(String nombre, int edad, String dni, char sexo, double peso, double altura) throws PersonaException
 	{
-		if(edad < 0)
+		/*if(edad < 0)
 		{
 			throw new PersonaException("¡Una persona no puede tener menos de 0 años! El objeto '"+nombre+"' no se ha creado");
 		}
@@ -75,14 +75,14 @@ public class Persona implements Cloneable
 			throw new PersonaException("¡Una persona no puede medir menos de 0 centímetros! El objeto '"+nombre+"' no se ha creado");
 		}
 		else
-		{
+		{*/
 			this.nombre = nombre;
 			this.edad = edad;
 			this.dni = dni;
 			this.sexo = sexo;
 			this.peso = peso;
 			this.altura = altura;
-		}
+		//}
 	}
 	
 	//Copia
@@ -248,6 +248,16 @@ public class Persona implements Cloneable
 		return(hash);
 	}
 	
+	/*@Override
+	public int compareTo(Persona other)
+	{
+		int compare = -1;
+		
+		
+			compare = 0;
+		
+		return(compare);
+	}*/
 }
 		
 		
