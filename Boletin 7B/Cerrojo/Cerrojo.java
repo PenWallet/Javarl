@@ -5,8 +5,8 @@
  * 		combinación, tal y como un cerrojo de verdad. Este se podrá usar como medida
  * 		de seguridad.
  * 
- * 		Tendrá una combinación, que será una secuencia de tres números, y oculta,
- * 		no se podrán copiar los cerrojos.
+ * 		Tendrá una combinación oculta, que será una secuencia de tres números.
+ * 		No se podrán copiar los cerrojos por seguridad.
  * 		La combinación solo se podrá cambiar si está desbloqueada
  *  
  * 		Como función añadida, si se falla al intentar desbloquearla 3 veces, el cerrojo
@@ -68,11 +68,12 @@ public class Cerrojo implements Cloneable
 	}
 	
 	//Funcionalidades
-	
 	public void setN1(int n1) throws CerrojoException
 	{
 		if(isBloqueada)
 			throw new CerrojoException("¡El cerrojo está cerrado! No puedes cambiar su combinación");
+		else if(n1 < 0 || n1 > 64)
+			throw new CerrojoException("¡La combinación solo puede ser entre 0 y 64!");
 		else
 			this.n1 = n1;
 		
@@ -83,6 +84,8 @@ public class Cerrojo implements Cloneable
 	{
 		if(isBloqueada)
 			throw new CerrojoException("¡El cerrojo está cerrado! No puedes cambiar su combinación");
+		else if(n2 < 0 || n2 > 64)
+			throw new CerrojoException("¡La combinación solo puede ser entre 0 y 64!");
 		else
 			this.n2 = n2;
 		
@@ -93,6 +96,8 @@ public class Cerrojo implements Cloneable
 	{
 		if(isBloqueada)
 			throw new CerrojoException("¡El cerrojo está cerrado! No puedes cambiar su combinación");
+		else if(n3 < 0 || n3 > 64)
+			throw new CerrojoException("¡La combinación solo puede ser entre 0 y 64!");
 		else
 			this.n3 = n3;
 		
@@ -113,8 +118,8 @@ public class Cerrojo implements Cloneable
  * Necesidades: Combinación del cerrojo y combinación del intento
  * Devoluciones: Boolean
  * Nec/Dev: Ninguna
- * Restricciones: Cada número de la combinación deberá estar entre 0 y 64, inclusiveCada número de la combinación deberá estar entre 0 y 64, inclusive
-*/ 
+ * Restricciones: Cada número de la combinación deberá estar entre 0 y 64, inclusive
+*/
 
 /* Interfaz:
  * 
@@ -133,7 +138,7 @@ public class Cerrojo implements Cloneable
 		boolean isAbierta;
 		
 		if (this.intentos > 2)
-			throw new CerrojoException("¡Esta cerradura está bloqueada! Ha quedado inservible");
+			throw new CerrojoException("¡Esta cerradura está bloqueada! Es inservible");
 		else if (this.isBloqueada == false)
 			throw new CerrojoException("¡La cerradura ya está abierta!");
 		else if (this.n1 == n1 && this.n2 == n2 && this.n3 == n3)
@@ -186,7 +191,7 @@ public class Cerrojo implements Cloneable
 	public int hashCode()
 	{
 		int hash;
-		hash = n1 * 17 + n2 * 3 - n3 * 5;
+		hash = n1 * 17 + n2 * 3 + n3 * 5;
 		return(hash);
 	}
 	
