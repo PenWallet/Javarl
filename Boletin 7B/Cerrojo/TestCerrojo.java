@@ -109,6 +109,7 @@ public class TestCerrojo
 		
 		//Probar el equals
 		System.out.println(c3.equals(c2));
+		
 	}
 }
 		

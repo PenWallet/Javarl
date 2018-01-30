@@ -67,7 +67,8 @@ public class Cerrojo implements Cloneable
 		intentos = 0;
 	}
 	
-	//Funcionalidades
+	//Funcionalidades (IMPORTANTE: Los gets han sido introducidos para poder visualizarlo en la prueba de los arrays)
+	public int getN1() { return(this.n1); }
 	public void setN1(int n1) throws CerrojoException
 	{
 		if(isBloqueada)
@@ -80,6 +81,7 @@ public class Cerrojo implements Cloneable
 		return;
 	}
 	
+	public int getN2() { return(this.n2); }
 	public void setN2(int n2) throws CerrojoException
 	{
 		if(isBloqueada)
@@ -92,6 +94,7 @@ public class Cerrojo implements Cloneable
 		return;
 	}
 	
+	public int getN3() { return(this.n3); }
 	public void setN3(int n3) throws CerrojoException
 	{
 		if(isBloqueada)
