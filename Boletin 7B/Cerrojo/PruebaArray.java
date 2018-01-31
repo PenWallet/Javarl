@@ -5,17 +5,20 @@ public class PruebaArray
 {
 	public static void main (String[] Args)
 	{
+		char respuesta;
+		
 		int max;
+		int i;
+		int n1;
+		int n2;
+		int n3;
+		
 		Scanner teclado = new Scanner(System.in);
 		
 		System.out.println("¿Cuántos cerrojos quieres introducir?");
 		max = teclado.nextInt();
 		Cerrojo pruebaArray[] = new Cerrojo[max];
-		int i;
-		char respuesta;
-		int n1;
-		int n2;
-		int n3;
+		
 		
 		for(i=0; i < max; i++)
 		{

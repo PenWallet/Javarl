@@ -116,14 +116,6 @@ public class Cerrojo implements Cloneable
 		return;
 	}
 	
-/* Estudio de la Interfaz (funcionalidad):
- * 
- * Necesidades: Combinación del cerrojo y combinación del intento
- * Devoluciones: Boolean
- * Nec/Dev: Ninguna
- * Restricciones: Cada número de la combinación deberá estar entre 0 y 64, inclusive
-*/
-
 /* Interfaz:
  * 
  * Comentario: Función con la que se podrá desbloquear el cerrojo
@@ -132,7 +124,7 @@ public class Cerrojo implements Cloneable
  * Entradas: Tres enteros, que es la combinación de intento
  * Salidas: Un boolean, para indicar si la cerradura se ha abierto o no
  * Entradas/Salidas: Ninguna
- * Postcondiciones: El boolean indicando si se ha abierto o no habrá sido devuelto asociado al nombre
+ * Postcondiciones: Asociado al nombre, se devolverá el boolean indicando si está abierto o no
  * 
 */
 	
