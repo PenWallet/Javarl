@@ -82,6 +82,21 @@ public class Procesador
 		else
 			this.velocidad = velocidad;
 	}
+	
+	@Override
+	public Procesador clone()
+	{
+		Procesador copia = null;
+		
+		try
+		{
+			copia = (Procesador)super.clone();
+		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		
+		return (copia);
+	}
+	
+	
 }
 	
 	

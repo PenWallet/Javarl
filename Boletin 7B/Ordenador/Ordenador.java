@@ -15,7 +15,7 @@
  * 		Precio del mercado: Precio base * (IVA+100)/100
  * 
  * - Indicar si cada propiedad es compartida por los objetos:
- * 		IVA: Entero, consultable, modificable
+ * 		IVA: Entero, consultable
  * 
  * - Definir operaciones o funcionalidades del objeto:
  * 		Memoria getMemoria()
@@ -28,12 +28,14 @@
  * 		void setProcesador(Procesador p)
  * 		
  * 		double getPrecioBase()
- * 		void setPrecioBase(double pbase)
+ * 		void setPrecioBase(double precioBase)
  * 		
  *		int getIva()
- * 		void setIva(int iva)
  * 		
  * 		double getPrecioMercado()
+ * 
+ * - Restricciones
+ * 		- El precio base debe ser superior a 0
 */
 
 import java.io.*;
@@ -79,6 +81,53 @@ public class Ordenador
 	}
 	
 	//Funciones
+	public Memoria getMemoria() { return(memoria); }
+	public void setMemoria(Memoria m) { this.memoria = m; }
+	
+	
+	public DiscoDuro getDiscoDuro() { return(discoDuro); }
+	public void setMemoria(DiscoDuro d) { this.discoDuro = d; }
+	
+	
+	public Procesador getProcesador() { return(procesador); }
+	public void setProcesador(Procesador p) { this.procesador = p; }
+	
+	
+	public double getPrecioBase() { return(precioBase); }
+	public void setPrecioBase(double precioBase) throws OrdenadorSmallerThanZeroException
+	{
+		if(precioBase < 0)
+			throw new OrdenadorSmallerThanZeroException("Error");
+		else
+			this.precioBase = precioBase;
+	}
+	
+	public int getIva() { return(iva); }
+	
+	public double getPrecioMercado() { return(precioBase * 1.21); }
+	
+	
+	@Override
+	public Ordenador clone()
+	{
+		Ordenador copia = null;
+		
+		try
+		{
+			copia = (Ordenador)super.clone();
+		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		
+		return (copia);
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		int hash;
+		hash = memoria.getVelocidad() * 5 + procesador.getVelocidad() * 11;
+		return(hash);
+	}
+	
 }
 	
 		

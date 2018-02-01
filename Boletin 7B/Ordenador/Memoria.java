@@ -88,6 +88,19 @@ public class Memoria
 		else
 			this.velocidad = velocidad;
 	}
+	
+	@Override
+	public Memoria clone()
+	{
+		Memoria copia = null;
+		
+		try
+		{
+			copia = (Memoria)super.clone();
+		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		
+		return (copia);
+	}
 }
 		
 		

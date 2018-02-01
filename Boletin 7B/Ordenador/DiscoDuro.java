@@ -69,6 +69,20 @@ public class DiscoDuro
 		else
 			this.velocidad = velocidad;
 	}
+	
+	@Override
+	public DiscoDuro clone()
+	{
+		DiscoDuro copia = null;
+		
+		try
+		{
+			copia = (DiscoDuro)super.clone();
+		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		
+		return (copia);
+	}
+	
 }
 		
 		
