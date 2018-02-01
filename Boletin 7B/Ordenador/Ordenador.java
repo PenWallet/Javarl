@@ -120,6 +120,7 @@ public class Ordenador
 		return (copia);
 	}
 	
+	/*
 	@Override
 	public int hashCode()
 	{
@@ -127,7 +128,7 @@ public class Ordenador
 		hash = memoria.getVelocidad() * 5 + procesador.getVelocidad() * 11;
 		return(hash);
 	}
-	
+	*/
 }
 	
 		
