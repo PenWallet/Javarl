@@ -13,16 +13,46 @@ import java.util.Random;
 
 public class FuncionesArray
 {
+	//1.a)
 	public static void CargarArrayAlea(int[] Array)
 	{
 		Random r = new Random();
 		int i;
+		int j;
 		
 		for(i = 0; i < Array.length; i++)
 		{
 			Array[i] = r.nextInt(50);
 		}
 	}
+	
+	//1.b)
+	public static int[] CargarArrayAleaDos()
+	{
+		Random r = new Random();
+		int i;
+		int k;
+		int[] Array = new int[20];
+		boolean isEqual = false;
+		
+		for(i = 0; i < 20; i++)
+		{
+			do
+			{
+				Array[i] = r.nextInt(20);
+				for(k = 0; k< i; k++) //El bucle se sigue ejecutando aunque haya encontrado isEqual o no
+				{
+					if(Array[i] == Array[k])
+						isEqual = true;
+					else
+						isEqual = false;
+				}
+			}while(isEqual);
+		}
+		
+		return(Array);
+	}
+	
 		
 	/*Dado un array cargado aleatoriamente, generar a partir de él otro array 
 	que contenga los elementos pares que se encuentran en el primero.*/
