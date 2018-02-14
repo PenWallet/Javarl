@@ -34,21 +34,44 @@ public class FuncionesArray
 		int k;
 		int[] Array = new int[20];
 		boolean isEqual = false;
+		boolean outOfLoop = false;
 		
 		for(i = 0; i < 20; i++)
 		{
 			do
 			{
+				k = 0;
+				outOfLoop = false;
 				Array[i] = r.nextInt(20);
-				for(k = 0; k< i; k++) //El bucle se sigue ejecutando aunque haya encontrado isEqual o no
+				while(k < i && !isEqual);
 				{
 					if(Array[i] == Array[k])
+					{
 						isEqual = true;
+						outOfLoop = true;
+					}
 					else
 						isEqual = false;
 				}
 			}while(isEqual);
 		}
+				
+			/*for(k = 0; k < i; k++) //El bucle se sigue ejecutando aunque haya encontrado isEqual o no
+			{
+				if(Array[i] == Array[k])
+				{
+					isEqual = true;
+					outOfLoop = true;
+				}
+				else
+				{
+					isEqual = false;
+					outOfLoop = false;
+				}
+					
+				}
+			}while(isEqual);
+		}*/
 		
 		return(Array);
 	}

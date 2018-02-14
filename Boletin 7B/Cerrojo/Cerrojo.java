@@ -39,7 +39,7 @@
 
 import java.io.*;
 
-public class Cerrojo implements Cloneable
+public class Cerrojo implements Cloneable, Comparable<Cerrojo>
 {
 	//Atributos
 	private int n1;
@@ -203,6 +203,21 @@ public class Cerrojo implements Cloneable
 		
 		return (copia);
 	}
+	
+	//Devuelve -1 si es menor, 0 si es igual, 1 si es mayor. Aunque aquí no tiene mucho sentido
+	@Override
+	public int compareTo(Cerrojo other)
+	{
+		int ret = -1;
+		
+		if(this == other || this.getN1() == other.getN1())
+			ret = 0;
+		else if(this.getN1() > other.getN1())
+			ret = 1;
+		
+		return ret;
+	}
+	
 	
 }
 		

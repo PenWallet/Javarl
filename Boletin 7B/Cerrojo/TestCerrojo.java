@@ -110,6 +110,14 @@ public class TestCerrojo
 		//Probar el equals
 		System.out.println(c3.equals(c2));
 		
+		System.out.println(c1.toString());
+		System.out.println(c2.toString());
+		System.out.println(c3.toString());
+		
+		
+		System.out.println(c1.compareTo(c2));
+		System.out.println(c2.compareTo(c3));
+		System.out.println(c2.compareTo(c1));
 	}
 }
 		

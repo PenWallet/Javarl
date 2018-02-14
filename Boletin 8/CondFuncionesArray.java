@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.io.*;
 
-public class Prueba
+public class CondFuncionesArray
 {
 	public static void main (String[] args) 
 	{
