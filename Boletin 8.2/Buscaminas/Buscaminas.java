@@ -1,5 +1,5 @@
 /* Nombre del programa: Buscaminas
- * 
+ * Hola qué tal jijijijijiji
  * Análisis:
  *  Comentario:
  *  Juego del buscaminas, donde se usará un array cargado de objetos de la clase Casilla, que tendrá
@@ -19,14 +19,15 @@
 
 /* Pseudocódigo Generalizado:
  * 	Inicio
- * 		Cargar array aleatoriamente
+ * 		Cargar Array
  * 		Repetir
  * 			MostrarGrid *
  * 			Leer y validar opcion
  * 			Según
- * 				Caso 1: Flag a box
- * 				Caso 2: Seleccionar box
+ * 				Caso 1: Select a box
+ * 				Caso 2: Flag a box
  * 			Fin Según
+ * 		Mientras (no todas las bombas están Flagged y no haya explotado ninguna)
  * 
  * 
 */
@@ -41,6 +42,27 @@ public class Buscaminas
 	{
 		//Declarar variables
 		Scanner teclado = new Scanner (System.in);
+		Casilla[][] Grid = new Casilla[10][10];
+		int fila;
+		int columna;
+		int opcion;
+		
+		//Cargar Array
+		for(int i = 0; i < 10; i++)
+		{
+			for(int j = 0; j < 10; j++)
+			{
+				Grid[i][j] = new Casilla();
+			}
+		}
+		
+		do
+		{
+			
+		}
+		
+	}
+		
 		
 		
 		

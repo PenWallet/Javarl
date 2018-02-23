@@ -11,14 +11,43 @@
  * - Indicar las propiedades derivadas (fórmula si necesario):
  * - Indicar si cada propiedad es compartida por los objetos:
  * - Definir operaciones o funcionalidades del objeto:
+ * 		boolean getBomb()
+ * 		boolean getFlagged()
+ * 		 
  * 
 */
 
 import java.io.*;
+import java.util.*;
 
 public class Casilla
 {
 	private boolean isBomb;
+	private boolean isFlagged;
+	
+	//Constructor único para juego Buscaminas
+	public Casilla()
+	{
+		Random random = new Random();
+		int r = random.nextInt(10)+1;
+		if(r == 1)
+			isBomb = true;
+		else
+			isBomb = false;
+		
+		isFlagged = false;
+	}
+	
+	//Getters
+	public boolean getBomb() { return(isBomb); }
+	public boolean getFlagged() { return(isFlagged); }
+	
+	public String toString()
+	{
+		String s = ("isBomb: "+isBomb+", isFlagged: "+isFlagged);
+		return(s);
+	}
+}
 	
 	
 	
