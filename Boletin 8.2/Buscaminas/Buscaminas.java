@@ -1,5 +1,4 @@
 /* Nombre del programa: Buscaminas
- * Hola qué tal jijijijijiji
  * Análisis:
  *  Comentario:
  *  Juego del buscaminas, donde se usará un array cargado de objetos de la clase Casilla, que tendrá

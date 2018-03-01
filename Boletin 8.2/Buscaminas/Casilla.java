@@ -24,6 +24,7 @@ public class Casilla
 {
 	private boolean isBomb;
 	private boolean isFlagged;
+	private boolean isDiscovered;
 	
 	//Constructor único para juego Buscaminas
 	public Casilla()
@@ -36,11 +37,13 @@ public class Casilla
 			isBomb = false;
 		
 		isFlagged = false;
+		isDiscovered = false;
 	}
 	
 	//Getters
 	public boolean getBomb() { return(isBomb); }
 	public boolean getFlagged() { return(isFlagged); }
+	public boolean getDiscovered() { return(isDiscovered); }
 	
 	public String toString()
 	{
