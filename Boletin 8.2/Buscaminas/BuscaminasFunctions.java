@@ -15,23 +15,62 @@ public class BuscaminasFunctions
 	 * 
 	*/
 	
-	public static void(Casilla[][] array)
+	public static void MostrarGrid(Casilla[][] array)
 	{
-		for(int i = 0; i < 10; i++)
+		for(int i = 0; i < array.length; i++)
 		{
-			if(i % 2 == 0)
-				System.out.println("---------------------");
-			else
+			System.out.print("---------------------\n");
+			for(int j = 0; j < array[0].length; j++)
 			{
-				for(int j = 0; i< 10; j++)
+				if(array[i][j].getDiscovered() == true)
 				{
-					if(j % 2 == 0)
-						System.out.println("|");
-					else
-					{
-						
-					}			
+					 if(j == (array[0].length - 1))
+					 {
+						if(array[i][j].getBomb() == true)
+							System.out.print("|*|\n");
+						else if(array[i][j].getFlagged() == true)
+							System.out.print("|<|\n");
+						else
+							System.out.print("|"+array[i][j].getNumberOfBombs()+"|\n");
+					 }
+					 else
+					 {
+						if(array[i][j].getBomb() == true)
+							System.out.print("|*");
+						else if(array[i][j].getFlagged() == true)
+							System.out.print("|<");
+						else
+							System.out.print("|"+array[i][j].getNumberOfBombs());
+					 }
 				}
+				else
+				{
+					if(j == (array[0].length - 1))
+					 {
+						System.out.print("| |\n");
+					 }
+					 else
+					 {
+						System.out.print("| ");
+					 }
+				}
+				
+				if(i == array.length)
+					System.out.print("---------------------\n");
+				
+				/*
+				if(array[i][j].getDiscovered() == true)
+				{
+					if(array[i][j].getBomb() == true)
+						System.out.print("*");
+					else if(array[i][j].getFlagged() == true)
+						System.out.print("<");
+				}
+				else
+				{
+					System.out.print(" ");
+				}
+				*/
 			}
 		}
 		
@@ -50,39 +89,122 @@ public class BuscaminasFunctions
 	 * 
 	*/
 	
-	public static int (Casilla[][] array)
+	public static int contarBombas(Casilla[][] array, int i, int j)
 	{
-		private int contadorB = 0;
+		int contadorB = 0;
 		
-		if(i == 0 || i == 9 || j == 0 || j == 9)
+		if(i == 0 && j == 0)
 		{
-			if(i == 0)
-			{
-				if(j == 0)
-					
-			}
+			if(array[i+1][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j].getBomb() == true)
+				contadorB++;
 		}
-		else
+		else if(i== 0 && j == (array[0].length - 1))
 		{
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j].getBomb() == true)
+				contadorB++;
+		}
+		else if(j == 0 && i == (array.length - 1))
+		{
+			if(array[i-1][j].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i-1][j+1].getBomb() == true)
+				contadorB++;
+		}
+		else if(i == (array.length - 1) && j == (array[0].length - 1))
+		{
+			if(array[i-1][j].getBomb() == true)
+				contadorB++;
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i-1][j-1].getBomb() == true)
+				contadorB++;
+		}
+		else if(i == 0)
+		{
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j-1].getBomb() == true)
+				contadorB++;
+		}
+		else if(j == 0)
+		{
+			if(array[i+1][j].getBomb() == true)
+				contadorB++;
+			if(array[i-1][j].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i-1][j+1].getBomb() == true)
+				contadorB++;
+		}
+		else if(i == (array.length - 1))
+		{
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
+				contadorB++;
 			if(array[i-1][j-1].getBomb() == true)
 				contadorB++;
 			if(array[i-1][j].getBomb() == true)
 				contadorB++;
 			if(array[i-1][j+1].getBomb() == true)
 				contadorB++;
-			
-			if(array[i][j-1].getBomb() == true)
-				contadorB++;
-			if(array[i][j+1].getBomb() == true)
-				contadorB++;
-			
-			if(array[i+1][j-1].getBomb() == true)
+		}
+		else if(j == (array[0].length - 1))
+		{
+			if(array[i-1][j].getBomb() == true)
 				contadorB++;
 			if(array[i+1][j].getBomb() == true)
+				contadorB++;
+			if(array[i-1][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j-1].getBomb() == true)
+				contadorB++;
+		}
+		else
+		{
+			if(array[i-1][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i][j-1].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j-1].getBomb() == true)
+				contadorB++;
+			
+			if(array[i-1][j].getBomb() == true)
+				contadorB++;
+			if(array[i+1][j].getBomb() == true)
+				contadorB++;
+			
+			if(array[i-1][j+1].getBomb() == true)
+				contadorB++;
+			if(array[i][j+1].getBomb() == true)
 				contadorB++;
 			if(array[i+1][j+1].getBomb() == true)
 				contadorB++;
 		}
+		
+		return(contadorB);
 	}
+}
 	
 	
