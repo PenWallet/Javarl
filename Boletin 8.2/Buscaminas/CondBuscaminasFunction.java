@@ -36,7 +36,7 @@ public class CondBuscaminasFunction
 		{
 			for(int j = 0; j < Grid[0].length; j++)
 			{
-				Grid[i][j].changeDiscoveredState();
+				Grid[i][j].changeToDiscovered();
 			}
 		}
 		

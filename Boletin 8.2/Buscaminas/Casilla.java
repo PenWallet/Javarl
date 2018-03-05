@@ -63,7 +63,7 @@ public class Casilla
 	public void setFlagged(boolean flag) { this.isFlagged = flag; }
 	public void setNumberOfBombs(int number) { this.numberOfBombs = number; }
 	
-	public void changeDiscoveredState() { this.isDiscovered = !this.isDiscovered; }
+	public void changeToDiscovered() { this.isDiscovered = true; }
 	
 	public String toString()
 	{

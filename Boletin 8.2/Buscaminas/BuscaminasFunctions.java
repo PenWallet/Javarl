@@ -205,6 +205,28 @@ public class BuscaminasFunctions
 		
 		return(contadorB);
 	}
+	
+	/* Interfaz:
+	 * 
+	 * Comentario: Función que se encargará de descubrir la casilla seleccionadas y las adyacented que tenga un nº de bombas == 0
+	 * Cabecera: void descubrirCasilla(Casilla[][] array, int columna, int fila)
+	 * Precondiciones: El int de columna y fila serán mayores de 0
+	 * Entradas: Array 2D de enteros, un int de la columna y otro de la fila para seleccionar la casilla
+	 * Salidas: Ninguna
+	 * Entradas/Salidas: Ninguna
+	 * Postcondiciones: Los estados que correspondan se habrán cambiado
+	 * 
+	
+	
+	public static void descubrirCasilla(Casilla[][] array, int columna, int fila)
+	{
+		array[i][j].changeToDiscovered();
+		if
+	*/
+		
+		
+		
+		
 }
 	
 	
