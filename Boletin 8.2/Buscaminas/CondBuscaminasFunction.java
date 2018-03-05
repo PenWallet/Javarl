@@ -7,9 +7,9 @@ public class CondBuscaminasFunction
 	{
 		Casilla[][] Grid = new Casilla[10][10];
 		
-		for(int i = 0; i < (Grid.length - 1); i++)
+		for(int i = 0; i < Grid.length; i++)
 		{
-			for(int j = 0; j < (Grid[0].length - 1); j++)
+			for(int j = 0; j < Grid[0].length; j++)
 			{
 				Grid[i][j] = new Casilla();
 			}
@@ -19,9 +19,9 @@ public class CondBuscaminasFunction
 		System.out.println("PRIMER GRID, TODO DEBERÍA ESTAR OCULTO");
 		BuscaminasFunctions.MostrarGrid(Grid);
 		
-		for(int i = 0; i < (Grid.length - 1); i++)
+		for(int i = 0; i < Grid.length; i++)
 		{
-			for(int j = 0; j < (Grid[0].length - 1); j++)
+			for(int j = 0; j < Grid[0].length; j++)
 			{
 				Grid[i][j].setNumberOfBombs(BuscaminasFunctions.contarBombas(Grid, i, j));
 			}
@@ -30,6 +30,20 @@ public class CondBuscaminasFunction
 		//Segundo grid, donde todo debería seguir oculto
 		System.out.println("SEGUNDO GRID, TODO DEBERÍA SEGUIR OCULTO");
 		BuscaminasFunctions.MostrarGrid(Grid);
+		
+		//Vamos a poner todas descubiertas
+		for(int i = 0; i < Grid.length; i++)
+		{
+			for(int j = 0; j < Grid[0].length; j++)
+			{
+				Grid[i][j].changeDiscoveredState();
+			}
+		}
+		
+		//Segundo grid, donde todos deberían estar descubiertas
+		System.out.println("\n\nTERCER GRID, TODO DEBERÍA ESTAR DESCUBIERTO");
+		BuscaminasFunctions.MostrarGrid(Grid);
+
 		
 	}
 	

@@ -25,7 +25,8 @@
  * 		void setFlagged(boolean flag)
  * 		void setDiscovered(boolean discover)
  * 		void setNumberOfBombs(boolean number)
- * 		 
+ * 		
+ * 		void changeDiscoveredState()
  * 
 */
 
@@ -57,10 +58,12 @@ public class Casilla
 	public boolean getBomb() { return(isBomb); }
 	public boolean getFlagged() { return(isFlagged); }
 	public boolean getDiscovered() { return(isDiscovered); }
-	public boolean getNumberOfBombs() {return(numberOfBombs); }
+	public int getNumberOfBombs() { return(numberOfBombs); }
 	
 	public void setFlagged(boolean flag) { this.isFlagged = flag; }
 	public void setNumberOfBombs(int number) { this.numberOfBombs = number; }
+	
+	public void changeDiscoveredState() { this.isDiscovered = !this.isDiscovered; }
 	
 	public String toString()
 	{
