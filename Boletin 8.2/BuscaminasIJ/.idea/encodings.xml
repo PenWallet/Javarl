@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/Buscaminas.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/BuscaminasFunctions.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/Casilla.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/CondBuscaminasFunction.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/src/TestCasilla.java" charset="ISO-8859-1" />
+  </component>
+</project>
