@@ -56,9 +56,9 @@ public class Prueba
 
 
         //FileWriter
-        FileWriter w1 = new FileWriter("C:\\Users\\Oscar\\Desktop\\DAM\\Javarl\\FileReader y FileWriter\\assets\\prueba2.txt", true);
-        w1.write("\nBuenas tardes, compañer");
-        w1.flush();
+        FileWriter w1 = new FileWriter("C:\\Users\\Oscar\\Desktop\\DAM\\Javarl\\FileReader y FileWriter\\assets\\prueba2.txt", true); //El true del final indica que vamos a seguir escribiendo después de lo que ya hay escrito dentro
+        w1.write("\nBuenas tardes, compañeros"); //Comando para escribir
+        w1.flush(); //IMPORTANTE: Esto escribe lo que hay en el buffer (memoria intermedia)
 
         //Probamos a leer qué hay
         try
@@ -73,6 +73,6 @@ public class Prueba
                     System.out.print(cC);
                 }
             }while(c != -1);
-        }catch(IOException e){System.out.println("Archivo no encontrado");};
+        }catch(IOException e){System.out.println("Archivo no encontrado");}
     }
 }
