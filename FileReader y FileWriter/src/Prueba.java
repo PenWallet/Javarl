@@ -4,28 +4,7 @@ public class Prueba
 {
     public static void main(String[] args) throws Exception
     {
-        /*
-        //FileReader con BufferedReader
-        FileReader r1 = new FileReader("C:\\Users\\Oscar\\Desktop\\DAM\\Javarl\\FileReader y FileWriter\\assets\\prueba.txt");
-        BufferedReader reader = new BufferedReader(r1);
-        String s1 = "";
-        String buff = reader.readLine();
-
-        while (buff != null)
-        {
-            s1 += buff;
-            buff = reader.readLine();
-        }
-
-        System.out.println(s1);
-        r1.close();
-        */
-
-
-
-
-
-        //FileReader
+       //FileReader
         int c; //Variable que almacena el código ASCII que lee
         char cC; //Variable que almacena el carácter ya casteado
 
