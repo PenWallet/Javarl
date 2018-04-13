@@ -13,7 +13,8 @@ public class FWriterFReader {
 		
 	        try{
 	            //Abrimos el stream, crea el fichero si no existe
-	        	  FileWriter fw = new FileWriter("fichero1.txt");
+	            //El true indica que escribiremos sobre lo que ya está escrito
+	        	  FileWriter fw = new FileWriter("..\\fichero1.txt", true);
 	            
 	            //Escribimos en el fichero un String y un caracter, por ejemplo 97 (a)
 	              fw.write("Prueba de escritur");
@@ -26,7 +27,7 @@ public class FWriterFReader {
 	              fw.close(); 
 	            
 	            //Abrimos el stream, el fichero debe existir
-	              FileReader fr = new FileReader("fichero1.txt");
+	              FileReader fr = new FileReader("..\\fichero1.txt");
 	            
 	            //Leemos el fichero y lo mostramos por pantalla
 	              int valor=fr.read();
@@ -53,7 +54,7 @@ public class FWriterFReader {
 			try 
 			{
 			  //Instanciamos el FileReader y el FileWriter, creando el ficheroCopia.txt que no existe
-				entrada = new FileReader("fichero1.txt"); 
+				entrada = new FileReader("..\\fichero1.txt"); 
 				salida = new FileWriter("ficheroCopia.txt");
 				
 			  //Copiamos uno por uno los caracteres de fichero1 a ficheroCopia
