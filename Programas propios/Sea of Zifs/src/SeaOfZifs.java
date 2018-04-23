@@ -1,15 +1,16 @@
 import java.io.*;
+import Clases.*;
 
 /*
     Nombre del programa: Sea of Zifs
     Análisis:
         Este juego se basa en el reciente (20 marzo, 2018) juego de piratas, donde vas buscando tesoros por islas,
         donde te puedes encontrar a otros jugadores, atacarles, robarles, encontrarte con enemigos, etc.
-        No se implementará la parte de encontrase a otros jugadores por falta de conocimientos, pero sí lo demás.
+        No se implementará la parte de encontrarse a otros jugadores, pero sí lo demás.
 
-        El juego tendrá un mapa, con 6 islas distintas, más una isla principal, en la que se empiezan. Estos los nombres:
-            Calamah Island
+        El juego tendrá un mapa, con 6 islas distintas, más una isla principal, en la que se empieza:
             Happiness Island //Aquí se empieza
+            Calamah Island
             Null Island
             Cucumber Island
             Bolsillodedoraimon Island
@@ -24,11 +25,15 @@ import java.io.*;
         Siendo un juego, necesitará unos controles. Se hará mediante letras. El jugador tendrá que ir escribiendo las
         letras y pulsando el intro para ir moviéndose, o haciendo las diferentes acciones. Estos son los controles:
             W, A, S, D ------> Moverse en diferentes direcciones
-            G ---------------> Guardar partida
             E ---------------> Acción (hablar con NPCs, usar objeto, etc.)
-            M ---------------> Menú
+            M ---------------> Menú In-Game
             I ---------------> Inventario
 
+        El MIG (Menú In-Game) contendrá las siguientes opciones:
+            Guardar partida
+            Guardar y salir
+            Cambiar dificultad
+            Salir sin guardar
 
     Pseudocódigo Generalizado:
         Inicio
@@ -40,23 +45,25 @@ import java.io.*;
                         Caso '1':
                             MostrarMPG * //MPG, Menú Partidas Guardadas
                             Leer y validar opción MPG
+                            Fin Si
                         Caso '2':
                             CrearPartidaNueva *
                     Fin Según
                 Mientras (opción no sea correcta)
-                MostrarMapa *
-                Leer y validar Letra de Control
+                Mientras (opción no sea salir de la partida)
+                    MostrarMapa *
+                    Leer y validar Letra de Control
                     Según (letra de control) //Letras de control descritas en Análisis
                         Caso 'W': MovimientoW *
                         Caso 'A': MovimientoA *
                         Caso 'S': MovimientoS *
                         Caso 'D': MovimientoD *
-                        Caso 'G': GuardarPartida *
-                        Caso 'E': AccionRealizada *
+                        TODO Caso 'E': AccionRealizada *
                         Caso 'M': MostrarMenuJugador *
-                        Caso 'I': AbrirInventario *
+                        TODO Caso 'I': AbrirInventario *
                     Fin Según
-            Mientras (opcion no sea salir)
+                Fin Mientras
+            Mientras (opcion no sea salir del juego)
         Fin
 
 
@@ -66,17 +73,53 @@ import java.io.*;
             Leer partidas guardadas
             Mostrar en pantalla partidas guardadas
         Fin
+
+    Pseudocódigo Específico (CrearPartidaNueva)
+        Inicio
+            Leer nombre de guardado
+            Copiar fichero de partida nueva y nombrar //Copiar de "assets" y guardar copia en "savegames"
+            Copiar fichero de partida para uso temporal //Copiar en "savegames" bajo el nombre de $~(nombre de guardado)
+        Fin
+
+    Pseudocódigo Específico (MostrarMapa)
+        Inicio
+            Abrir fichero de partida en uso para leer
+            Leer carácter de fichero
+            Mientras (carácter != -1)
+                Imprimir carácter en pantalla
+                Leer carácter de fichero
+            Fin Mientras
+        Fin
+
+    Pseudocódigo Específico (Movimiento[WASD])
+        Inicio
+            Abrir fichero de partida en uso para escribir
+            Mover Jugador
+            Según (carácter al que se haya movido)
+                TODO: Elegir qué caracteres representará cada cosa (agua, tierra, NPC, personaje, etc)
+        Fin
+
+    TODO Pseudocódigo Específico (AccionRealizada)
+        Inicio
+            Mirar casillas alrededor
+            Si (hay algo que hacer)
+                Según (qué hay alrededor)
+                    TODO: Elegir qué caracteres representará cada cosa (agua, tierra, NPC, personaje, etc)
+                Fin Según
+            Si no
+                Mostrar mensaje de error
+            Fin Si
+        Fin
+
+
+
+
+
  */
 
 public class SeaOfZifs {
     public static void main(String[] args)
     {
-
-
-
-
-
-
 
 
 

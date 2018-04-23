@@ -8,6 +8,16 @@
  * 
 */
 
+/*  Estudio de interfaz (clase):
+        Definición:
+    
+        Atributos:
+    
+        Atributos derivados:
+    
+        Métodos:
+ */
+
 /* Estudio de la Interfaz (funcionalidad):
  * 
  * Necesidades: 
