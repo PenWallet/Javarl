@@ -1,4 +1,5 @@
 package Clases;
+
 /*  Estudio de interfaz (clase):
         Definición:
             Clase que almacenará los datos del jugador

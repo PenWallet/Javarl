@@ -1,5 +1,7 @@
 import java.io.*;
+import java.util.*;
 import Clases.*;
+import Funciones.*;
 
 /*
     Nombre del programa: Sea of Zifs
@@ -38,18 +40,18 @@ import Clases.*;
     Pseudocódigo Generalizado:
         Inicio
             Repetir
-                Repetir
-                    MostrarMP * //MP, Menú Principal
-                    Leer y validar opción MP
-                    Según (opción MP)
-                        Caso '1':
-                            MostrarMPG * //MPG, Menú Partidas Guardadas
-                            Leer y validar opción MPG
-                            Fin Si
-                        Caso '2':
-                            CrearPartidaNueva *
-                    Fin Según
-                Mientras (opción no sea correcta)
+                MostrarMP * //MP, Menú Principal
+                Leer y validar opción MP
+                Según (opción MP)
+                    Caso '1':
+                        MostrarMPG * //MPG, Menú Partidas Guardadas
+                        Leer y validar opción MPG
+                    Caso '2':
+                        Leer nombre de partida
+                        CrearPartidaNueva *
+                    Caso '0':
+                        Salir
+                Fin Según
                 Mientras (opción no sea salir de la partida)
                     MostrarMapa *
                     Leer y validar Letra de Control
@@ -63,6 +65,7 @@ import Clases.*;
                         TODO Caso 'I': AbrirInventario *
                     Fin Según
                 Fin Mientras
+                Leer y validar cargar otra partida
             Mientras (opcion no sea salir del juego)
         Fin
 
@@ -120,8 +123,56 @@ import Clases.*;
 public class SeaOfZifs {
     public static void main(String[] args)
     {
+        Scanner teclado = new Scanner(System.in);
+        Scanner tecladoS = new Scanner(System.in);
+
+        char opcionMP, opcionMPG, opcionCargar = 'N';
+
+        boolean jugar = true;
+
+        String nombrePartidaNueva;
+
+        do
+        {
+            Gestora.MostrarMP();
+            //Leer y validar opción MP
+            do
+            {
+                opcionMP = teclado.next().charAt(0);
+                if(opcionMP < '0' ||opcionMP > '2')
+                {
+                    System.out.println("¡Opción no válido!");
+                }
+            }while(opcionMP < '0' ||opcionMP > '2');
 
 
+            switch(opcionMP)
+            {
+                case '1': Gestora.MostrarMPG(); jugar = true; break;
+                case '2':
+                    System.out.println("Escribe tu nombre:");
+                    nombrePartidaNueva = tecladoS.nextLine();
+                    Gestora.crearPartidaNueva(nombrePartidaNueva); jugar = true; break;
 
+                case '0': jugar = false; break;
+            }
+
+            //El juego en sí
+            while(jugar)
+            {
+                System.out.println("Esto debería ser el juego, pero está en construcción");
+                jugar = false;
+
+                //Leer y validar cargar otra partida
+                System.out.println("¿Cargar o crear otra partida?");
+                do
+                {
+                    opcionCargar = Character.toUpperCase(teclado.next().charAt(0));
+                    if(opcionCargar != 'Y' && opcionCargar != 'N')
+                        System.out.println("¡Solo Y o N!");
+                }while(opcionCargar != 'Y' && opcionCargar != 'N');
+            }
+
+        }while(opcionCargar == 'Y');
     }
 }
