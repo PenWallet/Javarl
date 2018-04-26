@@ -1,17 +1,17 @@
 			/* Estudio interfaz (clase):
  * 
- * - Definición:
+ * - Definici?n:
  * 		Para poder crear la clase ordenador, necesitaremos la clase Memoria,
- * 		que representará a la memoria RAM del ordenador
+ * 		que representar? a la memoria RAM del ordenador
  * 
- * 		Tendrá capacidad, tipo, y velocidad
+ * 		Tendr? capacidad, tipo, y velocidad
  * 
  * - Por cada propiedad, indicar su tipo y si es consultable/modificable:
  * 		Capacidad: Entero, consultable, modificable
  * 		Tipo: String, consultable, modificable
  * 		Velocidad: Entero, consultable, modificable 
  * 
- * - Indicar las propiedades derivadas (fórmula si necesario):
+ * - Indicar las propiedades derivadas (f?rmula si necesario):
  * - Indicar si cada propiedad es compartida por los objetos:
  * 
  * - Definir operaciones o funcionalidades del objeto:
@@ -27,7 +27,7 @@
  * - Restricciones:
  * 		- El tipo solo puede ser DDR1, DDR2, DDR3 y DDR4
  * 		- La capacidad y la velocidad deben ser mayores de 0
- * 		- La capacidad se introducirá en MB
+ * 		- La capacidad se introducir? en MB
  * 
 */
 
@@ -97,7 +97,7 @@ public class Memoria
 		try
 		{
 			copia = (Memoria)super.clone();
-		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		}catch(CloneNotSupportedException error){System.out.println("?Clone no creado!");};
 		
 		return (copia);
 	}

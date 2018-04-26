@@ -1,16 +1,16 @@
 /* Estudio interfaz (clase):
  * 
- * - Definición:
+ * - Definici?n:
  * 		Para poder crear la clase ordenador, necesitaremos la clase Disco Duro,
- * 		que representará a la memoria de disco duro del ordenador
+ * 		que representar? a la memoria de disco duro del ordenador
  * 
- * 		Tendrá capacidad y velocidad
+ * 		Tendr? capacidad y velocidad
  * 
  * - Por cada propiedad, indicar su tipo y si es consultable/modificable:
  * 		Capacidad: Entero, consultable, modificable
  * 		Velocidad: Entero, consultable modificable
  * 
- * - Indicar las propiedades derivadas (fórmula si necesario):
+ * - Indicar las propiedades derivadas (f?rmula si necesario):
  * - Indicar si cada propiedad es compartida por los objetos:
  * 
  * - Definir operaciones o funcionalidades del objeto:
@@ -22,7 +22,7 @@
  * 
  * - Restricciones:
  * 		- La capacidad y la velocidad deben ser mayores de 0
- * 		- La capacidad estará en GB, y la velocidad en RPM
+ * 		- La capacidad estar? en GB, y la velocidad en RPM
 */
 
 import java.io.*;
@@ -78,7 +78,7 @@ public class DiscoDuro
 		try
 		{
 			copia = (DiscoDuro)super.clone();
-		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
+		}catch(CloneNotSupportedException error){System.out.println("?Clone no creado!");};
 		
 		return (copia);
 	}

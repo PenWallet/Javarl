@@ -10,10 +10,10 @@
  * 		Marca: String, consultable, modificable
  * 		Modelo: String, consultable, modificable
  * 		Velocidad: Double, consultable, modificable
- * 
- * - Indicar las propiedades derivadas (fórmula si necesario):
+ *
+ * - Indicar las propiedades derivadas (f?rmula si necesario):
  * - Indicar si cada propiedad es compartida por los objetos:
- * 
+ *
  * - Definir operaciones o funcionalidades del objeto:
  * 		String getMarca()
  * 		void setMarca(String marca)
@@ -27,8 +27,8 @@
  * 
  * - Restricciones:
  * 		- La marca solo puede ser Intel o AMD
- * 		- La velocidad deberá ser mayor de 0
- * 		- La velocidad estará dada en GHz
+ * 		- La velocidad deber? ser mayor de 0
+ * 		- La velocidad estar? dada en GHz
 */
 
 import java.io.*;
@@ -42,9 +42,9 @@ public class Procesador
 	//Constructores
 	public Procesador()
 	{
-		marca = "Intel";
-		modelo = "i7 7700K";
-		velocidad = 3.8;
+		marca = " ";
+		modelo = " ";
+		velocidad = 0;
 	}
 	
 	public Procesador(String marca, String modelo, double velocidad)
