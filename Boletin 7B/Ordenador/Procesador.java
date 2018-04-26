@@ -61,42 +61,15 @@ public class Procesador
 		this.velocidad = p.velocidad;
 	}
 	
-	//Funciones
+	//Getters y setters
 	public String getMarca() { return(marca); }
-	public void setMarca() throws ProcesadorBrandNotAllowedException
-	{
-		if(marca != "Intel" && marca != "AMD")
-			throw new ProcesadorBrandNotAllowedException("Error");
-		else
-			this.marca = marca;
-	}
+	public void setMarca() { this.marca = marca; }
 	
 	public String getModelo() { return(modelo); }
 	public void setModelo(String modelo) { this.modelo = modelo; }
 	
 	public double getVelocidad() { return(velocidad); }
-	public void setVelocidad() throws ProcesadorSmallerThanZeroException
-	{
-		if(velocidad < 0)
-			throw new ProcesadorSmallerThanZeroException("Error");
-		else
-			this.velocidad = velocidad;
-	}
-	
-	@Override
-	public Procesador clone()
-	{
-		Procesador copia = null;
-		
-		try
-		{
-			copia = (Procesador)super.clone();
-		}catch(CloneNotSupportedException error){System.out.println("¡Clone no creado!");};
-		
-		return (copia);
-	}
-	
-	
+	public void setVelocidad() { this.velocidad = velocidad; }
 }
 	
 	

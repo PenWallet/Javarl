@@ -61,46 +61,15 @@ public class Memoria
 		this.velocidad = m.velocidad;
 	}
 	
-	//Funciones
+	//Getters y setters
 	public int getCapacidad() { return(capacidad); }
-	public void setCapacidad(int capacidad) throws MemoriaSmallerThanZeroException
-	{
-		if(capacidad < 0)
-			throw new MemoriaSmallerThanZeroException("Error");
-		else
-			this.capacidad = capacidad;
-	}
+	public void setCapacidad(int capacidad) { this.capacidad = capacidad; }
 	
 	public String getTipo() { return(tipo); }
-	public void setTipo(String tipo) throws MemoriaTypeNotAllowedException
-	{
-		if(tipo != "DDR1" && tipo != "DDR2" && tipo != "DDR3" && tipo != "DDR4")
-			throw new MemoriaTypeNotAllowedException("Error");
-		else
-			this.tipo = tipo;
-	}
-	
+	public void setTipo(String tipo) { this.tipo = tipo; }
+
 	public int getVelocidad() { return(velocidad); }
-	public void setVelocidad(int velocidad) throws MemoriaSmallerThanZeroException
-	{
-		if(velocidad < 0)
-			throw new MemoriaSmallerThanZeroException("Error");
-		else
-			this.velocidad = velocidad;
-	}
-	
-	@Override
-	public Memoria clone()
-	{
-		Memoria copia = null;
-		
-		try
-		{
-			copia = (Memoria)super.clone();
-		}catch(CloneNotSupportedException error){System.out.println("?Clone no creado!");};
-		
-		return (copia);
-	}
+	public void setVelocidad(int velocidad) { this.velocidad = velocidad; }
 }
 		
 		
