@@ -16,37 +16,21 @@
         Atributos derivados:
     
         Métodos:
- */
-
-/* Estudio de la Interfaz (funcionalidad):
- * 
- * Necesidades: 
- * Devoluciones: 
- * Nec/Dev: 
- * Restricciones: 
-*/ 
-
-/* Interfaz:
- * 
- * Comentario: 
- * Cabecera: 
- * Precondiciones: 
- * Entradas: 
- * Salidas: 
- * Entradas/Salidas: 
- * Postcondiciones: 
- * 
 */
 
-// ************************************************************************
-
-/* Nombre del bucle: 
-*  Tipo de VCB: 
-*  Descripción: 
-*  Inicialización VCB: 
-*  Actualización VCB: 
-*  Condición de entrada: 
-*  Condición de salida: 
+/*  Interfaz:
+            Comentario:
+               	
+            Cabecera:
+                
+            Precondiciones:
+                
+            Entradas:
+                
+            Salida:
+                
+            E/S:
+                
+            Postcondiciones:
+                
 */
-
-// ************************************************************************
