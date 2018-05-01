@@ -1,10 +1,6 @@
-import java.io.*;
-import java.util.*;
-import Clases.*;
-import Funciones.*;
+/*  Nombre del programa:
+        Sea of Zifs
 
-/*
-    Nombre del programa: Sea of Zifs
     Análisis:
         Este juego se basa en el reciente (20 marzo, 2018) juego de piratas, donde vas buscando tesoros por islas,
         donde te puedes encontrar a otros jugadores, atacarles, robarles, encontrarte con enemigos, etc.
@@ -119,6 +115,10 @@ import Funciones.*;
 
 
  */
+import java.io.*;
+import java.util.*;
+import Clases.*;
+import Funciones.*;
 
 public class SeaOfZifs {
     public static void main(String[] args)
@@ -126,7 +126,7 @@ public class SeaOfZifs {
         Scanner teclado = new Scanner(System.in);
         Scanner tecladoS = new Scanner(System.in);
 
-        char opcionMP, opcionMPG, opcionCargar = 'N';
+        char opcionMP, opcionMPG, opcionCargar;
 
         boolean jugar = true;
 
@@ -135,6 +135,8 @@ public class SeaOfZifs {
         do
         {
             Gestora.MostrarMP();
+
+
             //Leer y validar opción MP
             do
             {
@@ -152,7 +154,7 @@ public class SeaOfZifs {
                 case '2':
                     System.out.println("Escribe tu nombre:");
                     nombrePartidaNueva = tecladoS.nextLine();
-                    Gestora.crearPartidaNueva(nombrePartidaNueva); jugar = true; break;
+                    GestoraPartidas.crearPartidaNueva(nombrePartidaNueva); jugar = true; break;
 
                 case '0': jugar = false; break;
             }
@@ -160,18 +162,20 @@ public class SeaOfZifs {
             //El juego en sí
             while(jugar)
             {
+
+
                 System.out.println("Esto debería ser el juego, pero está en construcción");
                 jugar = false;
-
-                //Leer y validar cargar otra partida
-                System.out.println("¿Cargar o crear otra partida?");
-                do
-                {
-                    opcionCargar = Character.toUpperCase(teclado.next().charAt(0));
-                    if(opcionCargar != 'Y' && opcionCargar != 'N')
-                        System.out.println("¡Solo Y o N!");
-                }while(opcionCargar != 'Y' && opcionCargar != 'N');
             }
+
+            //Leer y validar cargar otra partida
+            System.out.println("¿Cargar o crear otra partida?");
+            do
+            {
+                opcionCargar = Character.toUpperCase(teclado.next().charAt(0));
+                if(opcionCargar != 'Y' && opcionCargar != 'N')
+                    System.out.println("¡Solo Y o N!");
+            }while(opcionCargar != 'Y' && opcionCargar != 'N');
 
         }while(opcionCargar == 'Y');
     }

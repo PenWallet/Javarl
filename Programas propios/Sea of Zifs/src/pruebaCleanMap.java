@@ -15,23 +15,14 @@ public class pruebaCleanMap {
 
        try
        {
-           for(int i = 0; i < 180; i++)
+           for(int cont = 0; cont < 44; cont++)
            {
-               bw.write("~");
-           }
+               for(int i = 0; i < 180; i++)
+               {
+                   bw.write("~");
+               }
 
-           bw.newLine();
-
-           for(int i = 0; i < 180; i++)
-           {
-               bw.write("~");
-           }
-
-           bw.newLine();
-
-           for(int i = 0; i < 180; i++)
-           {
-               bw.write("~");
+               bw.newLine();
            }
 
            bw.close();
