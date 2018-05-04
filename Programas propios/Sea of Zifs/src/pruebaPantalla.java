@@ -1,9 +1,35 @@
+import java.io.*;
+
 public class pruebaPantalla {
-    public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
+    public static void main(String[] args)
+    {
+        FileReader fr = null;
+        BufferedReader br = null;
+        String line;
+
+        try
+        {
+            fr = new FileReader("assets\\cleanMap2.txt");
+            br = new BufferedReader(fr);
+
+            line = br.readLine();
+            while(line != null)
+            {
+                System.out.println(line);
+                line = br.readLine();
+            }
+
+        }catch(Exception e){}
+
+
+
+        /*
+        for (int i = 0; i < 100; i++)
+        {
             System.out.print("·········|");
         }
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++)
+        {
             System.out.println(i + 1);
         }
 

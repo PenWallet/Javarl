@@ -1,10 +1,6 @@
-import java.io.*;
-import java.util.*;
-import Clases.*;
-import Funciones.*;
+/*  Nombre del programa:
+        Sea of Zifs
 
-/*
-    Nombre del programa: Sea of Zifs
     Análisis:
         Este juego se basa en el reciente (20 marzo, 2018) juego de piratas, donde vas buscando tesoros por islas,
         donde te puedes encontrar a otros jugadores, atacarles, robarles, encontrarte con enemigos, etc.
@@ -40,7 +36,7 @@ import Funciones.*;
     Pseudocódigo Generalizado:
         Inicio
             Repetir
-                MostrarMP * //MP, Menú Principal
+                mostrarMP * //MP, Menú Principal
                 Leer y validar opción MP
                 Según (opción MP)
                     Caso '1':
@@ -49,6 +45,10 @@ import Funciones.*;
                     Caso '2':
                         Leer nombre de partida
                         CrearPartidaNueva *
+                    Caso '3':
+                        MostrarMPG *
+                        Leer y validar partida
+                        BorrarPartida *
                     Caso '0':
                         Salir
                 Fin Según
@@ -65,8 +65,7 @@ import Funciones.*;
                         TODO Caso 'I': AbrirInventario *
                     Fin Según
                 Fin Mientras
-                Leer y validar cargar otra partida
-            Mientras (opcion no sea salir del juego)
+            Mientras (opcionMP != '0')
         Fin
 
 
@@ -119,40 +118,57 @@ import Funciones.*;
 
 
  */
+import java.util.*;
+
+import Funciones.*;
 
 public class SeaOfZifs {
     public static void main(String[] args)
     {
         Scanner teclado = new Scanner(System.in);
         Scanner tecladoS = new Scanner(System.in);
+        Gestora g = new Gestora();
+        GestoraPartidas gp = new GestoraPartidas();
 
-        char opcionMP, opcionMPG, opcionCargar = 'N';
+        char opcionMP, opcionMPG, opcionCargar;
 
         boolean jugar = true;
 
         String nombrePartidaNueva;
+        String[] partidas;
 
         do
         {
-            Gestora.MostrarMP();
+            g.mostrarMP();
             //Leer y validar opción MP
             do
             {
                 opcionMP = teclado.next().charAt(0);
-                if(opcionMP < '0' ||opcionMP > '2')
+                if(opcionMP < '0' ||opcionMP > '3')
                 {
-                    System.out.println("¡Opción no válido!");
+                    System.out.println("¡Solo del 1 al 3, o 0 para salir!");
                 }
-            }while(opcionMP < '0' ||opcionMP > '2');
+            }while(opcionMP < '0' ||opcionMP > '3');
 
 
             switch(opcionMP)
             {
-                case '1': Gestora.MostrarMPG(); jugar = true; break;
+                case '1':
+                    gp.mostrarMPG();
+                    jugar = true;
+                    break;
+
                 case '2':
                     System.out.println("Escribe tu nombre:");
                     nombrePartidaNueva = tecladoS.nextLine();
-                    Gestora.crearPartidaNueva(nombrePartidaNueva); jugar = true; break;
+                    gp.crearPartidaNueva(nombrePartidaNueva);
+                    jugar = true;
+                    break;
+
+                case '3':
+                    gp.borrarPartida();
+                    jugar = false;
+                    break;
 
                 case '0': jugar = false; break;
             }
@@ -160,19 +176,12 @@ public class SeaOfZifs {
             //El juego en sí
             while(jugar)
             {
+
+
                 System.out.println("Esto debería ser el juego, pero está en construcción");
                 jugar = false;
-
-                //Leer y validar cargar otra partida
-                System.out.println("¿Cargar o crear otra partida?");
-                do
-                {
-                    opcionCargar = Character.toUpperCase(teclado.next().charAt(0));
-                    if(opcionCargar != 'Y' && opcionCargar != 'N')
-                        System.out.println("¡Solo Y o N!");
-                }while(opcionCargar != 'Y' && opcionCargar != 'N');
             }
 
-        }while(opcionCargar == 'Y');
+        }while(opcionMP != '0');
     }
 }
