@@ -38,21 +38,17 @@
             Repetir
                 mostrarMP * //MP, Menú Principal
                 Leer y validar opción MP
-                Según (opción MP)
+                Según (opcionMP)
                     Caso '1':
-                        MostrarMPG * //MPG, Menú Partidas Guardadas
-                        Leer y validar opción MPG
+                        Cargar partida
                     Caso '2':
-                        Leer nombre de partida
-                        CrearPartidaNueva *
+                        Crear partida
                     Caso '3':
-                        MostrarMPG *
-                        Leer y validar partida
-                        BorrarPartida *
+                        Borrar partida
                     Caso '0':
                         Salir
                 Fin Según
-                Mientras (opción no sea salir de la partida)
+                Mientras (jugar)
                     MostrarMapa *
                     Leer y validar Letra de Control
                     Según (letra de control) //Letras de control descritas en Análisis
@@ -130,11 +126,13 @@ public class SeaOfZifs {
         Gestora g = new Gestora();
         GestoraPartidas gp = new GestoraPartidas();
 
-        char opcionMP, opcionMPG, opcionCargar;
+        char opcionMP;
 
         boolean jugar = true;
+        boolean borrado;
 
         String nombrePartidaNueva;
+        String nombrePartidaCargada = "";
         String[] partidas;
 
         do
@@ -154,19 +152,39 @@ public class SeaOfZifs {
             switch(opcionMP)
             {
                 case '1':
+                    //Cargar partida
                     gp.mostrarMPG();
+                    System.out.println("Escribe el nombre de la partida que quieres cargar:");
+                    nombrePartidaCargada = teclado.nextLine();
+                    gp.cargarPartida(nombrePartidaCargada);
+
                     jugar = true;
                     break;
 
                 case '2':
+                    //Crear partida
                     System.out.println("Escribe tu nombre:");
                     nombrePartidaNueva = tecladoS.nextLine();
                     gp.crearPartidaNueva(nombrePartidaNueva);
+                    nombrePartidaCargada = nombrePartidaNueva;
+                    gp.cargarPartida(nombrePartidaCargada);
+
                     jugar = true;
                     break;
 
                 case '3':
-                    gp.borrarPartida();
+                    //Borrar partida
+                    partidas = gp.mostrarMPG();
+                    if(partidas.length != 0)
+                    {
+                        System.out.println("Escribe el nombre de la partida que quieres borrar:");
+                        borrado = gp.borrarPartida(tecladoS.nextLine());
+                        if(borrado)
+                            System.out.println("¡Tu partida se ha borrado correctamente!");
+                        else
+                            System.out.println("La partida que has indicado no se ha encontrado");
+                    }
+
                     jugar = false;
                     break;
 
@@ -176,9 +194,9 @@ public class SeaOfZifs {
             //El juego en sí
             while(jugar)
             {
-
-
                 System.out.println("Esto debería ser el juego, pero está en construcción");
+                System.out.println("Descargando partida...");
+                gp.descargarPartida(nombrePartidaCargada);
                 jugar = false;
             }
 

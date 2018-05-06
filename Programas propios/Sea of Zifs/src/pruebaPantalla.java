@@ -9,7 +9,7 @@ public class pruebaPantalla {
 
         try
         {
-            fr = new FileReader("assets\\cleanMap2.txt");
+            fr = new FileReader("assets\\cleanMap.txt");
             br = new BufferedReader(fr);
 
             line = br.readLine();
