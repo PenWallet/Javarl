@@ -15,7 +15,4 @@ public class Gestora {
         System.out.println("|         0. Salir          |");
         System.out.println("-----------------------------");
     }
-
-    public void MostrarMapa() { System.out.println("En resguardo"); }
-
 }

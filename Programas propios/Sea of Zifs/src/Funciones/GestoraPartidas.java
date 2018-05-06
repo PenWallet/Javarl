@@ -7,18 +7,23 @@ public class GestoraPartidas {
     /**
      * Muestra el Menú de Personajes Guardados
      *
-     * @return String[] con los nombres de todas las partidas guardadas
+     * @return false si hay partidas que mostrar, true en caso contrario
      */
 
-    public String[] mostrarMPG()
+    public boolean mostrarMPG()
     {
+        boolean empty = false;
+
         String[] array;
 
         File directory = new File("savegames");
         array = directory.list();
 
         if(array.length == 0)
+        {
             System.out.println("¡No hay partidas guardadas!");
+            empty = true;
+        }
         else
         {
             for(int i = 0; i < array.length; i++)
@@ -27,7 +32,7 @@ public class GestoraPartidas {
             }
         }
 
-        return(array);
+        return(empty);
     }
 
     /**
@@ -121,10 +126,15 @@ public class GestoraPartidas {
      * Carga la partida mediante la creación de un archivo en el que se irán guardando los cambios temporalmente
      *
      * @param partida El nombre de la partida (que debe existir)
+     * @return true si se ha cargado la partida, false en caso contrario
      */
 
-    public void cargarPartida(String partida)
+    public boolean cargarPartida(String partida)
     {
+        boolean loaded = false;
+        File partidas = new File("savegames");
+        String[] array = partidas.list();
+
         FileReader fr = null;
         BufferedReader br = null;
 
@@ -133,40 +143,47 @@ public class GestoraPartidas {
 
         String line;
 
-        try
+        for(int i = 0; i < array.length && !loaded; i++)
         {
-            fr = new FileReader("savegames\\"+partida+"\\mapa.txt");
-            br = new BufferedReader(fr);
-
-            fw = new FileWriter("savegames\\"+partida+"\\mapaTemp.txt");
-            bw = new BufferedWriter(fw);
-        }catch(IOException e) { System.out.println("¡Error al abrir el stream!"); }
-
-
-        try
-        {
-            line = br.readLine();
-
-            while(line != null)
+            if(array[i].equals(partida))
             {
-                bw.write(line);
-                line = br.readLine();
-                if(line != null)
-                    bw.newLine();
+                try
+                {
+                    fr = new FileReader("savegames\\" + partida + "\\mapa.txt");
+                    br = new BufferedReader(fr);
+
+                    fw = new FileWriter("savegames\\" + partida + "\\mapaTemp.txt");
+                    bw = new BufferedWriter(fw);
+                } catch (IOException e) { System.out.println("¡Error al abrir el stream!"); }
+
+
+                try {
+                    line = br.readLine();
+
+                    while (line != null) {
+                        bw.write(line);
+                        line = br.readLine();
+                        if (line != null)
+                            bw.newLine();
+                    }
+
+
+                } catch (IOException e) { System.out.println("Error al leer/escribir"); }
+                finally
+                {
+                    try {
+                        bw.close();
+                        br.close();
+                        fw.close();
+                        fr.close();
+                    } catch (IOException e) { System.out.println("Error al cerrar el stream"); }
+                }
+
+                loaded = true;
             }
-
-
-        }catch(IOException e) { System.out.println("Error al leer/escribir"); }
-        finally
-        {
-            try
-            {
-                bw.close();
-                br.close();
-                fw.close();
-                fr.close();
-            }catch(IOException e) { System.out.println("Error al cerrar el stream"); }
         }
+
+        return(loaded);
     }
 
     /**
@@ -178,6 +195,9 @@ public class GestoraPartidas {
 
     public void descargarPartida(String partida)
     {
+        boolean deleted;
+
+        File temp = new File("savegames\\"+partida+"\\mapaTemp.txt");
         FileReader fr = null;
         BufferedReader br = null;
 
@@ -186,15 +206,17 @@ public class GestoraPartidas {
 
         String line;
 
+        //Abrir los streams
         try
         {
-            fr = new FileReader("savegames\\"+partida+"\\mapaTemp.txt");
+            fr = new FileReader(temp);
             br = new BufferedReader(fr);
 
             fw = new FileWriter("savegames\\"+partida+"\\mapa.txt");
             bw = new BufferedWriter(fw);
         }catch(IOException e) { System.out.println("¡Error al abrir el stream!"); }
 
+        //Copiar de mapaTemp a mapa
         try
         {
             line = br.readLine();
@@ -209,15 +231,27 @@ public class GestoraPartidas {
 
 
         }catch(IOException e) { System.out.println("Error al leer/escribir"); }
-        finally
+
+        try
         {
-            try
-            {
                 bw.close();
                 br.close();
                 fw.close();
                 fr.close();
-            }catch(IOException e) { System.out.println("Error al cerrar el stream"); }
+        } catch(IOException e) { System.out.println("Error al cerrar el stream"); }
+
+        //Borrar archivo temporal
+        System.out.println("Attempting to delete " + temp.getAbsolutePath());
+        if (!temp.exists())
+            System.out.println("  Doesn't exist");
+        else if (!temp.canWrite())
+            System.out.println("  No write permission");
+        else
+        {
+            if (temp.delete())
+                System.out.println("  Deleted!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            else
+                System.out.println("  Delete failed - reason unknown");
         }
     }
 }

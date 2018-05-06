@@ -125,15 +125,17 @@ public class SeaOfZifs {
         Scanner tecladoS = new Scanner(System.in);
         Gestora g = new Gestora();
         GestoraPartidas gp = new GestoraPartidas();
+        GestoraJuego gj = new GestoraJuego();
 
         char opcionMP;
 
-        boolean jugar = true;
+        boolean jugar = false;
         boolean borrado;
+        boolean cargado;
+        boolean empty;
 
         String nombrePartidaNueva;
         String nombrePartidaCargada = "";
-        String[] partidas;
 
         do
         {
@@ -153,12 +155,21 @@ public class SeaOfZifs {
             {
                 case '1':
                     //Cargar partida
-                    gp.mostrarMPG();
-                    System.out.println("Escribe el nombre de la partida que quieres cargar:");
-                    nombrePartidaCargada = teclado.nextLine();
-                    gp.cargarPartida(nombrePartidaCargada);
+                    empty = gp.mostrarMPG();
+                    if(!empty)
+                    {
+                        System.out.println("Escribe el nombre de la partida que quieres cargar:");
+                        nombrePartidaCargada = tecladoS.nextLine();
+                        cargado = gp.cargarPartida(nombrePartidaCargada);
+                        if (cargado)
+                         {
+                            System.out.println("¡Partida cargada con éxito!");
+                            jugar = true;
+                        } else {
+                            System.out.println("¡No se ha podido encontrar una partida con ese nombre!");
+                        }
+                    }
 
-                    jugar = true;
                     break;
 
                 case '2':
@@ -174,8 +185,8 @@ public class SeaOfZifs {
 
                 case '3':
                     //Borrar partida
-                    partidas = gp.mostrarMPG();
-                    if(partidas.length != 0)
+                    empty = gp.mostrarMPG();
+                    if(!empty)
                     {
                         System.out.println("Escribe el nombre de la partida que quieres borrar:");
                         borrado = gp.borrarPartida(tecladoS.nextLine());
@@ -194,8 +205,8 @@ public class SeaOfZifs {
             //El juego en sí
             while(jugar)
             {
-                System.out.println("Esto debería ser el juego, pero está en construcción");
-                System.out.println("Descargando partida...");
+                gj.mostrarMapa(nombrePartidaCargada);
+
                 gp.descargarPartida(nombrePartidaCargada);
                 jugar = false;
             }
