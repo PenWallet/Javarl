@@ -36,23 +36,66 @@ public class Persona {
     /**
      * Nombre - String
      */
-    String nombre;
+    protected String nombre;
 
     /**
      * Edad - int
      */
-    int edad;
+    protected int edad;
 
     /**
      * DNI - String
      */
-    String DNI;
+    protected String DNI;
 
     /**
      * Genero - char
      * Solo puede ser H (hombre) o M (mujer)
      */
-    char genero;
+    protected char genero;
+
+    //Constructores
+
+    /**
+     * Constructor por defecto
+     */
+    public Persona()
+    {
+        this.nombre = "";
+        this.edad = 0;
+        this.DNI = "00000000A";
+        this.genero = 'H';
+    }
+
+    /**
+     * Constructor con parámetros de entrada
+     *
+     * @param nombre El nombre de la nueva persona
+     * @param edad La edad de la nueva persona
+     * @param DNI El DNI de la nueva persona
+     * @param genero El genero de la nueva persona
+     */
+    public Persona(String nombre, int edad, String DNI, char genero)
+    {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.DNI = DNI;
+        this.genero = genero;
+    }
+
+    /**
+     * Constructor de copia de otro objeto de la clase Persona
+     *
+     * @param p Otra instancia de la clase Persona
+     */
+    public Persona(Persona p)
+    {
+        this.nombre = p.nombre;
+        this.edad = p.edad;
+        this.DNI = p.DNI;
+        this.genero = p.genero;
+    }
+
 
     //Getters y setters
 
