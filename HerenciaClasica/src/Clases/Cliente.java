@@ -13,22 +13,21 @@ package Clases;
             double getDinero()
             void setDinero(double dinero)
 
-            int getID()ç
+            int getID()
 
 
 */
 public class Cliente extends Persona {
 
     private double dinero;
-    private final int ID;
-    private static int IDCont;
+    private int ID;
+    private static int IDCont = 0;
 
 
     public Cliente()
     {
         super();
         this.dinero = 0;
-        this.ID =
-
+        this.ID = IDCont++;
     }
 }
