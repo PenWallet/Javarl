@@ -100,6 +100,12 @@ public class Cliente extends Persona {
 
     //FUNCIONES AÑADIDAS
 
+    /**
+     * Función que reducirá el dinero según una cantidad dada
+     *
+     * @param cantidad La cantidad de dinero a deducir
+     */
+    public void reducirDinero(double cantidad) { this.dinero -= cantidad; }
 
 
 }

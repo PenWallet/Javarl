@@ -25,10 +25,48 @@ package Clases;
  * Clase producto, con las propiedades más comunes que se le pueden atribuir a un producto
  */
 public class Producto {
-    String nombre;
-    double precio;
 
-    //Getters y setters
+    /**
+     * El nombre del producto
+     */
+    protected String nombre;
+
+    /**
+     * El precio del producto
+     */
+    protected double precio;
+
+    //CONSTRUCTORES
+
+    /**
+     * El constructor por defecto
+     */
+    public Producto()
+    {
+        this.nombre = "";
+        this.precio = 0;
+    }
+
+    /**
+     * El constructor por parámetros
+     */
+    public Producto(String nombre, double precio)
+    {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    /**
+     * El constructor de copia
+     */
+    public Producto (Producto p)
+    {
+        this.nombre = p.nombre;
+        this.precio = p.precio;
+    }
+
+
+    //GETTERS Y SETTERS
     /**
      * Devuelve el nombre
      *
