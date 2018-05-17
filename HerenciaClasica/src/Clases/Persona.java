@@ -154,5 +154,13 @@ public class Persona {
      */
     public void cumplirAnos() { this.edad++; }
 
+    /**
+     * toString
+     */
+    @Override
+    public String toString()
+    {
+        return(nombre+","+edad+","+DNI+","+genero);
+    }
 
 }

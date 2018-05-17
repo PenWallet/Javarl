@@ -107,5 +107,13 @@ public class Cliente extends Persona {
      */
     public void reducirDinero(double cantidad) { this.dinero -= cantidad; }
 
+    /**
+     * toString
+     */
+    @Override
+    public String toString()
+    {
+        return(super.toString()+","+ID+","+dinero);
+    }
 
 }
