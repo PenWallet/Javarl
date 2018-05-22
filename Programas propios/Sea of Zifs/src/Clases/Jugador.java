@@ -22,6 +22,9 @@ public class Jugador {
     //Atributos
     private String nombre;
     private double dinero;
+    private int i;
+    private int j;
+    private int nPartida;
 
     //Constructores
     public Jugador(String n, double d)

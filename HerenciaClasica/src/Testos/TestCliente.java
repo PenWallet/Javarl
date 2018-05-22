@@ -1,6 +1,8 @@
 package Testos;
 
 import Clases.Cliente;
+import Clases.Producto;
+import Clases.Pelicula;
 
 public class TestCliente {
 

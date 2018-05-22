@@ -116,14 +116,14 @@
  */
 import java.util.*;
 
-import Funciones.*;
+import Gestoras.*;
 
 public class SeaOfZifs {
     public static void main(String[] args)
     {
         Scanner teclado = new Scanner(System.in);
         Scanner tecladoS = new Scanner(System.in);
-        Gestora g = new Gestora();
+        GestoraMenus g = new GestoraMenus();
         GestoraPartidas gp = new GestoraPartidas();
         GestoraJuego gj = new GestoraJuego();
 
