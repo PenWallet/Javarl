@@ -47,7 +47,7 @@ CREATE TABLE Ingredientes(
 CREATE TABLE Pedidos(
 	ID int IDENTITY(1,1) NOT NULL,
 	IDCliente int NOT NULL,
-	FechaCompra smalldatetime NOT NULL,
+	FechaCompra date NOT NULL,
 	ImporteTotal smallmoney NULL,
 	CONSTRAINT PKPedidos PRIMARY KEY (ID),
 	CONSTRAINT FKPedidosClientes FOREIGN KEY (IDCliente) REFERENCES Clientes(ID) ON DELETE NO ACTION ON UPDATE CASCADE
@@ -116,3 +116,94 @@ INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) 
 INSERT INTO Panes (Nombre, Crujenticidad, Integral, Precio) VALUES
 ('Andaluza',2,0,0.2),('Baguette',4,0,0.5),('Bollo',5,0,0.25),('Pan de molde',0,0,1),('Pan de molde',0,1,1.2),
 ('Chapata',3,0,0.4),('Chapata',3,1,0.5),('Flauta',2,0,0.5),('Artesano',5,0,1),('Artesano',5,1,1.2)
+
+INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES
+(1,'9-3-2017'),(1,'25-5-2017'),(2,'3-8-2017'),(2,'9-8-2017'),(4,'9-9-2017'),(7,'21-10-2017'),(6,'30-11-2017'),
+(1,'2-1-2018'),(1,'4-1-2018'),(1,'4-2-2018'),(5,'10-2-2018'),(3,'16-2-2018'),(6,'28-2-2018'),(5,'16-3-2018'),
+(1,'13-4-2018'),(1,'5-5-2018')
+
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES
+(1,2,3),(1,3,1),(2,6,3),(3,6,1),(3,5,2),(3,7,1),(5,2,1),(6,2,1),(9,9,2),(9,8,1),(10,10,1),(10,9,9),
+(11,1,6),(11,3,4),(12,5,1),(14,5,1),(16,9,2)
+
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES
+(1,6,1),(3,8,1),(3,9,10),(4,12,1),(5,3,2),(7,11,2),(7,7,1),(7,10,1),(8,5,1),(11,1,1),(13,1,3),(14,5,2)
+
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES
+(1,1),(6,2),(6,3),(8,7),(8,9),(10,2),(14,2),(15,2),(16,8)
+
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES
+(1,1,2),(1,2,2),(2,4,2),(2,13,1),(3,5,2),(4,11,3),(5,6,1),(5,8,1),(5,9,1),
+(6,12,2),(7,14,1),(8,16,3),(9,6,1),(9,10,1)
+
+/*
+	Procedimiento almacenado que devuelve el valor total de los complementos de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalComplementos(@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL(SUM(C.Precio * PC.Cantidad),0)
+							FROM PedidosComplementos AS PC
+								INNER JOIN Complementos AS C
+									ON PC.IDComplemento = C.ID
+								WHERE PC.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Procedimiento almacenado que devuelve el valor total de los panes de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalPanes(@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL(SUM(P.Precio * PP.Cantidad),0)
+							FROM PedidosPanes AS PP
+								INNER JOIN Panes AS P
+									ON PP.IDPan = P.ID
+								WHERE PP.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Procedimiento almacenado que devuelve el valor total de los bocatas de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalBocatas(@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL((MAX(P.Precio) + SUM(I.Precio * BI.Cantidad)),0)
+							FROM Bocatas AS B
+								INNER JOIN Panes AS P
+									ON B.IDPan = P.ID
+								INNER JOIN BocatasIngredientes AS BI
+									ON B.ID = BI.IDBocata
+								INNER JOIN Ingredientes AS I
+									ON BI.IDIngrediente = I.ID
+							WHERE B.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Procedimiento almacenado que, además de servir para futuras inserciones de Pedidos, servirá para
+	la generación de esta base de datos.
+	Lo que hace es obtener el importe total de un pedido y actualiza la tabla ImporteTotal de dicho pedido
+	Entradas: ID del pedido
+	Salidas: Ninguna
+*/
+GO
+CREATE PROCEDURE CargarImportesTotales(@IDPedido int) AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = (SELECT ImporteTotal
+		COMMIT
+	END
+GO
