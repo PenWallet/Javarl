@@ -53,7 +53,7 @@ CREATE TABLE Pedidos(
 	ID int IDENTITY(1,1) NOT NULL,
 	IDCliente int NOT NULL,
 	FechaCompra date NOT NULL,
-	ImporteTotal smallmoney NULL,
+	ImporteTotal smallmoney NOT NULL DEFAULT 0,
 	CONSTRAINT PKPedidos PRIMARY KEY (ID),
 	CONSTRAINT FKPedidosClientes FOREIGN KEY (IDCliente) REFERENCES Clientes(ID) ON DELETE NO ACTION ON UPDATE CASCADE
 )
@@ -158,9 +158,8 @@ AS
 GO
 
 /*
-	Procedimiento almacenado que, además de servir para futuras inserciones de Pedidos, servirá para
-	la generación de esta base de datos.
-	Lo que hace es obtener el importe total de un pedido y actualiza la tabla ImporteTotal de dicho pedido
+	Procedimiento almacenado que obtiene el importe total de un pedido y actualiza la tabla ImporteTotal de dicho pedido.
+	Usa las funciones escalares creadas anteriormente
 	Entradas: ID del pedido
 	Salidas: Ninguna
 */
@@ -185,18 +184,27 @@ GO
 
 -- Trigger que actualiza la tabla Pedidos después de que se actualice PedidosComplementos
 GO
-CREATE TRIGGER ImporteTotalAfterComp ON PedidosComplementos AFTER INSERT,UPDATE 
+ALTER TRIGGER ImporteTotalAfterComp ON PedidosComplementos AFTER INSERT,UPDATE 
 AS
 	BEGIN
 		BEGIN TRANSACTION
+			-- Creación de una tabla temporal con los datos de la tabla inserted, ya que vamos a actualizar
+			CREATE TABLE #Temp (IDPedido int, IDComplemento int, Cantidad int)
+			INSERT INTO #Temp SELECT * FROM inserted
+
 			UPDATE Pedidos
-				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * C.Precio)
-				FROM Pedidos AS P
-					INNER JOIN inserted AS I
-						ON P.ID = I.IDPedido
+				SET ImporteTotal +=	(I.Cantidad * C.Precio)
+				
+				FROM #Temp AS I
+					INNER JOIN Pedidos AS P
+						ON I.IDPedido = P.ID
 					INNER JOIN Complementos AS C
 						ON I.IDComplemento = C.ID
+				
 				WHERE P.ID = I.IDPedido
+
+			-- Droperino a la tabla temporal, ya no tiene utilidad
+			DROP TABLE #Temp
 		COMMIT
 	END
 GO
@@ -244,13 +252,15 @@ AS
 	BEGIN
 		BEGIN TRANSACTION
 			UPDATE Pedidos
-				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Pa.Precio)
+				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Ing.Precio)
 				FROM Pedidos AS P
+					INNER JOIN Bocatas AS B
+						ON P.ID = B.IDPedido
 					INNER JOIN inserted AS I
-						ON P.ID = I.IDPedido
+						ON B.ID = I.IDBocata
 					INNER JOIN Ingredientes AS Ing
 						ON I.IDIngrediente = Ing.ID
-				WHERE P.ID = I.
+				WHERE B.ID = I.IDBocata
 		COMMIT
 	END 
 GO
@@ -300,8 +310,19 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES
 (1,1,2),(1,2,2),(2,4,2),(2,13,1),(3,5,2),(4,11,3),(5,6,1),(5,8,1),(5,9,1),
 (6,12,2),(7,14,1),(8,16,3),(9,6,1),(9,10,1)
 
-
--- UPDATE Pedidos SET ImporteTotal = NULL
+BEGIN TRANSACTION
+ROLLBACK
+COMMIT
+-- UPDATE Pedidos SET ImporteTotal = 0
 -- DELETE FROM PedidosComplementos
+-- DELETE FROM PedidosPanes
 -- SELECT * FROM Pedidos
 -- SELECT * FROM Complementos
+-- SELECT * FROM Ingredientes
+-- SELECT * FROM Panes
+
+SELECT *
+	FROM Pedidos AS P
+		INNER JOIN Bocatas AS B
+			ON P.ID = B.IDPedido
+	WHERE P.ID = 1
