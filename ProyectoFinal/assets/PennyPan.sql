@@ -4,7 +4,12 @@ GO
 USE PennyPan
 GO
 
--- Creación de las tablas
+/*
+	*********************************************************************************************
+	*************************************** T A B L A S *****************************************
+	*********************************************************************************************
+*/
+
 CREATE TABLE Clientes(
 	ID int IDENTITY(1,1) NOT NULL,
 	Nombre varchar(20) NOT NULL,
@@ -92,6 +97,165 @@ CREATE TABLE BocatasIngredientes(
 	CONSTRAINT CHK_BI_Cantidad CHECK (Cantidad > 0)
 )
 
+/*
+	*********************************************************************************************
+	******************** F U N C I O N E S  Y  P R O C E D I M I E N T O S **********************
+	*********************************************************************************************
+*/
+/*
+	Función que devuelve el valor total de los complementos de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalComplementos (@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL(SUM(C.Precio * PC.Cantidad),0)
+							FROM PedidosComplementos AS PC
+								INNER JOIN Complementos AS C
+									ON PC.IDComplemento = C.ID
+								WHERE PC.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Función que devuelve el valor total de los panes de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalPanes (@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL(SUM(P.Precio * PP.Cantidad),0)
+							FROM PedidosPanes AS PP
+								INNER JOIN Panes AS P
+									ON PP.IDPan = P.ID
+								WHERE PP.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Función que devuelve el valor total de los bocatas de un pedido
+	Entradas: ID del pedido
+	Salida: smallmoney con el total
+*/
+GO
+CREATE FUNCTION ImporteTotalBocatas (@IDPedido int) RETURNS smallmoney
+AS
+	BEGIN
+		RETURN (SELECT ISNULL((MAX(P.Precio) + SUM(I.Precio * BI.Cantidad)),0)
+							FROM Bocatas AS B
+								INNER JOIN Panes AS P
+									ON B.IDPan = P.ID
+								INNER JOIN BocatasIngredientes AS BI
+									ON B.ID = BI.IDBocata
+								INNER JOIN Ingredientes AS I
+									ON BI.IDIngrediente = I.ID
+							WHERE B.IDPedido = @IDPedido )
+	END
+GO
+
+/*
+	Procedimiento almacenado que, además de servir para futuras inserciones de Pedidos, servirá para
+	la generación de esta base de datos.
+	Lo que hace es obtener el importe total de un pedido y actualiza la tabla ImporteTotal de dicho pedido
+	Entradas: ID del pedido
+	Salidas: Ninguna
+*/
+GO
+CREATE PROCEDURE CargarImportesTotales (@IDPedido int) AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = (SELECT	dbo.ImporteTotalBocatas(ID)+
+											dbo.ImporteTotalComplementos(ID)+
+											dbo.ImporteTotalPanes(ID) )
+		COMMIT
+	END
+GO
+
+
+/*
+	*********************************************************************************************
+	************************************** T R I G G E R S **************************************
+	*********************************************************************************************
+*/
+
+-- Trigger que actualiza la tabla Pedidos después de que se actualice PedidosComplementos
+GO
+CREATE TRIGGER ImporteTotalAfterComp ON PedidosComplementos AFTER INSERT,UPDATE 
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * C.Precio)
+				FROM Pedidos AS P
+					INNER JOIN inserted AS I
+						ON P.ID = I.IDPedido
+					INNER JOIN Complementos AS C
+						ON I.IDComplemento = C.ID
+				WHERE P.ID = I.IDPedido
+		COMMIT
+	END
+GO
+
+-- Trigger que actualiza la tabla Pedidos después de que se actualice PedidosPanes
+GO
+CREATE TRIGGER ImporteTotalAfterPanes ON PedidosPanes AFTER INSERT,UPDATE 
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Pa.Precio)
+				FROM Pedidos AS P
+					INNER JOIN inserted AS I
+						ON P.ID = I.IDPedido
+					INNER JOIN Panes AS Pa
+						ON I.IDPan = Pa.ID
+				WHERE P.ID = I.IDPedido
+		COMMIT
+	END 
+GO
+
+-- Trigger que actualiza la tabla Pedidos después de que se actualice Bocatas
+GO
+CREATE TRIGGER ImporteTotalAfterBocatas ON Bocatas AFTER INSERT,UPDATE 
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + Pa.Precio
+				FROM Pedidos AS P
+					INNER JOIN inserted AS I
+						ON P.ID = I.IDPedido
+					INNER JOIN Panes AS Pa
+						ON I.IDPan = Pa.ID
+				WHERE P.ID = I.IDPedido
+		COMMIT
+	END 
+GO
+
+-- Trigger que actualiza la tabla Pedidos después de que se actualice Bocatas
+GO
+CREATE TRIGGER ImporteTotalAfterBocIngr ON BocatasIngredientes AFTER INSERT,UPDATE 
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Pa.Precio)
+				FROM Pedidos AS P
+					INNER JOIN inserted AS I
+						ON P.ID = I.IDPedido
+					INNER JOIN Ingredientes AS Ing
+						ON I.IDIngrediente = Ing.ID
+				WHERE P.ID = I.
+		COMMIT
+	END 
+GO
+
+
 -- Rellenar con datos
 
 INSERT INTO Complementos (Nombre, Precio) VALUES
@@ -136,74 +300,8 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES
 (1,1,2),(1,2,2),(2,4,2),(2,13,1),(3,5,2),(4,11,3),(5,6,1),(5,8,1),(5,9,1),
 (6,12,2),(7,14,1),(8,16,3),(9,6,1),(9,10,1)
 
-/*
-	Procedimiento almacenado que devuelve el valor total de los complementos de un pedido
-	Entradas: ID del pedido
-	Salida: smallmoney con el total
-*/
-GO
-CREATE FUNCTION ImporteTotalComplementos(@IDPedido int) RETURNS smallmoney
-AS
-	BEGIN
-		RETURN (SELECT ISNULL(SUM(C.Precio * PC.Cantidad),0)
-							FROM PedidosComplementos AS PC
-								INNER JOIN Complementos AS C
-									ON PC.IDComplemento = C.ID
-								WHERE PC.IDPedido = @IDPedido )
-	END
-GO
 
-/*
-	Procedimiento almacenado que devuelve el valor total de los panes de un pedido
-	Entradas: ID del pedido
-	Salida: smallmoney con el total
-*/
-GO
-CREATE FUNCTION ImporteTotalPanes(@IDPedido int) RETURNS smallmoney
-AS
-	BEGIN
-		RETURN (SELECT ISNULL(SUM(P.Precio * PP.Cantidad),0)
-							FROM PedidosPanes AS PP
-								INNER JOIN Panes AS P
-									ON PP.IDPan = P.ID
-								WHERE PP.IDPedido = @IDPedido )
-	END
-GO
-
-/*
-	Procedimiento almacenado que devuelve el valor total de los bocatas de un pedido
-	Entradas: ID del pedido
-	Salida: smallmoney con el total
-*/
-GO
-CREATE FUNCTION ImporteTotalBocatas(@IDPedido int) RETURNS smallmoney
-AS
-	BEGIN
-		RETURN (SELECT ISNULL((MAX(P.Precio) + SUM(I.Precio * BI.Cantidad)),0)
-							FROM Bocatas AS B
-								INNER JOIN Panes AS P
-									ON B.IDPan = P.ID
-								INNER JOIN BocatasIngredientes AS BI
-									ON B.ID = BI.IDBocata
-								INNER JOIN Ingredientes AS I
-									ON BI.IDIngrediente = I.ID
-							WHERE B.IDPedido = @IDPedido )
-	END
-GO
-
-/*
-	Procedimiento almacenado que, además de servir para futuras inserciones de Pedidos, servirá para
-	la generación de esta base de datos.
-	Lo que hace es obtener el importe total de un pedido y actualiza la tabla ImporteTotal de dicho pedido
-	Entradas: ID del pedido
-	Salidas: Ninguna
-*/
-GO
-CREATE PROCEDURE CargarImportesTotales(@IDPedido int) AS
-	BEGIN
-		BEGIN TRANSACTION
-			UPDATE Pedidos
-				SET ImporteTotal = (SELECT ImporteTotal
-		COMMIT
-	END
-GO
+-- UPDATE Pedidos SET ImporteTotal = NULL
+-- DELETE FROM PedidosComplementos
+-- SELECT * FROM Pedidos
+-- SELECT * FROM Complementos
