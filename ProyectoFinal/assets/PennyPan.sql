@@ -187,25 +187,23 @@ GO
 ALTER TRIGGER ImporteTotalAfterComp ON PedidosComplementos AFTER INSERT,UPDATE 
 AS
 	BEGIN
-		BEGIN TRANSACTION
-			-- Creación de una tabla temporal con los datos de la tabla inserted, ya que vamos a actualizar
-			CREATE TABLE #Temp (IDPedido int, IDComplemento int, Cantidad int)
-			INSERT INTO #Temp SELECT * FROM inserted
+		-- Creación de una tabla temporal con los datos de la tabla inserted, ya que vamos a actualizar
+		CREATE TABLE #PedCompTemp (IDPedido int, IDComplemento int, Cantidad int)
+		INSERT INTO #PedCompTemp SELECT * FROM inserted
 
-			UPDATE Pedidos
-				SET ImporteTotal +=	(I.Cantidad * C.Precio)
+		UPDATE Pedidos
+			SET ImporteTotal +=	(I.Cantidad * C.Precio)
+			
+			FROM #PedCompTemp AS I
+				INNER JOIN Pedidos AS P
+					ON I.IDPedido = P.ID
+				INNER JOIN Complementos AS C
+					ON I.IDComplemento = C.ID
 				
-				FROM #Temp AS I
-					INNER JOIN Pedidos AS P
-						ON I.IDPedido = P.ID
-					INNER JOIN Complementos AS C
-						ON I.IDComplemento = C.ID
-				
-				WHERE P.ID = I.IDPedido
+			WHERE P.ID IN (SELECT IDPedido FROM #PedCompTemp)
 
-			-- Droperino a la tabla temporal, ya no tiene utilidad
-			DROP TABLE #Temp
-		COMMIT
+		-- Droperino a la tabla temporal, ya no tiene utilidad
+		DROP TABLE #PedCompTemp
 	END
 GO
 
@@ -300,7 +298,7 @@ INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES
 (1,2,3),(1,3,1),(2,6,3),(3,6,1),(3,5,2),(3,7,1),(5,2,1),(6,2,1),(9,9,2),(9,8,1),(10,10,1),(10,9,9),
 (11,1,6),(11,3,4),(12,5,1),(14,5,1),(16,9,2)
 
-INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (1,8,1),(1,9,10),(3,1,1),(3,9,10)
 (1,6,1),(3,8,1),(3,9,10),(4,12,1),(5,3,2),(7,11,2),(7,7,1),(7,10,1),(8,5,1),(11,1,1),(13,1,3),(14,5,2)
 
 INSERT INTO Bocatas (IDPedido, IDPan) VALUES
