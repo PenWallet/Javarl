@@ -344,7 +344,7 @@ AS
 				WHERE P.ID IN (SELECT IDPedido FROM deleted)
 
 			UPDATE Pedidos
-				SET ImporteTotal -= (SELECT SUM(BI.Cantidad * I.Precio)
+				SET ImporteTotal -= (SELECT ISNULL(SUM(BI.Cantidad * I.Precio),0)
 										FROM deleted AS D
 											INNER JOIN BocatasIngredientes AS BI
 												ON D.ID = BI.IDBocata
@@ -464,6 +464,8 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10
 -- UPDATE Pedidos SET ImporteTotal = 0
 -- DELETE FROM PedidosComplementos
 -- DELETE FROM PedidosPanes
+-- DELETE FROM BocatasIngredientes
+-- DELETE FROM Bocatas
 -- SELECT * FROM Pedidos
 -- SELECT * FROM Complementos
 -- SELECT * FROM Ingredientes
