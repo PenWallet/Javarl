@@ -182,75 +182,75 @@ GO
 	*********************************************************************************************
 */
 
--- Trigger que actualiza la tabla Pedidos después de que se actualice PedidosComplementos
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosComplementos
 GO
-ALTER TRIGGER ImporteTotalAfterComp ON PedidosComplementos AFTER INSERT,UPDATE 
+CREATE TRIGGER ImporteTotalAfterIUComp ON PedidosComplementos AFTER INSERT,UPDATE 
 AS
 	BEGIN
-		-- Creación de una tabla temporal con los datos de la tabla inserted, ya que vamos a actualizar
-		CREATE TABLE #PedCompTemp (IDPedido int, IDComplemento int, Cantidad int)
-		INSERT INTO #PedCompTemp SELECT * FROM inserted
-
-		UPDATE Pedidos
-			SET ImporteTotal +=	(I.Cantidad * C.Precio)
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal +=	(I.Cantidad * C.Precio)
 			
-			FROM #PedCompTemp AS I
-				INNER JOIN Pedidos AS P
-					ON I.IDPedido = P.ID
-				INNER JOIN Complementos AS C
-					ON I.IDComplemento = C.ID
+				FROM inserted AS I
+					INNER JOIN Pedidos AS P
+						ON I.IDPedido = P.ID
+					INNER JOIN Complementos AS C
+						ON I.IDComplemento = C.ID
 				
-			WHERE P.ID IN (SELECT IDPedido FROM #PedCompTemp)
-
-		-- Droperino a la tabla temporal, ya no tiene utilidad
-		DROP TABLE #PedCompTemp
+				WHERE P.ID IN (SELECT IDPedido FROM inserted)
+		COMMIT
 	END
 GO
 
--- Trigger que actualiza la tabla Pedidos después de que se actualice PedidosPanes
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosPanes
 GO
-CREATE TRIGGER ImporteTotalAfterPanes ON PedidosPanes AFTER INSERT,UPDATE 
+CREATE TRIGGER ImporteTotalAfterIUPanes ON PedidosPanes AFTER INSERT,UPDATE 
 AS
 	BEGIN
 		BEGIN TRANSACTION
 			UPDATE Pedidos
-				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Pa.Precio)
-				FROM Pedidos AS P
-					INNER JOIN inserted AS I
-						ON P.ID = I.IDPedido
+				SET ImporteTotal += (I.Cantidad * Pa.Precio)
+				
+				FROM inserted AS I
+					INNER JOIN Pedidos AS P
+						ON I.IDPedido = P.ID
 					INNER JOIN Panes AS Pa
 						ON I.IDPan = Pa.ID
-				WHERE P.ID = I.IDPedido
+
+				WHERE P.ID IN (SELECT IDPedido FROM inserted)
 		COMMIT
 	END 
 GO
 
--- Trigger que actualiza la tabla Pedidos después de que se actualice Bocatas
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice Bocatas
 GO
-CREATE TRIGGER ImporteTotalAfterBocatas ON Bocatas AFTER INSERT,UPDATE 
+CREATE TRIGGER ImporteTotalAfterIUBocatas ON Bocatas AFTER INSERT,UPDATE 
 AS
 	BEGIN
 		BEGIN TRANSACTION
 			UPDATE Pedidos
-				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + Pa.Precio
-				FROM Pedidos AS P
-					INNER JOIN inserted AS I
-						ON P.ID = I.IDPedido
+				SET ImporteTotal += Pa.Precio
+				
+				FROM inserted AS I
+					INNER JOIN Pedidos AS P
+						ON I.IDPedido = P.ID
 					INNER JOIN Panes AS Pa
 						ON I.IDPan = Pa.ID
-				WHERE P.ID = I.IDPedido
+				
+				WHERE P.ID IN (SELECT IDPedido FROM inserted)
 		COMMIT
 	END 
 GO
 
--- Trigger que actualiza la tabla Pedidos después de que se actualice Bocatas
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice BocatasIngredientes
 GO
-CREATE TRIGGER ImporteTotalAfterBocIngr ON BocatasIngredientes AFTER INSERT,UPDATE 
+CREATE TRIGGER ImporteTotalAfterIUBocIngr ON BocatasIngredientes AFTER INSERT,UPDATE 
 AS
 	BEGIN
 		BEGIN TRANSACTION
 			UPDATE Pedidos
-				SET ImporteTotal = ISNULL(P.ImporteTotal,0) + (I.Cantidad * Ing.Precio)
+				SET ImporteTotal += (I.Cantidad * Ing.Precio)
+
 				FROM Pedidos AS P
 					INNER JOIN Bocatas AS B
 						ON P.ID = B.IDPedido
@@ -258,13 +258,139 @@ AS
 						ON B.ID = I.IDBocata
 					INNER JOIN Ingredientes AS Ing
 						ON I.IDIngrediente = Ing.ID
-				WHERE B.ID = I.IDBocata
+				
+				WHERE B.ID IN (SELECT IDBocata FROM inserted)
+		COMMIT
+	END 
+GO
+
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Pan de un pedido
+GO
+CREATE TRIGGER ImporteTotalAfterDPanes ON PedidosPanes AFTER DELETE
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal -= (D.Cantidad * Pa.Precio)
+				
+				FROM deleted AS D
+					INNER JOIN Pedidos AS P
+						ON D.IDPedido = P.ID
+					INNER JOIN Panes AS Pa
+						ON D.IDPan = Pa.ID
+
+				WHERE P.ID IN (SELECT IDPedido FROM deleted)
+		COMMIT
+	END
+GO
+
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Complemento de un pedido
+GO
+CREATE TRIGGER ImporteTotalAfterDComp ON PedidosComplementos AFTER DELETE
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal -=	(D.Cantidad * C.Precio)
+			
+				FROM deleted AS D
+					INNER JOIN Pedidos AS P
+						ON D.IDPedido = P.ID
+					INNER JOIN Complementos AS C
+						ON D.IDComplemento = C.ID
+				
+				WHERE P.ID IN (SELECT IDPedido FROM deleted)
+		COMMIT
+	END
+GO
+
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Ingrediente de un Bocata
+GO
+CREATE TRIGGER ImporteTotalAfterDBocIngr ON BocatasIngredientes AFTER DELETE
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal -= (D.Cantidad * Ing.Precio)
+
+				FROM Pedidos AS P
+					INNER JOIN Bocatas AS B
+						ON P.ID = B.IDPedido
+					INNER JOIN deleted AS D
+						ON B.ID = D.IDBocata
+					INNER JOIN Ingredientes AS Ing
+						ON D.IDIngrediente = Ing.ID
+				
+				WHERE B.ID IN (SELECT IDBocata FROM deleted)
+		COMMIT
+	END 
+GO
+
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Bocata
+GO
+CREATE TRIGGER ImporteTotalAfterDBocatas ON Bocatas INSTEAD OF DELETE
+AS
+	BEGIN
+		BEGIN TRANSACTION
+			UPDATE Pedidos
+				SET ImporteTotal -= Pa.Precio
+				
+				FROM deleted AS D
+					INNER JOIN Pedidos AS P
+						ON D.IDPedido = P.ID
+					INNER JOIN Panes AS Pa
+						ON D.IDPan = Pa.ID
+				
+				WHERE P.ID IN (SELECT IDPedido FROM deleted)
+
+			UPDATE Pedidos
+				SET ImporteTotal -= (SELECT SUM(BI.Cantidad * I.Precio)
+										FROM deleted AS D
+											INNER JOIN BocatasIngredientes AS BI
+												ON D.ID = BI.IDBocata
+											INNER JOIN Ingredientes AS I
+												ON BI.IDIngrediente = I.ID 
+										WHERE BI.IDBocata = D.ID )
+
+				WHERE ID IN (SELECT IDPedido FROM deleted)
+
+			-- Necesitamos deshabilitar temporalmente el trigger que se ejecuta sobre cada DELETE en la tabla BocatasIngredientes
+			ALTER TABLE BocatasIngredientes DISABLE TRIGGER ImporteTotalAfterDBocIngr
+
+			-- Borramos todos los ingredientes pertenecientes a ese bocata, y después el bocata
+			DELETE FROM BocatasIngredientes WHERE IDBocata IN (SELECT ID FROM deleted)
+			DELETE FROM Bocatas WHERE ID IN (SELECT ID FROM deleted)
+
+			-- Volvemos a habilitar el trigger
+			ALTER TABLE BocatasIngredientes ENABLE TRIGGER ImporteTotalAfterDBocIngr
 		COMMIT
 	END 
 GO
 
 
--- Rellenar con datos
+/*
+	*********************************************************************************************
+	************************************** P O B L A R ******************************************
+	*********************************************************************************************
+*/
+
+INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) VALUES
+('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo José Cela, 1B','678333412'),
+('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ramón Jiménez, 20','622041614'),
+('Ignacio','Van Loy','04-06-2018','IES Nervion','Claudio Guerin','654321987'),
+('Tomás','Núñez','20-04-1998','Utrera','Almerìa, 35','628119707'),
+('Raquel','González','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
+('David','Galván','12-06-1999','Sevilla','Av Parque Amate','674658099'),
+('Oscar','Funes','12-08-1999','Sevilla','Reina del Cielo 3 2B','667879970')
+
+INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES
+(1,'9-3-2017'),(1,'25-5-2017'),(2,'3-8-2017'),(2,'9-8-2017'),(4,'9-9-2017'),(7,'21-10-2017'),(6,'30-11-2017'),
+(1,'2-1-2018'),(1,'4-1-2018'),(1,'4-2-2018'),(5,'10-2-2018'),(3,'16-2-2018'),(6,'28-2-2018'),(5,'16-3-2018'),
+(1,'13-4-2018'),(1,'5-5-2018')
+
+INSERT INTO Panes (Nombre, Crujenticidad, Integral, Precio) VALUES
+('Andaluza',2,0,0.2),('Baguette',4,0,0.5),('Bollo',5,0,0.25),('Pan de molde',0,0,1),('Pan de molde',0,1,1.2),
+('Chapata',3,0,0.4),('Chapata',3,1,0.5),('Flauta',2,0,0.5),('Artesano',5,0,1),('Artesano',5,1,1.2)
 
 INSERT INTO Complementos (Nombre, Precio) VALUES
 ('Doritos',1.35),('Patatas fritas',1),('Agua',0.5),('Coca-Cola',0.8),('Coca-Cola Zero',0.8),('Nachos',1.2),
@@ -276,41 +402,65 @@ INSERT INTO Ingredientes (Nombre, Precio) VALUES
 ('Tortilla',0.6),('Mayonesa',0.2),('Ketchup',0.2),('Ali-oli',0.2),('Jamón serrano',0.5),('Atún',0.4),('Mortadela',0.3),
 ('Jamón York',0.4),('Nacho',1),('Yeray',2),('Caña de lomo',0.4)
 
-INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) VALUES
-('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo José Cela, 1B','678333412'),
-('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ramón Jiménez, 20','622041614'),
-('Ignacio','Van Loy','04-06-2018','IES Nervion','Claudio Guerin','654321987'),
-('Tomás','Núñez','20-04-1998','Utrera','Almerìa, 35','628119707'),
-('Raquel','González','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
-('David','Galván','12-06-1999','Sevilla','Av Parque Amate','674658099'),
-('Oscar','Funes','12-08-1999','Sevilla','Reina del Cielo 3 2B','667879970')
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,2,3)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,3,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (2,6,3)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (3,6,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (3,5,2)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (3,7,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (5,2,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (6,2,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (9,9,2)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (9,8,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (10,10,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (10,9,9)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (11,1,6)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (11,3,4)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (12,5,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (14,5,1)
+INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (16,9,2)
 
-INSERT INTO Panes (Nombre, Crujenticidad, Integral, Precio) VALUES
-('Andaluza',2,0,0.2),('Baguette',4,0,0.5),('Bollo',5,0,0.25),('Pan de molde',0,0,1),('Pan de molde',0,1,1.2),
-('Chapata',3,0,0.4),('Chapata',3,1,0.5),('Flauta',2,0,0.5),('Artesano',5,0,1),('Artesano',5,1,1.2)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (1,6,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (3,8,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (3,9,10)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (4,12,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (5,3,2)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (7,11,2)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (7,7,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (7,10,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (8,5,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (11,1,1)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (13,1,3)
+INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (14,5,2)
 
-INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES
-(1,'9-3-2017'),(1,'25-5-2017'),(2,'3-8-2017'),(2,'9-8-2017'),(4,'9-9-2017'),(7,'21-10-2017'),(6,'30-11-2017'),
-(1,'2-1-2018'),(1,'4-1-2018'),(1,'4-2-2018'),(5,'10-2-2018'),(3,'16-2-2018'),(6,'28-2-2018'),(5,'16-3-2018'),
-(1,'13-4-2018'),(1,'5-5-2018')
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (1,1)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (6,2)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (6,3)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (8,7)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (8,9)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (10,2)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (14,2)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (15,2)
+INSERT INTO Bocatas (IDPedido, IDPan) VALUES (16,8)
 
-INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES
-(1,2,3),(1,3,1),(2,6,3),(3,6,1),(3,5,2),(3,7,1),(5,2,1),(6,2,1),(9,9,2),(9,8,1),(10,10,1),(10,9,9),
-(11,1,6),(11,3,4),(12,5,1),(14,5,1),(16,9,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (1,1,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (1,2,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (2,4,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (2,13,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (3,5,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (4,11,3)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (5,6,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (5,8,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (5,9,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (6,12,2)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (7,14,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (8,16,3)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,6,1)
+INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10,1)
 
-INSERT INTO PedidosComplementos (IDPedido, IDComplemento, Cantidad) VALUES (1,8,1),(1,9,10),(3,1,1),(3,9,10)
-(1,6,1),(3,8,1),(3,9,10),(4,12,1),(5,3,2),(7,11,2),(7,7,1),(7,10,1),(8,5,1),(11,1,1),(13,1,3),(14,5,2)
-
-INSERT INTO Bocatas (IDPedido, IDPan) VALUES
-(1,1),(6,2),(6,3),(8,7),(8,9),(10,2),(14,2),(15,2),(16,8)
-
-INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES
-(1,1,2),(1,2,2),(2,4,2),(2,13,1),(3,5,2),(4,11,3),(5,6,1),(5,8,1),(5,9,1),
-(6,12,2),(7,14,1),(8,16,3),(9,6,1),(9,10,1)
-
-BEGIN TRANSACTION
-ROLLBACK
-COMMIT
+-- BEGIN TRANSACTION
+-- ROLLBACK
+-- COMMIT
 -- UPDATE Pedidos SET ImporteTotal = 0
 -- DELETE FROM PedidosComplementos
 -- DELETE FROM PedidosPanes
@@ -318,9 +468,3 @@ COMMIT
 -- SELECT * FROM Complementos
 -- SELECT * FROM Ingredientes
 -- SELECT * FROM Panes
-
-SELECT *
-	FROM Pedidos AS P
-		INNER JOIN Bocatas AS B
-			ON P.ID = B.IDPedido
-	WHERE P.ID = 1
