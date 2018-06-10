@@ -34,7 +34,7 @@ CREATE TABLE Panes(
 	ID int IDENTITY(1,1) NOT NULL,
 	Nombre char(20) NOT NULL,
 	Crujenticidad int NULL,
-	Integral bit NULL,
+	Integral bit NOT NULL DEFAULT 0,
 	Precio smallmoney NOT NULL,
 	CONSTRAINT PKPanes PRIMARY KEY (ID),
 	CONSTRAINT CHK_Panes_Precio CHECK (Precio > 0),
