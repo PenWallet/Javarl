@@ -5,7 +5,7 @@
     Análisis:
         Programa de gestión de la famosa panadería PennyPan.
         Se podrá: Añadir nuevos panes, complementos e ingredientes;
-        añadir pedidos nuevos, modificarlos y borrarlos;
+        añadir pedidos nuevos y borrarlos;
         añadir clientes.
 
     Entradas:
@@ -23,6 +23,11 @@
         - Los precios debe ser mayor de 0
         - Las opciones de menú deben estar entre 0 (salir), y el número máximo de opción
         - Al elegir un pedido, debe estar entre el mínimo y el máximo nº de pedidos
+        - La longitud de los nombres debe ser menor o igual a 2 caracteres
+        - La longitud del apellido debe ser menor o igual a 30 caracteres
+        - La longitud de la ciudad debe ser menor o igual a 20 caracteres
+        - La longitud de la dirección debe ser menor o igual a 40 caracteres
+        - La longitud del teléfono debe ser de 9 caracteres
 
     Pseudocódigo (nivel 0):
         Inicio
@@ -63,8 +68,6 @@
                     Caso '1':
                         Hacer pedido
                     Caso '2':
-                        Modificar pedido
-                    Caso '3':
                         Consultar pedido
             Mientras (opcionMU != '0')
         Fin
@@ -75,13 +78,13 @@
                 MostrarMenuAdmin * y leer y validar opción (menú admin)
                 Según (opcionMU)
                     Caso '1':
-                        Añadir pan
+                        AñadirPanDatos *
                     Caso '2':
-                        Añadir complemento
+                        AñadirCompDatos *
                     Caso '3':
-                        Añadir ingrediente
+                        AñadirIngrDatos *
                     Caso '4':
-                        Añadir cliente
+                        AñadirClienteDatos *
                     Caso '5':
                         Quitar pedido
             Mientras (opcionMA != '0')
@@ -159,45 +162,55 @@
             MostrarTicketPedido *
         Fin
 
-    Pseudocódigo específico (Añadir pan):
+    Pseudocódigo específico (AñadirPanDatos *):
         Inicio
-            Leer nombre
+            Leer y validar nombre
             Leer y validar integral //(si es integral o no)
             Leer y validar crujenticidad
             Leer y validar precio
-            AñadirPan *
+            Leer y validar ultima validación
+            Si (ultimaValidacion)
+                AñadirPan *
+            Fin si
         Fin
 
-    Pseudocódigo específico (Añadir complemento):
+    Pseudocódigo específico (AñadirCompDatos *):
         Inicio
-            Leer nombre
+            Leer y validar nombre
             Leer y validar precio
-            AñadirComp *
+            Leer y validar ultima validación
+            Si (ultimaValidacion)
+                AñadirComp *
+            Fin si
         Fin
 
-    Pseudocódigo específico (Añadir ingrediente):
+    Pseudocódigo específico (AñadirIngrDatos *):
         Inicio
-            Leer nombre
+            Leer y validar nombre
             Leer y validar precio
-            AñadirIngr *
+            Leer y validar ultima validación
+            Si (ultimaValidacion)
+                AñadirIngr *
+            Fin si
         Fin
 
-    Pseudocódigo específico (Añadir cliente):
+    Pseudocódigo específico (AñadirClienteDatos *):
         Inicio
-            Leer nombre
-            Leer apellidos
+            Leer y validar nombre
+            Leer y validar apellidos
             Leer y validar fecha de nacimiento
-            Leer ciudad
-            Leer dirección
-            Leer teléfono
-            AñadirCliente *
+            Leer y validar ciudad
+            Leer y validar dirección
+            Leer y validar teléfono
+            Leer y validar ultima validación
+            Si (ultimaValidacion)
+                AñadirCliente *
+            Fin si
         Fin
 
  */
 
-import Gestion.GestionClientes;
-import Gestion.GestionMenus;
-import Gestion.GestionPedidos;
+import Gestion.*;
 
 import java.io.Console;
 import java.util.Scanner;
@@ -209,19 +222,27 @@ public class PennyPan
         int opcionLI;
         int contadorPedido = 0;
         int nCliente;
+        int crujenticidad;
+
+        double precio;
 
         boolean primerPedido;
 
         char opcionMU;
         char opcionMA;
         char opcionPedidoNuevo;
+        char integral;
+        char ultimaValidacion;
+
+        String nombreAnadir;
 
         Scanner teclado = new Scanner(System.in);
         Scanner tecladoS = new Scanner(System.in);
         Console cons = System.console();
-        Gestion.Gestion g = new Gestion.Gestion();
+        GestionGeneral g = new GestionGeneral();
         GestionPedidos gp = new GestionPedidos();
         GestionClientes gc = new GestionClientes();
+        GestionAdmin ga = new GestionAdmin();
 
         do
         {
@@ -246,7 +267,7 @@ public class PennyPan
                 if (opcionLI == 2)
                 {
                     //Leer contraseña y ValidarContraseña *
-                    opcionLI = g.ValidarContrasena(cons.readPassword("Escribe la contraseña para administradores: "));
+                    opcionLI = ga.ValidarContrasena(cons.readPassword("Escribe la contraseña para administradores: "));
 
                     if (opcionLI == 2)
                         //Mostrar mensaje de bienvenida de admin
@@ -404,20 +425,20 @@ public class PennyPan
 
                         switch(opcionMA)
                         {
-                            case '1':
-                                System.out.println("Añadir pan. En construcción");
+                            case'1':
+                                ga.anadirPanDatos();
                                 break;
 
                             case '2':
-                                System.out.println("Añadir complemento. En construcción");
+                                ga.anadirCompDatos();
                                 break;
 
                             case '3':
-                                System.out.println("Añadir ingrediente. En construcción");
+                                ga.anadirIngrDatos();
                                 break;
 
                             case '4':
-                                System.out.println("Añadir cliente. En construcción");
+                                ga.anadirClienteDatos();
                                 break;
 
                             case '5':
