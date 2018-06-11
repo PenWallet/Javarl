@@ -458,6 +458,21 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (8,16
 INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,6,1)
 INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10,1)
 
+/*
+	*********************************************************************************************
+	************************************ U S U A R I O S ****************************************
+	*********************************************************************************************
+*/
+
+CREATE LOGIN panadero WITH PASSWORD = 'elmejorpanadero', DEFAULT_DATABASE = PennyPan
+CREATE LOGIN invitado WITH PASSWORD = 'guest', DEFAULT_DATABASE = PennyPan
+CREATE USER pennyBread FOR LOGIN panadero; GRANT INSERT, DELETE TO pennyBread
+CREATE USER guestBread FOR LOGIN invitado; GRANT SELECT TO guestBread
+
+
+
+
+
 -- BEGIN TRANSACTION
 -- ROLLBACK
 -- COMMIT
@@ -470,3 +485,4 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10
 -- SELECT * FROM Complementos
 -- SELECT * FROM Ingredientes
 -- SELECT * FROM Panes
+-- SELECT ImporteTotal FROM Pedidos WHERE ID = 1
