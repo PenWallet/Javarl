@@ -14,7 +14,7 @@ public class GestionAdmin {
      * @param password La contraseña a comprobar
      * @return Devuelve un 2 si es correcta, un -1 si no lo es
      */
-    public int ValidarContrasena(char[] password)
+    public int validarContrasena(char[] password)
     {
         int ret = 2;
         char[] contrasena = "elmejorpanadero".toCharArray();
@@ -167,7 +167,6 @@ public class GestionAdmin {
             anadirComp(nombreAnadir, precio);
     }
 
-
     /**
      * Función que añade un nuevo complemento a la base de datos
      *
@@ -310,7 +309,7 @@ public class GestionAdmin {
         //Leer y validar última validación
         do
         {
-            System.out.println("¿Estás seguro que quieres añadir un nuevo complemento con estos datos? (Y/N)");
+            System.out.println("¿Estás seguro que quieres añadir un nuevo cliente con estos datos? (Y/N)");
             ultimaValidacion = Character.toUpperCase(teclado.next().charAt(0));
             if(ultimaValidacion != 'Y' && ultimaValidacion != 'N')
                 System.out.println("¡Solo Y o N!");
@@ -333,5 +332,47 @@ public class GestionAdmin {
     public void anadirCliente(String nombre, String apellidos, String fechaNac, String ciudad, String direccion, String telefono)
     {
         System.out.println("Añadir cliente. En resguardo");
+    }
+
+    /**
+     * Procedimiento que pregunta al usuario por todos los datos necesarios para eliminar un pedido de la base de datos
+     * Cuando termina de preguntar, llama a borrarPedido para eliminarlo
+     */
+    public void borrarPedidoDatos()
+    {
+        GestionPedidos gp = new GestionPedidos();
+        Scanner teclado = new Scanner(System.in);
+
+        int IDPedido;
+        boolean valido;
+
+        do
+        {
+            gp.mostrarPedidos();
+            System.out.println("Elige la ID del pedido que quieres borrar (o 0 para salir): ");
+            IDPedido = teclado.nextInt();
+            if(IDPedido != 0)
+            {
+                valido = gp.validarIDPedido(IDPedido);
+                if(!valido)
+                    System.out.println("¡La ID introducida no es válida!");
+            }
+            else
+                valido = false;
+        }while(IDPedido != 0 && !valido);
+
+        if(IDPedido != 0)
+            borrarPedido(IDPedido);
+    }
+
+    /**
+     * Función que borra de una base de dato un pedido entero, así como las columnas en las tablas PedidosPanes,
+     * PedidosComplementos, Bocatas, y BocatasIngredientes
+     *
+     * @param IDPedido El ID del cliente
+     */
+    public void borrarPedido(int IDPedido)
+    {
+        System.out.println("Borrar pedido. En resguardo");
     }
 }

@@ -66,9 +66,9 @@
                 MostrarMenuUsuario * y leer y validar opción (menú usuario)
                 Según (opcionMU)
                     Caso '1':
-                        Hacer pedido
+                        HacerPedidoDatos *
                     Caso '2':
-                        Consultar pedido
+                        ConsultarPedidoDatos *
             Mientras (opcionMU != '0')
         Fin
 
@@ -86,11 +86,11 @@
                     Caso '4':
                         AñadirClienteDatos *
                     Caso '5':
-                        Quitar pedido
+                        BorrarPedidoDatos *
             Mientras (opcionMA != '0')
         Fin
 
-    Pseudocódigo específico (Hacer pedido):
+    Pseudocódigo específico (hacerPedidoDatos *):
         Inicio
             Poner a true la variable primerPedido
             MostrarClientes * y leer y validar nº de cliente (usando ValidarIDCliente *)
@@ -128,38 +128,15 @@
 
             //Si no ha pedido nada
             Si (contadorPedido == 3)
-                BorrarNuevoPedido *
+                BorrarPedido *
             Fin Si
         Fin
 
-    Pseudocódigo específico (Modificar pedido):
+    Pseudocódigo específico (ConsultarPedidoDatos *):
         Inicio
             MostrarPedidos *
             Leer y validar número de pedido
-            Mientras (pedido != 0)
-                MostrarMenuModificarPedido *
-                Leer y validar opción modificar
-                Según (opcionMod)
-                    Caso '1':
-                        AñadirPanPedido *
-                    Caso '2':
-                        AñadirCompPedido *
-                    Caso '3':
-                        AñadirBocataPedido *
-                    Caso '4':
-                        QuitarPanPedido *
-                    Caso '5':
-                        QuitarCompPedido *
-                    Caso '6':
-                        QuitarBocataPedido *
-            Fin Mientras
-        Fin
-
-    Pseudocódigo específico (Consultar pedido):
-        Inicio
-            MostrarPedidos *
-            Leer y validar número de pedido
-            MostrarTicketPedido *
+            MostrarPedidoFully *
         Fin
 
     Pseudocódigo específico (AñadirPanDatos *):
@@ -220,28 +197,12 @@ public class PennyPan
     public static void main(String[] args)
     {
         int opcionLI;
-        int contadorPedido = 0;
-        int nCliente;
-        int crujenticidad;
-
-        double precio;
-
-        boolean primerPedido;
-
         char opcionMU;
         char opcionMA;
-        char opcionPedidoNuevo;
-        char integral;
-        char ultimaValidacion;
-
-        String nombreAnadir;
 
         Scanner teclado = new Scanner(System.in);
-        Scanner tecladoS = new Scanner(System.in);
         Console cons = System.console();
-        GestionGeneral g = new GestionGeneral();
         GestionPedidos gp = new GestionPedidos();
-        GestionClientes gc = new GestionClientes();
         GestionAdmin ga = new GestionAdmin();
 
         do
@@ -267,7 +228,7 @@ public class PennyPan
                 if (opcionLI == 2)
                 {
                     //Leer contraseña y ValidarContraseña *
-                    opcionLI = ga.ValidarContrasena(cons.readPassword("Escribe la contraseña para administradores: "));
+                    opcionLI = ga.validarContrasena(cons.readPassword("Escribe la contraseña para administradores: "));
 
                     if (opcionLI == 2)
                         //Mostrar mensaje de bienvenida de admin
@@ -298,109 +259,18 @@ public class PennyPan
                         {
                             GestionMenus.MostrarMenuUsuario();
                             opcionMU = teclado.next().charAt(0);
-                            if(opcionMU < '0' || opcionMU > '3')
-                                System.out.println("¡Solo del 1 al 3, o 0 para salir!");
-                        }while(opcionMU < '0' || opcionMU > '3');
+                            if(opcionMU < '0' || opcionMU > '2')
+                                System.out.println("¡Solo del 1 al 2, o 0 para salir!");
+                        }while(opcionMU < '0' || opcionMU > '2');
 
                         switch(opcionMU)
                         {
                             case '1':
-                                /*
-                                     **************************************
-                                     ******* H A C E R  P E D I D O *******
-                                     **************************************
-                                 */
-
-                                //Poner a true la variable primerPedido
-                                primerPedido = true;
-
-                                //MostrarClientes * y leer y validar nº de cliente
-                                do
-                                {
-                                    gc.mostrarClientes();
-                                    System.out.println("Elije un cliente: ");
-                                    nCliente = teclado.nextInt();
-                                    if(!gc.validarIDCliente(nCliente))
-                                        System.out.println("¡Número de cliente inválido!");
-                                }while(!gc.validarIDCliente(nCliente));
-
-                                //Pedir panes
-                                do
-                                {
-                                    //Leer y validar si quiere pedir pan
-                                    do
-                                    {
-                                        System.out.println("¿Quieres pedir pan? (Y/N)");
-                                        opcionPedidoNuevo = Character.toUpperCase(teclado.next().charAt(0));
-                                        if(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y')
-                                            System.out.println("¡Solo Y o N!");
-                                    }while(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y');
-
-                                    if(opcionPedidoNuevo == 'Y')
-                                    {
-                                        gp.anadirPanPedido(1);
-                                        primerPedido = false;
-                                    }
-                                    else if(primerPedido)
-                                        contadorPedido++;
-
-                                }while(opcionPedidoNuevo == 'Y');
-
-                                //Pedir complementos
-                                do
-                                {
-                                    //Leer y validar si quiere pedir complementos
-                                    do
-                                    {
-                                        System.out.println("¿Quieres pedir complemento? (Y/N)");
-                                        opcionPedidoNuevo = Character.toUpperCase(teclado.next().charAt(0));
-                                        if(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y')
-                                            System.out.println("¡Solo Y o N!");
-                                    }while(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y');
-
-                                    if(opcionPedidoNuevo == 'Y')
-                                    {
-                                        gp.anadirCompPedido(1);
-                                        primerPedido = false;
-                                    }
-                                    else if(primerPedido)
-                                        contadorPedido++;
-
-                                }while(opcionPedidoNuevo == 'Y');
-
-                                //Pedir bocatas
-                                do
-                                {
-                                    //Leer y validar si quiere pedir bocatas
-                                    do
-                                    {
-                                        System.out.println("¿Quieres pedir complemento? (Y/N)");
-                                        opcionPedidoNuevo = Character.toUpperCase(teclado.next().charAt(0));
-                                        if(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y')
-                                            System.out.println("¡Solo Y o N!");
-                                    }while(opcionPedidoNuevo != 'N' && opcionPedidoNuevo != 'Y');
-
-                                    if(opcionPedidoNuevo == 'Y')
-                                    {
-                                        gp.anadirBocataPedido(1);
-                                        primerPedido = false;
-                                    }
-                                    else if(primerPedido)
-                                        contadorPedido++;
-                                }while(opcionPedidoNuevo == 'Y');
-
-                                //Si no ha pedido nada
-                                if(contadorPedido == 3)
-                                    gp.borrarNuevoPedido(nCliente);
-
+                                gp.hacerPedidoDatos();
                                 break;
 
                             case '2':
-                                System.out.println("Modificar pedido. En construcción");
-                                break;
-
-                            case '3':
-                                System.out.println("Consultar pedido. En construcción");
+                                gp.consultarPedidoDatos();
                                 break;
                         }
                     }while(opcionMU != '0'); //FIN MENÚ USUARIO
@@ -442,10 +312,10 @@ public class PennyPan
                                 break;
 
                             case '5':
-                                System.out.println("Quitar pedido. En construcción");
+                                ga.borrarPedidoDatos();
                                 break;
                         }
-                    }while(opcionMA != '0'); //FIN MENÚ USUARIO
+                    }while(opcionMA != '0'); //FIN MENÚ ADMIN
                     break;
 
                 case 0:
