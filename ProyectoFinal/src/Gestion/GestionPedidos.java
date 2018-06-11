@@ -71,7 +71,7 @@ public class GestionPedidos {
      * Procedimiento que pregunta al usuario por todos los datos necesarios para añadir un nuevo pedido a la base de datos
      * Llama a todas las funciones necesarias, que se encuentran en esta misma clase de Gestión, para llevar a cabo su tarea
      */
-    public void hacerPedidoDatos() //TODO Cambiar borrarPedido(IDCliente) por borrarPedido(IDPedido)
+    public void hacerPedidoDatos()
     {
         //Poner a true la variable primerPedido
         boolean primerPedido = true;
