@@ -18,13 +18,12 @@ public class Prueba {
             String miOrden = "SELECT ImporteTotal FROM Pedidos WHERE ID = 1";
             ResultSet resultado = sentencia.executeQuery(miOrden);
 
-            while(resultado.next())
+            if(resultado.next())
             {
                 System.out.println(resultado.getBigDecimal("ImporteTotal"));
             }
 
         }catch(SQLException e) { System.out.println("Errorrrrrrr"); }
-
 
     }
 }
