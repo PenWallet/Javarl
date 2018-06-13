@@ -103,7 +103,7 @@ CREATE TABLE BocatasIngredientes(
 	*********************************************************************************************
 */
 /*
-	Función que devuelve el valor total de los complementos de un pedido
+	Funciï¿½n que devuelve el valor total de los complementos de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -120,7 +120,7 @@ AS
 GO
 
 /*
-	Función que devuelve el valor total de los panes de un pedido
+	Funciï¿½n que devuelve el valor total de los panes de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -137,7 +137,7 @@ AS
 GO
 
 /*
-	Función que devuelve el valor total de los bocatas de un pedido
+	Funciï¿½n que devuelve el valor total de los bocatas de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -176,7 +176,7 @@ CREATE PROCEDURE CargarImportesTotales (@IDPedido int) AS
 GO
 
 /*
-	Función que valida si una ID de un cliente existe.
+	Funciï¿½n que valida si una ID de un cliente existe.
 	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
 	Entradas: ID del cliente
 	Salida: Bit
@@ -200,7 +200,7 @@ AS
 GO
 
 /*
-	Función que valida si una ID de un pedido existe.
+	Funciï¿½n que valida si una ID de un pedido existe.
 	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
 	Entradas: ID del pedido
 	Salida: Bit
@@ -229,7 +229,7 @@ GO
 	*********************************************************************************************
 */
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosComplementos
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despuï¿½s de que se actualice PedidosComplementos
 GO
 CREATE TRIGGER ImporteTotalAfterIUComp ON PedidosComplementos AFTER INSERT,UPDATE 
 AS
@@ -249,7 +249,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosPanes
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despuï¿½s de que se actualice PedidosPanes
 GO
 CREATE TRIGGER ImporteTotalAfterIUPanes ON PedidosPanes AFTER INSERT,UPDATE 
 AS
@@ -269,7 +269,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice Bocatas
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despuï¿½s de que se actualice Bocatas
 GO
 CREATE TRIGGER ImporteTotalAfterIUBocatas ON Bocatas AFTER INSERT,UPDATE 
 AS
@@ -289,7 +289,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice BocatasIngredientes
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despuï¿½s de que se actualice BocatasIngredientes
 GO
 CREATE TRIGGER ImporteTotalAfterIUBocIngr ON BocatasIngredientes AFTER INSERT,UPDATE 
 AS
@@ -311,7 +311,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Pan de un pedido
+-- Trigger que actualiza la tabla ImporteTotal restï¿½ndole el precio despuï¿½s de borrar un Pan de un pedido
 GO
 CREATE TRIGGER ImporteTotalAfterDPanes ON PedidosPanes AFTER DELETE
 AS
@@ -331,7 +331,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Complemento de un pedido
+-- Trigger que actualiza la tabla ImporteTotal restï¿½ndole el precio despuï¿½s de borrar un Complemento de un pedido
 GO
 CREATE TRIGGER ImporteTotalAfterDComp ON PedidosComplementos AFTER DELETE
 AS
@@ -351,7 +351,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Ingrediente de un Bocata
+-- Trigger que actualiza la tabla ImporteTotal restï¿½ndole el precio despuï¿½s de borrar un Ingrediente de un Bocata
 GO
 CREATE TRIGGER ImporteTotalAfterDBocIngr ON BocatasIngredientes AFTER DELETE
 AS
@@ -373,7 +373,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Bocata
+-- Trigger que actualiza la tabla ImporteTotal restï¿½ndole el precio despuï¿½s de borrar un Bocata
 GO
 CREATE TRIGGER ImporteTotalAfterDBocatas ON Bocatas INSTEAD OF DELETE
 AS
@@ -404,7 +404,7 @@ AS
 			-- Necesitamos deshabilitar temporalmente el trigger que se ejecuta sobre cada DELETE en la tabla BocatasIngredientes
 			ALTER TABLE BocatasIngredientes DISABLE TRIGGER ImporteTotalAfterDBocIngr
 
-			-- Borramos todos los ingredientes pertenecientes a ese bocata, y después el bocata
+			-- Borramos todos los ingredientes pertenecientes a ese bocata, y despuï¿½s el bocata
 			DELETE FROM BocatasIngredientes WHERE IDBocata IN (SELECT ID FROM deleted)
 			DELETE FROM Bocatas WHERE ID IN (SELECT ID FROM deleted)
 
@@ -422,12 +422,12 @@ GO
 */
 
 INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) VALUES
-('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo José Cela, 1B','678333412'),
-('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ramón Jiménez, 20','622041614'),
+('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo Josï¿½ Cela, 1B','678333412'),
+('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ramï¿½n Jimï¿½nez, 20','622041614'),
 ('Ignacio','Van Loy','04-06-2018','IES Nervion','Claudio Guerin','654321987'),
-('Tomás','Núñez','20-04-1998','Utrera','Almerìa, 35','628119707'),
-('Raquel','González','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
-('David','Galván','12-06-1999','Sevilla','Av Parque Amate','674658099'),
+('Tomï¿½s','Nï¿½ï¿½ez','20-04-1998','Utrera','Almerï¿½a, 35','628119707'),
+('Raquel','Gonzï¿½lez','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
+('David','Galvï¿½n','12-06-1999','Sevilla','Av Parque Amate','674658099'),
 ('Oscar','Funes','12-08-1999','Sevilla','Reina del Cielo 3 2B','667879970')
 
 INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES
@@ -441,13 +441,13 @@ INSERT INTO Panes (Nombre, Crujenticidad, Integral, Precio) VALUES
 
 INSERT INTO Complementos (Nombre, Precio) VALUES
 ('Doritos',1.35),('Patatas fritas',1),('Agua',0.5),('Coca-Cola',0.8),('Coca-Cola Zero',0.8),('Nachos',1.2),
-('Palmera chocolate',1.2),('Polvorón',0.5),('Condón de fresa',1),('Nestea',1),('Bollicao',1),('Conchitas',1)
+('Palmera chocolate',1.2),('Polvorï¿½n',0.5),('Condï¿½n de fresa',1),('Nestea',1),('Bollicao',1),('Conchitas',1)
 ,('El Popper',500),('Bits',0.35)
 
 INSERT INTO Ingredientes (Nombre, Precio) VALUES
 ('Queso en loncha',0.3),('Bacon',0.5),('Lechuga',0.1),('Chorizo',0.4),('Pavo',0.3),('Pollo empanado',0.8),
-('Tortilla',0.6),('Mayonesa',0.2),('Ketchup',0.2),('Ali-oli',0.2),('Jamón serrano',0.5),('Atún',0.4),('Mortadela',0.3),
-('Jamón York',0.4),('Nacho',1),('Yeray',2),('Caña de lomo',0.4)
+('Tortilla',0.6),('Mayonesa',0.2),('Ketchup',0.2),('Ali-oli',0.2),('Jamï¿½n serrano',0.5),('Atï¿½n',0.4),('Mortadela',0.3),
+('Jamï¿½n York',0.4),('Nacho',1),('Yeray',2),('Caï¿½a de lomo',0.4)
 
 INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,2,3)
 INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,3,1)
@@ -513,8 +513,8 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10
 
 CREATE LOGIN panadero WITH PASSWORD = 'elmejorpanadero', DEFAULT_DATABASE = PennyPan
 CREATE LOGIN invitado WITH PASSWORD = 'guest', DEFAULT_DATABASE = PennyPan
-CREATE USER panadero FOR LOGIN panadero; GRANT INSERT, DELETE TO panadero
-CREATE USER invitado FOR LOGIN invitado; GRANT SELECT TO invitado
+CREATE USER panadero FOR LOGIN panadero; GRANT INSERT, DELETE TO pennyBread
+CREATE USER invitado FOR LOGIN invitado; GRANT SELECT TO guestBread
 
 
 
