@@ -1,5 +1,6 @@
 package Gestion;
 
+import java.sql.*;
 import java.util.Scanner;
 
 /**
@@ -15,8 +16,26 @@ public class GestionPedidos {
      */
     public boolean validarIDPedido(int IDPedido)
     {
-        System.out.println("ValidarIDPedido. En resguardo");
-        return(true);
+        String sourceURL = "jdbc:sqlserver://localhost";
+        String usuario = "invitado";
+        String password = "guest";
+        boolean ret = false;
+
+        try
+        {
+            Connection conexionBD = DriverManager.getConnection(sourceURL,usuario,password);
+            Statement sentencia = conexionBD.createStatement();
+            String miOrden = "SELECT dbo.ValidarIDPedido("+IDPedido+") AS ret";
+            ResultSet resultado = sentencia.executeQuery(miOrden);
+
+            if(resultado.next())
+            {
+                ret = resultado.getBoolean("ret");
+            }
+
+        }catch(SQLException e) { System.out.println("¡Error en validarIDPedido!"); }
+
+        return ret;
     }
 
     /**

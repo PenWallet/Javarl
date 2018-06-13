@@ -8,7 +8,7 @@ public class Prueba {
     public static void main(String[] args)
     {
         String sourceURL = "jdbc:sqlserver://localhost";
-        String usuario = "guestBread";
+        String usuario = "invitado";
         String password = "guest";
 
         try

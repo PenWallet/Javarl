@@ -175,6 +175,53 @@ CREATE PROCEDURE CargarImportesTotales (@IDPedido int) AS
 	END
 GO
 
+/*
+	Función que valida si una ID de un cliente existe.
+	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
+	Entradas: ID del cliente
+	Salida: Bit
+*/
+GO
+CREATE FUNCTION ValidarIDCliente (@IDCliente int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+		IF(EXISTS(SELECT ID FROM Clientes WHERE ID = @IDCliente))
+			BEGIN
+				SET @ret = 1
+			END
+		ELSE
+			BEGIN
+				SET @ret = 0
+			END
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si una ID de un pedido existe.
+	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
+	Entradas: ID del pedido
+	Salida: Bit
+*/
+GO
+CREATE FUNCTION ValidarIDPedido (@IDPedido int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+		IF(EXISTS(SELECT ID FROM Pedidos WHERE ID = @IDPedido))
+			BEGIN
+				SET @ret = 1
+			END
+		ELSE
+			BEGIN
+				SET @ret = 0
+			END
+
+		RETURN @ret
+	END
+GO
 
 /*
 	*********************************************************************************************
@@ -466,8 +513,8 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10
 
 CREATE LOGIN panadero WITH PASSWORD = 'elmejorpanadero', DEFAULT_DATABASE = PennyPan
 CREATE LOGIN invitado WITH PASSWORD = 'guest', DEFAULT_DATABASE = PennyPan
-CREATE USER pennyBread FOR LOGIN panadero; GRANT INSERT, DELETE TO pennyBread
-CREATE USER guestBread FOR LOGIN invitado; GRANT SELECT TO guestBread
+CREATE USER panadero FOR LOGIN panadero; GRANT INSERT, DELETE TO panadero
+CREATE USER invitado FOR LOGIN invitado; GRANT SELECT TO invitado
 
 
 
