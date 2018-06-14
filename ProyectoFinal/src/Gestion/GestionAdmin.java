@@ -1,5 +1,6 @@
 package Gestion;
 
+import java.sql.*;
 import java.util.Scanner;
 
 /**
@@ -60,7 +61,7 @@ public class GestionAdmin {
         //Leer nombre
         do
         {
-            System.out.println("Escribe el nombre del pan");
+            System.out.println("\nEscribe el nombre del pan");
             nombreAnadir = tecladoS.nextLine();
             if(nombreAnadir.length() > 20)
                 System.out.println("¡Demasiado largo, menos de 20 caracteres!");
@@ -69,7 +70,7 @@ public class GestionAdmin {
         //Leer y validar integral
         do
         {
-            System.out.println("¿El pan es integral? (Y/N)");
+            System.out.println("\n¿El pan es integral? (Y/N)");
             integral = Character.toUpperCase(teclado.next().charAt(0));
             if(integral != 'Y' && integral != 'N')
                 System.out.println("¡Solo Y o N!");
@@ -78,7 +79,7 @@ public class GestionAdmin {
         //Leer y validar crujenticidad
         do
         {
-            System.out.println("Escribe la crujenticidad del pan (0-5) (0: no crujiente; 5: mucho)");
+            System.out.println("\nEscribe la crujenticidad del pan (0-5) (0: no crujiente; 5: mucho)");
             crujenticidad = teclado.nextInt();
             if(crujenticidad < 0 || crujenticidad > 5)
                 System.out.println("¡Solo del 0 al 5!");
@@ -86,7 +87,7 @@ public class GestionAdmin {
 
         //Leer y validar precio
         do {
-            System.out.println("Introduce el precio del nuevo pan");
+            System.out.println("\nIntroduce el precio del nuevo pan");
             precio = teclado.nextDouble();
             if(precio <= 0)
                 System.out.println("¡El precio no puede ser menor o igual a 0!");
@@ -95,14 +96,19 @@ public class GestionAdmin {
         //Leer y validar última validación
         do
         {
-            System.out.println("¿Estás seguro que quieres añadir un nuevo pan con estos datos? (Y/N)");
+            System.out.println("\n¿Estás seguro que quieres añadir un nuevo pan con estos datos? (Y/N)");
             ultimaValidacion = Character.toUpperCase(teclado.next().charAt(0));
             if(ultimaValidacion != 'Y' && ultimaValidacion != 'N')
                 System.out.println("¡Solo Y o N!");
         }while(ultimaValidacion != 'Y' && ultimaValidacion != 'N');
 
         if(ultimaValidacion == 'Y')
+        {
             anadirPan(nombreAnadir, integral, crujenticidad, precio);
+            System.out.println("\n¡Pan añadido!");
+        }
+        else
+            System.out.println("\nNo se ha añadido nada");
     }
 
     /**
@@ -115,7 +121,31 @@ public class GestionAdmin {
      */
     public void anadirPan(String nombre, char integral, int crujenticidad, double precio)
     {
-        System.out.println("Añadir pan. En resguardo");
+        String sourceURL = "jdbc:sqlserver://localhost:1433;databaseName=PennyPan;integratedSecurity=false;";
+        String usuario = "panadero";
+        String password = "elmejorpanadero";
+        Connection conexionDB = null;
+        CallableStatement sentencia = null;
+
+        try
+        {
+
+            Class.forName("java.sql.Driver");
+            conexionDB = DriverManager.getConnection(sourceURL,usuario,password);
+            String miOrden = "EXECUTE InsertarPan "+"'"+nombre+"', "+(integral=='Y'?1:0)+", "+crujenticidad+", "+precio;
+            sentencia = conexionDB.prepareCall(miOrden);
+            sentencia.execute();
+
+        }catch(SQLException e) { System.out.println("¡Error al conectar!: " + e); }
+        catch (ClassNotFoundException e) { System.out.println("Driver not found " + e); }
+        finally
+        {
+            try
+            {
+                sentencia.close();
+                conexionDB.close();
+            }catch(SQLException e) { System.out.println("¡Error al cerrar la conexion!: " + e); }
+        }
     }
 
     /**
@@ -139,7 +169,7 @@ public class GestionAdmin {
         //Leer nombre
         do
         {
-            System.out.println("Escribe el nombre del complemento");
+            System.out.println("\nEscribe el nombre del complemento");
             nombreAnadir = tecladoS.nextLine();
             if(nombreAnadir.length() > 20)
                 System.out.println("¡Demasiado largo, menos de 20 caracteres!");
@@ -148,7 +178,7 @@ public class GestionAdmin {
         //Leer y validar precio
         do
         {
-            System.out.println("Introduce el precio del nuevo complemento");
+            System.out.println("\nIntroduce el precio del nuevo complemento");
             precio = teclado.nextDouble();
             if(precio <= 0)
                 System.out.println("¡El precio no puede ser menor o igual a 0!");
@@ -157,14 +187,19 @@ public class GestionAdmin {
         //Leer y validar última validación
         do
         {
-            System.out.println("¿Estás seguro que quieres añadir un nuevo complemento con estos datos? (Y/N)");
+            System.out.println("\n¿Estás seguro que quieres añadir un nuevo complemento con estos datos? (Y/N)");
             ultimaValidacion = Character.toUpperCase(teclado.next().charAt(0));
             if(ultimaValidacion != 'Y' && ultimaValidacion != 'N')
                 System.out.println("¡Solo Y o N!");
         }while(ultimaValidacion != 'Y' && ultimaValidacion != 'N');
 
         if(ultimaValidacion == 'Y')
+        {
             anadirComp(nombreAnadir, precio);
+            System.out.println("\n¡Complemento añadido!");
+        }
+        else
+            System.out.println("\nNo se ha añadido nada");
     }
 
     /**
@@ -175,7 +210,31 @@ public class GestionAdmin {
      */
     public void anadirComp(String nombre, double precio)
     {
-        System.out.println("Añadir comp. En resguardo.");
+        String sourceURL = "jdbc:sqlserver://localhost:1433;databaseName=PennyPan;integratedSecurity=false;";
+        String usuario = "panadero";
+        String password = "elmejorpanadero";
+        Connection conexionDB = null;
+        CallableStatement sentencia = null;
+
+        try
+        {
+
+            Class.forName("java.sql.Driver");
+            conexionDB = DriverManager.getConnection(sourceURL,usuario,password);
+            String miOrden = "EXECUTE InsertarComplemento "+"'"+nombre+"', "+precio;
+            sentencia = conexionDB.prepareCall(miOrden);
+            sentencia.execute();
+
+        }catch(SQLException e) { System.out.println("¡Error al conectar!: " + e); }
+        catch (ClassNotFoundException e) { System.out.println("Driver not found " + e); }
+        finally
+        {
+            try
+            {
+                sentencia.close();
+                conexionDB.close();
+            }catch(SQLException e) { System.out.println("¡Error al cerrar la conexion!: " + e); }
+        }
     }
 
     /**
@@ -199,7 +258,7 @@ public class GestionAdmin {
         //Leer nombre
         do
         {
-            System.out.println("Escribe el nombre del ingrediente");
+            System.out.println("\nEscribe el nombre del ingrediente");
             nombreAnadir = tecladoS.nextLine();
             if(nombreAnadir.length() > 20)
                 System.out.println("¡Demasiado largo, menos de 20 caracteres!");
@@ -208,7 +267,7 @@ public class GestionAdmin {
         //Leer y validar precio
         do
         {
-            System.out.println("Introduce el precio del nuevo complemento");
+            System.out.println("\nIntroduce el precio del nuevo ingrediente");
             precio = teclado.nextDouble();
             if(precio <= 0)
                 System.out.println("¡El precio no puede ser menor o igual a 0!");
@@ -217,14 +276,20 @@ public class GestionAdmin {
         //Leer y validar última validación
         do
         {
-            System.out.println("¿Estás seguro que quieres añadir un nuevo complemento con estos datos? (Y/N)");
+            System.out.println("\n¿Estás seguro que quieres añadir un nuevo ingrediente con estos datos? (Y/N)");
             ultimaValidacion = Character.toUpperCase(teclado.next().charAt(0));
             if(ultimaValidacion != 'Y' && ultimaValidacion != 'N')
                 System.out.println("¡Solo Y o N!");
         }while(ultimaValidacion != 'Y' && ultimaValidacion != 'N');
 
         if(ultimaValidacion == 'Y')
+        {
             anadirIngr(nombreAnadir, precio);
+            System.out.println("\n¡Ingrediente añadido!");
+        }
+        else
+            System.out.println("\nNo se ha añadido nada");
+
     }
 
     /**
@@ -235,7 +300,31 @@ public class GestionAdmin {
      */
     public void anadirIngr(String nombre, double precio)
     {
-        System.out.println("Añadir comp. En resguardo.");
+        String sourceURL = "jdbc:sqlserver://localhost:1433;databaseName=PennyPan;integratedSecurity=false;";
+        String usuario = "panadero";
+        String password = "elmejorpanadero";
+        Connection conexionDB = null;
+        CallableStatement sentencia = null;
+
+        try
+        {
+
+            Class.forName("java.sql.Driver");
+            conexionDB = DriverManager.getConnection(sourceURL,usuario,password);
+            String miOrden = "EXECUTE InsertarIngrediente "+"'"+nombre+"', "+precio;
+            sentencia = conexionDB.prepareCall(miOrden);
+            sentencia.execute();
+
+        }catch(SQLException e) { System.out.println("¡Error al conectar!: " + e); }
+        catch (ClassNotFoundException e) { System.out.println("Driver not found " + e); }
+        finally
+        {
+            try
+            {
+                sentencia.close();
+                conexionDB.close();
+            }catch(SQLException e) { System.out.println("¡Error al cerrar la conexion!: " + e); }
+        }
     }
 
     /**
@@ -260,7 +349,7 @@ public class GestionAdmin {
         //Leer y validar nombre
         do
         {
-            System.out.println("Escribe el nombre del cliente");
+            System.out.println("\nEscribe el nombre del cliente");
             nombre = tecladoS.nextLine();
             if(nombre.length() > 20)
                 System.out.println("¡Demasiado largo, menos de 20 caracteres!");
@@ -269,20 +358,26 @@ public class GestionAdmin {
         //Leer y validar apellidos
         do
         {
-            System.out.println("Escribe los apellidos del cliente");
+            System.out.println("\nEscribe los apellidos del cliente");
             apellidos = tecladoS.nextLine();
             if(apellidos.length() > 30)
                 System.out.println("¡Demasiado largo, menos de 30 caracteres!");
         }while(apellidos.length() > 30);
 
-        //Leer fecha
-        System.out.println("Escribe la fecha de nacimiento del cliente (sin validar, pls usa dd-mm-aaaa)");
-        fechaNac = tecladoS.nextLine();
+        //Leer y validar fecha
+        do
+        {
+            System.out.println("\nEscribe la fecha de nacimiento del cliente (dd-mm-aaaa)");
+            fechaNac = tecladoS.nextLine();
+            if(!fechaNac.matches("[0-3][0-9]-[01][0-9]-[12][0-9][0-9][0-9]"))
+                System.out.println("¡Fecha no válida!");
+        }while(!fechaNac.matches("[0-3][0-9]-[01][0-9]-[12][0-9][0-9][0-9]"));
+
 
         //Leer y validar ciudad
         do
         {
-            System.out.println("Escribe la ciudad del cliente");
+            System.out.println("\nEscribe la ciudad del cliente");
             ciudad = tecladoS.nextLine();
             if(ciudad.length() > 20)
                 System.out.println("¡Demasiado largo, menos de 20 caracteres!");
@@ -291,7 +386,7 @@ public class GestionAdmin {
         //Leer y validar direccion
         do
         {
-            System.out.println("Escribe la dirección del cliente");
+            System.out.println("\nEscribe la dirección del cliente");
             direccion = tecladoS.nextLine();
             if(direccion.length() > 40)
                 System.out.println("¡Demasiado largo, menos de 40 caracteres!");
@@ -300,7 +395,7 @@ public class GestionAdmin {
         //Leer y validar teléfono
         do
         {
-            System.out.println("Escribe el teléfono de contacto del cliente");
+            System.out.println("\nEscribe el teléfono de contacto del cliente");
             telefono = tecladoS.nextLine();
             if(telefono.length() != 9)
                 System.out.println("¡El teléfono debe tener 9 caracteres!");
@@ -309,14 +404,20 @@ public class GestionAdmin {
         //Leer y validar última validación
         do
         {
-            System.out.println("¿Estás seguro que quieres añadir un nuevo cliente con estos datos? (Y/N)");
+            System.out.println("\n¿Estás seguro que quieres añadir un nuevo cliente con estos datos? (Y/N)");
             ultimaValidacion = Character.toUpperCase(teclado.next().charAt(0));
             if(ultimaValidacion != 'Y' && ultimaValidacion != 'N')
                 System.out.println("¡Solo Y o N!");
         }while(ultimaValidacion != 'Y' && ultimaValidacion != 'N');
 
         if(ultimaValidacion == 'Y')
+        {
             anadirCliente(nombre, apellidos, fechaNac, ciudad, direccion, telefono);
+            System.out.println("\n¡Cliente añadido!");
+        }
+        else
+            System.out.println("\nNo se ha añadido nada");
+
     }
 
     /**
@@ -331,7 +432,31 @@ public class GestionAdmin {
      */
     public void anadirCliente(String nombre, String apellidos, String fechaNac, String ciudad, String direccion, String telefono)
     {
-        System.out.println("Añadir cliente. En resguardo");
+        String sourceURL = "jdbc:sqlserver://localhost:1433;databaseName=PennyPan;integratedSecurity=false;";
+        String usuario = "panadero";
+        String password = "elmejorpanadero";
+        Connection conexionDB = null;
+        CallableStatement sentencia = null;
+
+        try
+        {
+
+            Class.forName("java.sql.Driver");
+            conexionDB = DriverManager.getConnection(sourceURL,usuario,password);
+            String miOrden = "EXECUTE InsertarCliente "+"'"+nombre+"', '"+apellidos+"', '"+fechaNac+"', '"+ciudad+"', '"+direccion+"', '"+telefono+"'";
+            sentencia = conexionDB.prepareCall(miOrden);
+            sentencia.execute();
+
+        }catch(SQLException e) { System.out.println("¡Error al conectar!: " + e); }
+        catch (ClassNotFoundException e) { System.out.println("Driver not found " + e); }
+        finally
+        {
+            try
+            {
+                sentencia.close();
+                conexionDB.close();
+            }catch(SQLException e) { System.out.println("¡Error al cerrar la conexion!: " + e); }
+        }
     }
 
     /**
@@ -349,7 +474,7 @@ public class GestionAdmin {
         do
         {
             gp.mostrarPedidos();
-            System.out.println("Elige la ID del pedido que quieres borrar (o 0 para salir): ");
+            System.out.println("\nElige la ID del pedido que quieres borrar (o 0 para salir): ");
             IDPedido = teclado.nextInt();
             if(IDPedido != 0)
             {
@@ -362,7 +487,10 @@ public class GestionAdmin {
         }while(IDPedido != 0 && !valido);
 
         if(IDPedido != 0)
+        {
             borrarPedido(IDPedido);
+            System.out.println("\n¡Pedido borrado!");
+        }
     }
 
     /**
@@ -373,6 +501,31 @@ public class GestionAdmin {
      */
     public void borrarPedido(int IDPedido)
     {
-        System.out.println("Borrar pedido. En resguardo");
+        String sourceURL = "jdbc:sqlserver://localhost:1433;databaseName=PennyPan;integratedSecurity=false;";
+        String usuario = "panadero";
+        String password = "elmejorpanadero";
+        Connection conexionDB = null;
+        Statement sentencia = null;
+        int rows;
+
+        try
+        {
+
+            Class.forName("java.sql.Driver");
+            conexionDB = DriverManager.getConnection(sourceURL,usuario,password);
+            sentencia = conexionDB.createStatement();
+            String miOrden = "DELETE FROM Pedidos WHERE ID = "+IDPedido;
+            sentencia.executeUpdate(miOrden);
+
+        }catch(SQLException e) { System.out.println("Connect not possible: " + e); }
+        catch (ClassNotFoundException e) { System.out.println("Driver not found " + e); }
+        finally
+        {
+            try
+            {
+                sentencia.close();
+                conexionDB.close();
+            }catch(SQLException e) { System.out.println("¡Error al cerrar la conexion!: " + e); }
+        }
     }
 }

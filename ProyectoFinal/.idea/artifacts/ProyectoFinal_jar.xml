@@ -1,8 +1,11 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="ProyectoFinal:jar">
+  <artifact name="ProyectoFinal:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/ProyectoFinal_jar</output-path>
-    <root id="archive" name="ProyectoFinal.jar">
-      <element id="module-output" name="ProyectoFinal" />
+    <root id="root">
+      <element id="archive" name="ProyectoFinal.jar">
+        <element id="module-output" name="ProyectoFinal" />
+      </element>
+      <element id="library" level="project" name="mssql-jdbc-6.4.0.jre8" />
     </root>
   </artifact>
 </component>

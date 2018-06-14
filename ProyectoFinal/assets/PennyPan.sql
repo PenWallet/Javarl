@@ -99,11 +99,58 @@ CREATE TABLE BocatasIngredientes(
 
 /*
 	*********************************************************************************************
+	******************* T A B L A S  D E  G U A R D A D O  D E  B A J A S ***********************
+	*********************************************************************************************
+*/
+
+CREATE TABLE PedidosBorrados(
+	ID int,
+	IDCliente int,
+	FechaCompra date,
+	ImporteTotal smallmoney,
+	CONSTRAINT PKPedidosBorrados PRIMARY KEY (ID),
+)
+
+CREATE TABLE PedidosComplementosBorrados(
+	IDPedido int,
+	IDComplemento int,
+	Cantidad int,
+	CONSTRAINT FKPCPedidosBorrados FOREIGN KEY (IDPedido) REFERENCES PedidosBorrados(ID),
+	CONSTRAINT PKPCBorrados PRIMARY KEY (IDPedido, IDComplemento)
+)
+
+CREATE TABLE PedidosPanesBorrados(
+	IDPedido int,
+	IDPan int,
+	Cantidad int,
+	CONSTRAINT FKPPPedidosBorrados FOREIGN KEY (IDPedido) REFERENCES PedidosBorrados(ID),
+	CONSTRAINT PKPedidosPanesBorrados PRIMARY KEY (IDPedido, IDPan)
+)
+
+CREATE TABLE BocatasBorrados(
+	ID int,
+	IDPedido int,
+	IDPan int,
+	CONSTRAINT PKBocatasBorrados PRIMARY KEY (ID),
+	CONSTRAINT FKBocatasPedidosBorrados FOREIGN KEY (IDPedido) REFERENCES PedidosBorrados(ID)
+)
+
+CREATE TABLE BocatasIngredientesBorrados(
+	IDBocata int,
+	IDIngrediente int,
+	Cantidad int,
+	CONSTRAINT FKBIBocatasBorrados FOREIGN KEY (IDBocata) REFERENCES BocatasBorrados(ID),
+	CONSTRAINT PKBocatasIngredientesBorrados PRIMARY KEY (IDBocata, IDIngrediente)
+)
+
+/*
+	*********************************************************************************************
 	******************** F U N C I O N E S  Y  P R O C E D I M I E N T O S **********************
 	*********************************************************************************************
 */
+
 /*
-	Funci�n que devuelve el valor total de los complementos de un pedido
+	Función que devuelve el valor total de los complementos de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -120,7 +167,7 @@ AS
 GO
 
 /*
-	Funci�n que devuelve el valor total de los panes de un pedido
+	Función que devuelve el valor total de los panes de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -137,7 +184,7 @@ AS
 GO
 
 /*
-	Funci�n que devuelve el valor total de los bocatas de un pedido
+	Función que devuelve el valor total de los bocatas de un pedido
 	Entradas: ID del pedido
 	Salida: smallmoney con el total
 */
@@ -176,7 +223,13 @@ CREATE PROCEDURE CargarImportesTotales (@IDPedido int) AS
 GO
 
 /*
-	Funci�n que valida si una ID de un cliente existe.
+	*********************************************************************************************
+	*********** F U N C I O N E S  Y  P R O C E D I M I E N T O S  P A R A  J A V A *************
+	*********************************************************************************************
+*/
+
+/*
+	Función que valida si una ID de un cliente existe.
 	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
 	Entradas: ID del cliente
 	Salida: Bit
@@ -200,7 +253,7 @@ AS
 GO
 
 /*
-	Funci�n que valida si una ID de un pedido existe.
+	Función que valida si una ID de un pedido existe.
 	Devuelve un bit con valor 0 si no existe, o un 1 si existe.
 	Entradas: ID del pedido
 	Salida: Bit
@@ -224,12 +277,225 @@ AS
 GO
 
 /*
+	Función que valida si una ID de un pan existe
+	Devuelve un bit con valor 0 si no existe, o un 1 si existe
+	Entradas: ID del pan
+	Salida: Bit
+*/
+GO
+CREATE FUNCTION ValidarIDPan (@IDPan int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+		IF(EXISTS(SELECT ID FROM Panes WHERE ID = @IDPan))
+			BEGIN
+				SET @ret = 1
+			END
+		ELSE
+			BEGIN
+				SET @ret = 0
+			END
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si una ID de un complemento existe
+	Devuelve un bit con valor 0 si no existe, o un 1 si existe
+	Entradas: ID del complemento
+	Salida: Bit
+*/
+GO
+CREATE FUNCTION ValidarIDComplemento (@IDComp int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+		IF(EXISTS(SELECT ID FROM Complementos WHERE ID = @IDComp))
+			BEGIN
+				SET @ret = 1
+			END
+		ELSE
+			BEGIN
+				SET @ret = 0
+			END
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si una ID de un ingrediente existe
+	Devuelve un bit con valor 0 si no existe, o un 1 si existe
+	Entradas: ID del ingrediente
+	Salida: Bit
+*/
+GO
+CREATE FUNCTION ValidarIDIngrediente (@IDIngr int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+		IF(EXISTS(SELECT ID FROM Ingredientes WHERE ID = @IDIngr))
+			BEGIN
+				SET @ret = 1
+			END
+		ELSE
+			BEGIN
+				SET @ret = 0
+			END
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si en un pedido ya tiene el pan con la ID que se le pasa
+	Devuelve un bit con valor 0 si no lo ha pedido, 1 si ya lo ha pedido
+	Entradas: ID del pedido, ID del pan
+	Salidas: Bit
+*/
+GO
+CREATE FUNCTION ValidarPanPedido (@IDPedido int, @IDPan int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+
+		IF(EXISTS (SELECT IDPan FROM PedidosPanes WHERE IDPedido = @IDPedido AND IDPan = @IDPan))
+			SET @ret = 1
+		ELSE
+			SET @ret = 0
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si en un pedido ya tiene el complemento con la ID que se le pasa
+	Devuelve un bit con valor 0 si no lo ha pedido, 1 si ya lo ha pedido
+	Entradas: ID del pedido, ID del complemento
+	Salidas: Bit
+*/
+GO
+CREATE FUNCTION ValidarCompPedido (@IDPedido int, @IDComp int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+
+		IF(EXISTS (SELECT IDComplemento FROM PedidosComplementos WHERE IDPedido = @IDPedido AND IDComplemento = @IDComp))
+			SET @ret = 1
+		ELSE
+			SET @ret = 0
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Función que valida si un bocata ya tiene un ingrediente agregado a él
+	Devuelve un bit con valor 0 si no lo tiene agregado, 1 en caso contrario
+	Entradas: ID del bocata, ID del ingrediente
+	Salidas: Bit
+*/
+GO
+CREATE FUNCTION ValidarIngrBocata (@IDBocata int, @IDIngr int) RETURNS bit
+AS
+	BEGIN
+		DECLARE @ret bit
+
+		IF(EXISTS (SELECT IDIngrediente FROM BocatasIngredientes WHERE IDBocata = @IDBocata AND IDIngrediente = @IDIngr))
+			SET @ret = 1
+		ELSE
+			SET @ret = 0
+
+		RETURN @ret
+	END
+GO
+
+/*
+	Procedimiento usado para añadir panes de manera más cómoda
+	Entradas: char Nombre, bit Integral, int Crujenticidad, smallmoney Precio
+	Salidas: Ninguna
+*/
+GO
+CREATE PROCEDURE InsertarPan (@Nombre char(20), @Integral bit, @Crujenticidad int, @Precio smallmoney)
+AS
+	BEGIN
+		INSERT INTO Panes (Nombre, Integral, Crujenticidad, Precio) VALUES (@Nombre, @Integral, @Crujenticidad, @Precio)
+	END
+GO
+
+/*
+	Procedimiento usado para añadir complementos de manera más cómoda
+	Entradas: char Nombre, smallmoney Precio
+	Salidas: Ninguna
+*/
+GO
+CREATE PROCEDURE InsertarComplemento (@Nombre char(20), @Precio smallmoney)
+AS
+	BEGIN
+		INSERT INTO Complementos (Nombre, Precio) VALUES (@Nombre, @Precio)
+	END
+GO
+
+/*
+	Procedimiento usado para añadir ingredientes de manera más cómoda
+	Entradas: char Nombre, smallmoney Precio
+	Salidas: Ninguna
+*/
+GO
+CREATE PROCEDURE InsertarIngrediente (@Nombre char(20), @Precio smallmoney)
+AS
+	BEGIN
+		INSERT INTO Ingredientes (Nombre, Precio) VALUES (@Nombre, @Precio)
+	END
+GO
+
+/*
+	Procedimiento usado para añadir clientes de manera más cómoda
+*/
+GO
+CREATE PROCEDURE InsertarCliente (@Nombre char(20), @Apellidos char(30), @FechaNac date, @Ciudad char(20), @Direccion char(40), @Telefono char(9))
+AS
+	BEGIN
+		INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) VALUES (@Nombre, @Apellidos, @FechaNac, @Ciudad, @Direccion, @Telefono)
+	END
+GO
+
+/*
+	Procedimiento almacenado que introduce un nuevo pedido en la base de datos, y devuelve la ID de dicho pedido
+	Entradas: ID del cliente que ha hecho el pedido
+	Salidas: ID del nuevo pedido
+*/
+GO
+CREATE PROCEDURE CrearNuevoPedido (@IDCliente int, @IDPedido int OUTPUT)
+AS
+	BEGIN
+		INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES (@IDCliente, CAST(CURRENT_TIMESTAMP AS date))
+		SET @IDPedido = @@IDENTITY
+	END
+GO
+
+/*
+	Procedimiento almacenado que introduce un nuevo bocata en la base de datos, y devuelve la ID de dicho bocata
+	Entradas: ID del pedido, ID del pan
+	Salidas: ID del nuevo bocata
+*/
+GO
+CREATE PROCEDURE CrearNuevoBocata (@IDPedido int, @IDPan int, @IDBocata int OUTPUT)
+AS
+	BEGIN
+		INSERT INTO Bocatas (IDPedido, IDPan) VALUES (@IDPedido, @IDPan)
+		SET @IDBocata = @@IDENTITY
+	END
+GO
+
+/*
 	*********************************************************************************************
 	************************************** T R I G G E R S **************************************
 	*********************************************************************************************
 */
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despu�s de que se actualice PedidosComplementos
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosComplementos
 GO
 CREATE TRIGGER ImporteTotalAfterIUComp ON PedidosComplementos AFTER INSERT,UPDATE 
 AS
@@ -249,7 +515,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despu�s de que se actualice PedidosPanes
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice PedidosPanes
 GO
 CREATE TRIGGER ImporteTotalAfterIUPanes ON PedidosPanes AFTER INSERT,UPDATE 
 AS
@@ -269,7 +535,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despu�s de que se actualice Bocatas
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice Bocatas
 GO
 CREATE TRIGGER ImporteTotalAfterIUBocatas ON Bocatas AFTER INSERT,UPDATE 
 AS
@@ -289,7 +555,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos despu�s de que se actualice BocatasIngredientes
+-- Trigger que actualiza la columna ImporteTotal de la tabla Pedidos después de que se actualice BocatasIngredientes
 GO
 CREATE TRIGGER ImporteTotalAfterIUBocIngr ON BocatasIngredientes AFTER INSERT,UPDATE 
 AS
@@ -311,7 +577,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la tabla ImporteTotal rest�ndole el precio despu�s de borrar un Pan de un pedido
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Pan de un pedido
 GO
 CREATE TRIGGER ImporteTotalAfterDPanes ON PedidosPanes AFTER DELETE
 AS
@@ -331,7 +597,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la tabla ImporteTotal rest�ndole el precio despu�s de borrar un Complemento de un pedido
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Complemento de un pedido
 GO
 CREATE TRIGGER ImporteTotalAfterDComp ON PedidosComplementos AFTER DELETE
 AS
@@ -351,7 +617,7 @@ AS
 	END
 GO
 
--- Trigger que actualiza la tabla ImporteTotal rest�ndole el precio despu�s de borrar un Ingrediente de un Bocata
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Ingrediente de un Bocata
 GO
 CREATE TRIGGER ImporteTotalAfterDBocIngr ON BocatasIngredientes AFTER DELETE
 AS
@@ -373,7 +639,7 @@ AS
 	END 
 GO
 
--- Trigger que actualiza la tabla ImporteTotal rest�ndole el precio despu�s de borrar un Bocata
+-- Trigger que actualiza la tabla ImporteTotal restándole el precio después de borrar un Bocata
 GO
 CREATE TRIGGER ImporteTotalAfterDBocatas ON Bocatas INSTEAD OF DELETE
 AS
@@ -404,7 +670,7 @@ AS
 			-- Necesitamos deshabilitar temporalmente el trigger que se ejecuta sobre cada DELETE en la tabla BocatasIngredientes
 			ALTER TABLE BocatasIngredientes DISABLE TRIGGER ImporteTotalAfterDBocIngr
 
-			-- Borramos todos los ingredientes pertenecientes a ese bocata, y despu�s el bocata
+			-- Borramos todos los ingredientes pertenecientes a ese bocata, y después el bocata
 			DELETE FROM BocatasIngredientes WHERE IDBocata IN (SELECT ID FROM deleted)
 			DELETE FROM Bocatas WHERE ID IN (SELECT ID FROM deleted)
 
@@ -414,6 +680,55 @@ AS
 	END 
 GO
 
+/*
+	Trigger que hace que al borrar un pedido, en vez de borrarlo directamente, primero guarda toda la información
+	en las tablas de Borrados, porque nos gusta la información y no queremos perder nada :D
+*/
+GO
+CREATE TRIGGER GuardarPedidoAfterD ON Pedidos INSTEAD OF DELETE
+AS
+	BEGIN
+		DECLARE @IDPedidoBorrado int = (SELECT ID FROM deleted)
+
+		INSERT INTO PedidosBorrados
+			SELECT * FROM deleted
+
+		INSERT INTO PedidosPanesBorrados
+			SELECT * FROM PedidosPanes WHERE IDPedido = @IDPedidoBorrado
+
+		INSERT INTO PedidosComplementosBorrados
+			SELECT * FROM PedidosComplementos WHERE IDPedido = @IDPedidoBorrado
+
+		INSERT INTO BocatasBorrados
+			SELECT * FROM Bocatas WHERE IDPedido = @IDPedidoBorrado
+
+		INSERT INTO BocatasIngredientesBorrados (IDBocata, IDIngrediente, Cantidad)
+			SELECT BI.IDBocata, BI.IDIngrediente, BI.Cantidad
+				FROM Bocatas AS B
+					INNER JOIN BocatasIngredientes AS BI
+						ON B.ID = BI.IDBocata
+				WHERE B.IDPedido = @IDPedidoBorrado
+		
+		--Desactivamos temporalmente los triggers
+		ALTER TABLE PedidosPanes DISABLE TRIGGER ImporteTotalAfterDPanes
+		ALTER TABLE PedidosComplementos DISABLE TRIGGER ImporteTotalAfterDComp
+		ALTER TABLE BocatasIngredientes DISABLE TRIGGER ImporteTotalAfterDBocIngr
+		ALTER TABLE Bocatas DISABLE TRIGGER ImporteTotalAfterDBocatas
+
+		--Borramos las filas deseadas
+		DELETE FROM PedidosPanes WHERE IDPedido = @IDPedidoBorrado
+		DELETE FROM PedidosComplementos WHERE IDPedido = @IDPedidoBorrado
+		DELETE FROM BocatasIngredientes WHERE IDBocata IN (SELECT B.ID FROM deleted AS D INNER JOIN Bocatas AS B ON D.ID = B.IDPedido)
+		DELETE FROM Bocatas WHERE IDPedido = @IDPedidoBorrado
+		DELETE FROM Pedidos WHERE ID = @IDPedidoBorrado
+
+		--Volvemos a activar los triggers
+		ALTER TABLE PedidosPanes ENABLE TRIGGER ImporteTotalAfterDPanes
+		ALTER TABLE PedidosComplementos ENABLE TRIGGER ImporteTotalAfterDComp
+		ALTER TABLE BocatasIngredientes ENABLE TRIGGER ImporteTotalAfterDBocIngr
+		ALTER TABLE Bocatas ENABLE TRIGGER ImporteTotalAfterDBocatas
+	END
+GO
 
 /*
 	*********************************************************************************************
@@ -422,12 +737,12 @@ GO
 */
 
 INSERT INTO Clientes (Nombre, Apellidos, FechaNac, Ciudad, Direccion, Telefono) VALUES
-('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo Jos� Cela, 1B','678333412'),
-('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ram�n Jim�nez, 20','622041614'),
+('Yeray','Campanario','04-11-1997','Sevilla','Plaza Camilo José Cela, 1B','678333412'),
+('Daniel','Gordillo','03-12-1999','Sevilla','Juan Ramón Jiménez, 20','622041614'),
 ('Ignacio','Van Loy','04-06-2018','IES Nervion','Claudio Guerin','654321987'),
-('Tom�s','N��ez','20-04-1998','Utrera','Almer�a, 35','628119707'),
-('Raquel','Gonz�lez','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
-('David','Galv�n','12-06-1999','Sevilla','Av Parque Amate','674658099'),
+('Tomás','Núñez','20-04-1998','Utrera','Almería, 35','628119707'),
+('Raquel','González','25-05-1995','Sevilla','Almadraberos, 10','667037370'),
+('David','Galván','12-06-1999','Sevilla','Av Parque Amate','674658099'),
 ('Oscar','Funes','12-08-1999','Sevilla','Reina del Cielo 3 2B','667879970')
 
 INSERT INTO Pedidos (IDCliente, FechaCompra) VALUES
@@ -441,13 +756,13 @@ INSERT INTO Panes (Nombre, Crujenticidad, Integral, Precio) VALUES
 
 INSERT INTO Complementos (Nombre, Precio) VALUES
 ('Doritos',1.35),('Patatas fritas',1),('Agua',0.5),('Coca-Cola',0.8),('Coca-Cola Zero',0.8),('Nachos',1.2),
-('Palmera chocolate',1.2),('Polvor�n',0.5),('Cond�n de fresa',1),('Nestea',1),('Bollicao',1),('Conchitas',1)
-,('El Popper',500),('Bits',0.35)
+('Palmera chocolate',1.2),('Polvorón',0.5),('Condón de fresa',1),('Nestea',1),('Bollicao',1),('Conchitas',1),
+('Bits',0.35),('El Popper',500)
 
 INSERT INTO Ingredientes (Nombre, Precio) VALUES
 ('Queso en loncha',0.3),('Bacon',0.5),('Lechuga',0.1),('Chorizo',0.4),('Pavo',0.3),('Pollo empanado',0.8),
-('Tortilla',0.6),('Mayonesa',0.2),('Ketchup',0.2),('Ali-oli',0.2),('Jam�n serrano',0.5),('At�n',0.4),('Mortadela',0.3),
-('Jam�n York',0.4),('Nacho',1),('Yeray',2),('Ca�a de lomo',0.4)
+('Tortilla',0.6),('Mayonesa',0.2),('Ketchup',0.2),('Ali-oli',0.2),('Jamón serrano',0.5),('Atún',0.4),('Mortadela',0.3),
+('Jamón York',0.4),('Nacho',1),('Yeray',2),('Caña de lomo',0.4)
 
 INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,2,3)
 INSERT INTO PedidosPanes (IDPedido, IDPan, Cantidad) VALUES (1,3,1)
@@ -513,23 +828,5 @@ INSERT INTO BocatasIngredientes (IDBocata, IDIngrediente, Cantidad) VALUES (9,10
 
 CREATE LOGIN panadero WITH PASSWORD = 'elmejorpanadero', DEFAULT_DATABASE = PennyPan
 CREATE LOGIN invitado WITH PASSWORD = 'guest', DEFAULT_DATABASE = PennyPan
-CREATE USER panadero FOR LOGIN panadero; GRANT INSERT, DELETE TO pennyBread
-CREATE USER invitado FOR LOGIN invitado; GRANT SELECT TO guestBread
-
-
-
-
-
--- BEGIN TRANSACTION
--- ROLLBACK
--- COMMIT
--- UPDATE Pedidos SET ImporteTotal = 0
--- DELETE FROM PedidosComplementos
--- DELETE FROM PedidosPanes
--- DELETE FROM BocatasIngredientes
--- DELETE FROM Bocatas
--- SELECT * FROM Pedidos
--- SELECT * FROM Complementos
--- SELECT * FROM Ingredientes
--- SELECT * FROM Panes
--- SELECT ImporteTotal FROM Pedidos WHERE ID = 1
+CREATE USER panadero FOR LOGIN panadero; GRANT SELECT, INSERT, DELETE, EXECUTE, ALTER TO panadero
+CREATE USER invitado FOR LOGIN invitado; GRANT SELECT, EXECUTE TO invitado

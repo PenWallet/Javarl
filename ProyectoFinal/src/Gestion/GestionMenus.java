@@ -1,5 +1,8 @@
 package Gestion;
 
+/**
+ * Clase que contiene los menús del programa
+ */
 public class GestionMenus {
 
     /**

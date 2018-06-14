@@ -93,14 +93,17 @@
     Pseudocódigo específico (hacerPedidoDatos *):
         Inicio
             Poner a true la variable primerPedido
+            Poner a false la variable
             MostrarClientes * y leer y validar nº de cliente (usando ValidarIDCliente *)
-            CrearNuevoPedido *
 
             //Pedir panes
             Repetir
                 Leer y validar si quiere pedir pan
                 Si (opcionPedidoNuevo == 'Y')
-                    AñadirPanPedido *
+                    Si (primerPedido)
+                        CrearNuevoPedido *
+                    Fin Si
+                    AñadirPanPedidoDatos *
                 Si no, si (primerPedido)
                     Incrementar en 1 el contadorPedido
                 Fin Si
@@ -110,7 +113,10 @@
             Repetir
                 Leer y validar si quiere pedir complementos
                 Si (opcionPedidoNuevo == 'Y')
-                    AñadirCompPedido *
+                    Si (primerPedido)
+                        CrearNuevoPedido *
+                    Fin Si
+                    AñadirCompPedidoDatos *
                 Si no, si (primerPedido)
                     Incrementar en 1 el contadorPedido
                 Fin Si
@@ -120,16 +126,14 @@
             Repetir
                 Leer y validar si quiere pedir bocata
                 Si (opcionPedidoNuevo == 'Y')
-                    AñadirBocataPedido *
+                    Si (primerPedido)
+                        CrearNuevoPedido *
+                    Fin Si
+                    AñadirBocataPedidoDatos *
                 Si no, si (primerPedido)
                     Incrementar en 1 el contadorPedido
                 Fin Si
             Mientras (opcionPedidoNuevo == 'Y')
-
-            //Si no ha pedido nada
-            Si (contadorPedido == 3)
-                BorrarPedido *
-            Fin Si
         Fin
 
     Pseudocódigo específico (ConsultarPedidoDatos *):
