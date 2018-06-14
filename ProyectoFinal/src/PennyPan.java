@@ -239,7 +239,7 @@ public class PennyPan
                         System.out.println("¡Bienvenido, panadero!");
                     else
                         //Mostrar mensaje de fallo de log-in
-                        System.out.println("Error de log-in. Fuera, gentusa");
+                        System.out.println("¡Contraseña incorrecta! Fuera, gentusa");
                 }
             }while(opcionLI < 0 || opcionLI > 2); //FIN LOG-IN
 
